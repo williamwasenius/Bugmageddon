@@ -45,7 +45,7 @@ public class Mission4Script : MonoBehaviour
     }
     private void Lose()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("GameLoss");
     }
 
 }

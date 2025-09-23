@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class InGameMenu : MonoBehaviour
 {
+    public GameObject menuCanvas;
     public GameObject menu;
     public GameObject options;
 
@@ -10,14 +11,14 @@ public class InGameMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (menu.activeSelf)
+            if (menuCanvas.activeSelf)
             {
-                menu.SetActive(false);
+                menuCanvas.SetActive(false);
                 Time.timeScale = 1f;
             }
             else
             {
-                menu.SetActive(true);
+                menuCanvas.SetActive(true);
                 Time.timeScale = 0f;
             }
         }
