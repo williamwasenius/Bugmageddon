@@ -9,8 +9,14 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("WeaponSelection");
-    }
 
+        /*
+        if (!SaveManager.Instance.tutorialMission)
+        {
+            //open tutorial popup
+        }
+        */
+    }
     public void Options()
     {
         options.SetActive(true);

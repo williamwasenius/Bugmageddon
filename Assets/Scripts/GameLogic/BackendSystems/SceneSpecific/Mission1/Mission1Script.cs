@@ -47,6 +47,8 @@ public class Mission1Script : MonoBehaviour
     {
         Debug.Log("Congratulations! You completed the mission.");
         mission1complete = true;
+        SaveManager.Instance.mission1 = true;
+        SaveManager.Instance.SavePlayerData();
         SceneManager.LoadScene("Mission2");
     }
     private void Lose()

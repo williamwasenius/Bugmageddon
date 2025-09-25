@@ -47,9 +47,26 @@ public class WeaponSelection : MonoBehaviour
 
     public void StartGame()
     {
-            WeaponManager.Instance.selectedWeapon1 = selectedWPN1;
-            WeaponManager.Instance.selectedWeapon2 = selectedWPN2;
+        WeaponManager.Instance.selectedWeapon1 = selectedWPN1;
+        WeaponManager.Instance.selectedWeapon2 = selectedWPN2;
+
+        /*
+        if (!SaveManager.Instance.tutorialMission)
+        {
+            //SceneManager.LoadScene("Mission1");
+        }else 
+        */
+        if(!SaveManager.Instance.mission1)
+        {
             SceneManager.LoadScene("Mission1");
+        }else if (!SaveManager.Instance.mission2)
+        {
+            SceneManager.LoadScene("Mission2");
+        }else if (!SaveManager.Instance.mission3)
+        {
+            SceneManager.LoadScene("Mission4");
+        }
+        // and so on
     }
 
 
