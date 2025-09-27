@@ -58,7 +58,8 @@ public class Mission3Script : MonoBehaviour
     {
         Debug.Log("Congratulations! You completed the mission.");
         mission3Complete = true;
-        SaveManager.Instance.mission1 = true;
+        SaveManager.Instance.mission3 = true;
+        SaveManager.Instance.currentMission = 3;
         SaveManager.Instance.SavePlayerData();
         SceneManager.LoadScene("WeaponSelection");
         //SceneManager.LoadScene("Mission4");

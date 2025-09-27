@@ -8,12 +8,15 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance { get; private set; }
 
     //missions
+    // === completed ever ===
     public bool tutorialMission;
     public bool mission1;
     public bool mission2;
     public bool mission3;
     public bool mission4;
     public bool mission5;
+    // === completed this run ===
+    public int currentMission;
 
     //weapons unlocks
     public bool weapon1;
@@ -49,6 +52,7 @@ public class SaveManager : MonoBehaviour
         data.mission3 = mission3;
         data.mission4 = mission4;
         data.mission5 = mission5;
+        data.currentMission = currentMission;
 
         //Weapons
         data.weapon1 = weapon1;
@@ -72,6 +76,7 @@ public class SaveManager : MonoBehaviour
             mission3 = data.mission3;
             mission4 = data.mission4;
             mission5 = data.mission5;
+            currentMission = data.currentMission;
 
             //weapons
             weapon1 = data.weapon1;
@@ -118,6 +123,7 @@ public class SaveManager : MonoBehaviour
         mission3 = false;
         mission4 = false;
         mission5 = false;
+        currentMission = 0;
 
         //weapons
         weapon1 = true;
@@ -140,6 +146,7 @@ class PlayerData
     public bool mission3;
     public bool mission4;
     public bool mission5;
+    public int currentMission;
 
     //weapons unlocks
     public bool weapon1;

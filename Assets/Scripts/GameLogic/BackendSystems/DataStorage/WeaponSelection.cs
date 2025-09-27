@@ -56,13 +56,13 @@ public class WeaponSelection : MonoBehaviour
             //SceneManager.LoadScene("Mission1");
         }else 
         */
-        if(!SaveManager.Instance.mission1)
+        if(SaveManager.Instance.currentMission == 0)
         {
             SceneManager.LoadScene("Mission1");
-        }else if (!SaveManager.Instance.mission2)
+        }else if (SaveManager.Instance.currentMission == 1)
         {
             SceneManager.LoadScene("Mission2");
-        }else if (!SaveManager.Instance.mission3)
+        }else if (SaveManager.Instance.currentMission == 2)
         {
             SceneManager.LoadScene("Mission4");
         }

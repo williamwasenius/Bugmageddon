@@ -4,26 +4,42 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject options;
-
+    public GameObject tutorialPopup;
     public void StartGame()
     {
-        SceneManager.LoadScene("WeaponSelection");
-
-        /*
         if (!SaveManager.Instance.tutorialMission)
         {
-            //open tutorial popup
+            Options(tutorialPopup);
         }
-        */
+        else
+        {
+            SceneManager.LoadScene("WeaponSelection");
+        }
     }
-    public void Options()
+    public void Options(GameObject panel)
     {
-        options.SetActive(true);
+        if (panel.activeSelf == true)
+        {
+            panel.SetActive(false);
+        }else
+        {
+            panel.SetActive(true);
+        }
     }
 
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void TutorialYes()
+    {
+        SceneManager.LoadScene("WeaponSelection");
+    }
+    public void TutorialNo()
+    {
+        SaveManager.Instance.tutorialMission = true;
+        SaveManager.Instance.SavePlayerData();
+        SceneManager.LoadScene("WeaponSelection");
     }
 }

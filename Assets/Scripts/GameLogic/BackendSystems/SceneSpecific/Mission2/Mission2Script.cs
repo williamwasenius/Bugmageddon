@@ -26,6 +26,7 @@ public class Mission2Script  : MonoBehaviour
         Debug.Log("Congratulations! You completed the mission.");
         mission2Complete = true;
         SaveManager.Instance.mission2 = true;
+        SaveManager.Instance.currentMission = 2;
         SaveManager.Instance.SavePlayerData();
         SceneManager.LoadScene("WeaponSelection");
         //SceneManager.LoadScene("Mission4");

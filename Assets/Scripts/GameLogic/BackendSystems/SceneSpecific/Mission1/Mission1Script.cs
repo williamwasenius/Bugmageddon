@@ -48,6 +48,7 @@ public class Mission1Script : MonoBehaviour
         Debug.Log("Congratulations! You completed the mission.");
         mission1complete = true;
         SaveManager.Instance.mission1 = true;
+        SaveManager.Instance.currentMission = 1;
         SaveManager.Instance.SavePlayerData();
         SceneManager.LoadScene("Mission2");
     }
