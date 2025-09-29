@@ -57,15 +57,22 @@ public class Mission3Script : MonoBehaviour
     private void MissionComplete()
     {
         Debug.Log("Congratulations! You completed the mission.");
-        mission3Complete = true;
-        SceneManager.LoadScene("Mission4");
-        // missionLoader.LoadLevelBtn("Mission4");
+
+        if (!SaveManager.Instance.mission3)
+        {
+            SaveManager.Instance.mission3 = true;
+            SaveManager.Instance.SavePlayerData();
+        }
+
+        MissionTracker.Instance.MissionComplete();
+        SceneManager.LoadScene("WeaponSelection");
     }
     private void Lose()
     {
-        Debug.Log("You lost");
+        Debug.Log("Mission failed!");
+
+        MissionTracker.Instance.MissionFailed();
         SceneManager.LoadScene("GameLoss");
-        // missionLoader.LoadLevelBtn("MainMenu");
     }
 
 }

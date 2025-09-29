@@ -8,6 +8,13 @@ public class WeaponSelection : MonoBehaviour
     public int selectedWPN1 = 0;
     public int selectedWPN2 = 0;
 
+    public void Start()
+    {
+        if (Cursor.visible == false)
+        {
+            Cursor.visible = true;
+        }
+    }
     public void NextWeapon()
     {
         weapons1[selectedWPN1].SetActive(false);
