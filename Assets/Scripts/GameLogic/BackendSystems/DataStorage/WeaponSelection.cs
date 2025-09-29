@@ -52,7 +52,6 @@ public class WeaponSelection : MonoBehaviour
         WeaponManager.Instance.selectedWeapon1 = selectedWPN1;
         WeaponManager.Instance.selectedWeapon2 = selectedWPN2;
 
-        string missionScene = MissionTracker.Instance.GetCurrentMissionScene();
-        SceneManager.LoadScene(missionScene);
+        SceneManager.LoadScene(MissionTracker.Instance.GetNextMissionScene());
     }
 }

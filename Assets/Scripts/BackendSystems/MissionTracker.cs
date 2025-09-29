@@ -5,15 +5,15 @@ public class MissionTracker : MonoBehaviour
 {
     public static MissionTracker Instance;
 
-    public int currentMission = 1;
-    public int maxMissions = 5;
+    [Header("Mission state")]
+    public string nextMission = "Mission1";   
+    public string lastCompletedMission = "";    
 
-    public bool lastMissionComplete = false;
-    public bool lastMissionFailed = false;
+    public bool lastMissionComplete;
+    public bool lastMissionFailed;
 
     private void Awake()
     {
-        // Singleton setup
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -22,20 +22,27 @@ public class MissionTracker : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        nextMission = "Mission1";
     }
 
-    public void MissionComplete()
+    public void MissionComplete(string beatenMission)
     {
         lastMissionComplete = true;
         lastMissionFailed = false;
 
-        // Advance mission (but don’t exceed max)
-        if (currentMission < maxMissions)
-            currentMission++;
-        else if (currentMission == maxMissions)
+        lastCompletedMission = beatenMission;
+
+        switch (beatenMission)
         {
-            currentMission = 1;
-            SceneManager.LoadScene("GameComplete");
+            case "Mission1": nextMission = "Mission2"; break;
+            case "Mission2": nextMission = "Mission3"; break;
+            case "Mission3": nextMission = "Mission4"; break;
+            case "Mission4": nextMission = "Mission5"; break;
+            case "Mission5":
+                nextMission = "Mission1";
+                SceneManager.LoadScene("GameWin"); 
+                return;
         }
     }
 
@@ -44,12 +51,11 @@ public class MissionTracker : MonoBehaviour
         lastMissionFailed = true;
         lastMissionComplete = false;
 
-        // Reset mission back to 1 on failure
-        currentMission = 1;
+        nextMission = "Mission1";
     }
 
-    public string GetCurrentMissionScene()
+    public string GetNextMissionScene()
     {
-        return "Mission" + currentMission;
+        return nextMission;
     }
 }

@@ -23,7 +23,7 @@ public class Mission2Script  : MonoBehaviour
 
     private void MissionComplete()
     {
-        Debug.Log("Congratulations! You completed the mission.");
+        MissionTracker.Instance.MissionComplete("Mission2");
 
         if (!SaveManager.Instance.mission2)
         {
@@ -31,10 +31,9 @@ public class Mission2Script  : MonoBehaviour
             SaveManager.Instance.SavePlayerData();
         }
 
-        MissionTracker.Instance.MissionComplete();
-
         SceneManager.LoadScene("WeaponSelection");
     }
+
     private void Lose()
     {
         MissionTracker.Instance.MissionFailed();

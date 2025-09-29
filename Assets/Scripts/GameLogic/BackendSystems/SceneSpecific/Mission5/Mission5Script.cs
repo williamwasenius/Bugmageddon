@@ -24,17 +24,15 @@ public class Mission5Script : MonoBehaviour
 
     private void MissionComplete()
     {
-        Debug.Log("Congratulations! You completed the mission.");
+        MissionTracker.Instance.MissionComplete("Mission5");
 
         if (!SaveManager.Instance.mission5)
         {
             SaveManager.Instance.mission5 = true;
             SaveManager.Instance.SavePlayerData();
         }
-
-        MissionTracker.Instance.MissionComplete();
-        SceneManager.LoadScene("GameWin");
     }
+
     private void Lose()
     {
         MissionTracker.Instance.MissionFailed();

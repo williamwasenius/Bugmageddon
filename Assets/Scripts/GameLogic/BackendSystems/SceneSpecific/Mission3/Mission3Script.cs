@@ -56,7 +56,7 @@ public class Mission3Script : MonoBehaviour
 
     private void MissionComplete()
     {
-        Debug.Log("Congratulations! You completed the mission.");
+        MissionTracker.Instance.MissionComplete("Mission3");
 
         if (!SaveManager.Instance.mission3)
         {
@@ -64,13 +64,11 @@ public class Mission3Script : MonoBehaviour
             SaveManager.Instance.SavePlayerData();
         }
 
-        MissionTracker.Instance.MissionComplete();
         SceneManager.LoadScene("WeaponSelection");
     }
+
     private void Lose()
     {
-        Debug.Log("Mission failed!");
-
         MissionTracker.Instance.MissionFailed();
         SceneManager.LoadScene("GameLoss");
     }
