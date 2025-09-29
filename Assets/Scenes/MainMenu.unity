@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9146476318bc141a87a951067a4afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  options: {fileID: 0}
+  tutorialPopup: {fileID: 886876024}
 --- !u!4 &442968589
 Transform:
   m_ObjectHideFlags: 0
