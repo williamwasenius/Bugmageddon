@@ -24,11 +24,12 @@ public class Mission2Script  : MonoBehaviour
     private void MissionComplete()
     {
         Debug.Log("Congratulations! You completed the mission.");
-        mission2Complete = true;
-        SceneManager.LoadScene("Mission4");
+        MissionTracker.Instance.MissionComplete();
+        SceneManager.LoadScene("WeaponSelection");
     }
     private void Lose()
     {
+        MissionTracker.Instance.MissionFailed();
         SceneManager.LoadScene("GameLoss");
     }
 

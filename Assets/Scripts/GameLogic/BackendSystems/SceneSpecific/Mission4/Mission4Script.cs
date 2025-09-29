@@ -40,11 +40,12 @@ public class Mission4Script : MonoBehaviour
     private void MissionComplete()
     {
         Debug.Log("Congratulations! You completed the mission.");
-        mission4Complete = true;
-        SceneManager.LoadScene("Mission5");
+        MissionTracker.Instance.MissionComplete();
+        SceneManager.LoadScene("WeaponSelection");
     }
     private void Lose()
     {
+        MissionTracker.Instance.MissionFailed();
         SceneManager.LoadScene("GameLoss");
     }
 

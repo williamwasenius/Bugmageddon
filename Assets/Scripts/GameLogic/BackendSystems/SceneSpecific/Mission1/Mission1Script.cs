@@ -1,28 +1,26 @@
-using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Mission1Script : MonoBehaviour
 {
     public GameObject player;
     public int enemiesRemaining;
     public TextMeshProUGUI enemyCounter;
-    public bool mission1complete = false;
 
     private void Awake()
     {
         UpdateEnemyCount();
     }
+
     public void Update()
     {
-        enemyCounter.text = (enemiesRemaining.ToString());
+        enemyCounter.text = enemiesRemaining.ToString();
     }
 
     private void FixedUpdate()
     {
-
         if (player == null)
         {
             Lose();
@@ -36,6 +34,7 @@ public class Mission1Script : MonoBehaviour
             MissionComplete();
         }
     }
+
     private void UpdateEnemyCount()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -46,11 +45,16 @@ public class Mission1Script : MonoBehaviour
     private void MissionComplete()
     {
         Debug.Log("Congratulations! You completed the mission.");
-        mission1complete = true;
-        SceneManager.LoadScene("Mission2");
+
+        MissionTracker.Instance.MissionComplete();
+        SceneManager.LoadScene("WeaponSelection");
     }
+
     private void Lose()
     {
+        Debug.Log("Mission failed!");
+
+        MissionTracker.Instance.MissionFailed();
         SceneManager.LoadScene("GameLoss");
     }
 }

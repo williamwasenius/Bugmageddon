@@ -3,11 +3,17 @@ using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{ 
+{
 
     [Header("Movement Settings")]
-    public float speed = 2;
-    public float dashSpeedMultiplier = 50;
+    public float speed;
+    public float acceleration;
+    public float deceleration;
+    private Vector3 currentVelocity;
+
+    [Header("Body Parts")]
+    public Transform legs;
+    public Transform torso;
 
     [Header("Weapons")]
     public GameObject weapon1;
@@ -16,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dash")]
     public float dashCooldown = 2;
     private float dashCooldownCounter;
+    public float dashForceMultiplier = 50;
 
     [Header("Ability")]
     public float abilityCooldown = 30;
@@ -28,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
 
     private Rigidbody rigidBody;
-    // [SerializeField] private Animator animator;
+   // [SerializeField] private Animator animator;
     private Camera playerCamera;
 
     private WeaponHandler weapon1Handler;
@@ -122,35 +129,56 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-       /* if (horizontal != 0 || vertical != 0)
+        Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
+
+        // Smooth acceleration/deceleration
+        if (targetDirection.magnitude > 0.1f)
         {
-            Debug.Log("is moving");
-            animator.SetBool("IsWalking", true);
+            currentVelocity = Vector3.MoveTowards(
+                currentVelocity,
+                targetDirection * speed,
+                acceleration * Time.fixedDeltaTime
+            );
         }
         else
         {
-            animator.SetBool("IsWalking", false);
-        } */
+            currentVelocity = Vector3.MoveTowards(
+                currentVelocity,
+                Vector3.zero,
+                deceleration * Time.fixedDeltaTime
+            );
+        }
 
-        movement = new Vector3(horizontal, 0, vertical);
+        rigidBody.linearVelocity = new Vector3(currentVelocity.x, rigidBody.linearVelocity.y, currentVelocity.z);
 
-        rigidBody.AddForce(movement * speed, ForceMode.VelocityChange);
-
-        RotateTowardsMouse();
+        HandleLegRotation(targetDirection); // NEW legs system
+        RotateTowardsMouse(); // Torso stays independent
+    }
+    private void HandleLegRotation(Vector3 moveDir)
+    {
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            legs.rotation = Quaternion.Slerp(legs.rotation, targetRotation, 10f * Time.deltaTime);
+        }
     }
 
     private void RotateTowardsMouse()
     {
         Ray cameraRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
 
         if (groundPlane.Raycast(cameraRay, out float rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
 
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            // Torso faces mouse
+            torso.LookAt(new Vector3(pointToLook.x, torso.position.y, pointToLook.z));
 
-            Vector3 weaponLookAtTarget = armLock ? new Vector3(pointToLook.x, weapon1.transform.position.y, pointToLook.z) : pointToLook;
+            // Weapons align with torso aim
+            Vector3 weaponLookAtTarget = armLock
+                ? new Vector3(pointToLook.x, weapon1.transform.position.y, pointToLook.z)
+                : pointToLook;
 
             weapon1.transform.LookAt(weaponLookAtTarget);
             weapon2.transform.LookAt(weaponLookAtTarget);
@@ -158,9 +186,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     private void Dash(Vector3 movementDirection)
     {
-        Vector3 dashForce = movementDirection * dashSpeedMultiplier;
+        Vector3 dashForce = movementDirection * dashForceMultiplier;
         rigidBody.AddForce(dashForce, ForceMode.Impulse);
     }
 

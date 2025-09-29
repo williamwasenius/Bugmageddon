@@ -6,6 +6,14 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject options;
 
+    public void Start()
+    {
+        if (Cursor.visible == false)
+        {  
+            Cursor.visible = true; 
+        }
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("WeaponSelection");
