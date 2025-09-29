@@ -4103,7 +4103,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: b731ca1a3de633a4291f77d495b999e9, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4391,7 +4391,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: b731ca1a3de633a4291f77d495b999e9, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7480,7 +7480,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: a9e81855b85017f4493a97a483374dd2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7883,7 +7883,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: b731ca1a3de633a4291f77d495b999e9, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10556,7 +10556,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: a9e81855b85017f4493a97a483374dd2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11066,7 +11066,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: a9e81855b85017f4493a97a483374dd2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14031,7 +14031,7 @@ PrefabInstance:
     - target: {fileID: 8480015002134107046, guid: a9e81855b85017f4493a97a483374dd2, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 300353378}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
