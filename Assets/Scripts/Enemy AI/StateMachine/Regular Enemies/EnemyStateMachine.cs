@@ -8,8 +8,10 @@ public class EnemyStateMachine : MonoBehaviour
     public float sightRange = 50f;
     public float wanderSpeed = 5f;
     public float chaseSpeed = 10f;
-    public Transform enemyPosition;
-    public Vector3 TargetPosition;
+    public Transform currentPosition;
+    public Vector3 targetPosition;
+    public Vector3 velocity;
+
 
     public bool isRanged;
     public GameObject projectile;
@@ -27,6 +29,7 @@ public class EnemyStateMachine : MonoBehaviour
     [HideInInspector] public IEnemyStates currentState;
     [HideInInspector] public WanderState wanderState;
     [HideInInspector] public NavMeshAgent navMeshAgent;
+    [SerializeField] private Animator animator;
 
     // Wander Behavior Variables
     [SerializeField] public float wanderRadius = 10f;
@@ -56,7 +59,19 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Velocity: " + velocity.magnitude);
         currentState.UpdateState();
+        velocity = navMeshAgent.velocity;
+
+        if (velocity.magnitude >= 0.01f)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
     }
 
     // Trigger & Collision Handlers

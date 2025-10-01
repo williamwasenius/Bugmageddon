@@ -49,9 +49,9 @@ public class AttackState : IEnemyStates
 
     void Look()
     {
-        Debug.DrawRay(enemy.enemyPosition.position, enemy.enemyPosition.forward * enemy.sightRange, Color.red);
+        Debug.DrawRay(enemy.currentPosition.position, enemy.currentPosition.forward * enemy.sightRange, Color.red);
         RaycastHit hit;
-        if (Physics.Raycast(enemy.enemyPosition.position, enemy.enemyPosition.forward, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
+        if (Physics.Raycast(enemy.currentPosition.position, enemy.currentPosition.forward, out hit, enemy.sightRange) && hit.collider.CompareTag("Player"))
         {
             enemy.chaseTarget = hit.transform;
         }

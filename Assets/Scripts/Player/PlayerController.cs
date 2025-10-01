@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
 
     private Rigidbody rigidBody;
-   // [SerializeField] private Animator animator;
+   [SerializeField] private Animator animator;
     private Camera playerCamera;
 
     private WeaponHandler weapon1Handler;
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         playerCamera = Camera.main;
 
         InitializeWeapons();
@@ -131,7 +132,6 @@ public class PlayerController : MonoBehaviour
 
         Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-        // Smooth acceleration/deceleration
         if (targetDirection.magnitude > 0.1f)
         {
             currentVelocity = Vector3.MoveTowards(
@@ -139,6 +139,8 @@ public class PlayerController : MonoBehaviour
                 targetDirection * speed,
                 acceleration * Time.fixedDeltaTime
             );
+
+            //animator.SetBool("IsWalking", true);
         }
         else
         {
@@ -147,12 +149,14 @@ public class PlayerController : MonoBehaviour
                 Vector3.zero,
                 deceleration * Time.fixedDeltaTime
             );
+
+            //animator.SetBool("IsWalking", false);
         }
 
         rigidBody.linearVelocity = new Vector3(currentVelocity.x, rigidBody.linearVelocity.y, currentVelocity.z);
 
-        HandleLegRotation(targetDirection); // NEW legs system
-        RotateTowardsMouse(); // Torso stays independent
+        HandleLegRotation(targetDirection);
+        RotateTowardsMouse();
     }
     private void HandleLegRotation(Vector3 moveDir)
     {
@@ -172,10 +176,8 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
 
-            // Torso faces mouse
             torso.LookAt(new Vector3(pointToLook.x, torso.position.y, pointToLook.z));
 
-            // Weapons align with torso aim
             Vector3 weaponLookAtTarget = armLock
                 ? new Vector3(pointToLook.x, weapon1.transform.position.y, pointToLook.z)
                 : pointToLook;

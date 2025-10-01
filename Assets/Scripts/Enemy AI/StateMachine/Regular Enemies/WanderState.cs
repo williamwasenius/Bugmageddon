@@ -7,7 +7,7 @@ public class WanderState : IEnemyStates
     private float wanderRadius;
     private float wanderTimer;
     private float timer;
-    private float timeToNextWander; // Random time until the next wander
+    private float timeToNextWander;
 
     public WanderState(EnemyStateMachine statePatternEnemy, float radius, float initialWanderTime)
     {
@@ -60,9 +60,9 @@ public class WanderState : IEnemyStates
 
     void Look()
     {
-        Debug.DrawRay(enemy.enemyPosition.position, enemy.enemyPosition.forward * enemy.sightRange, Color.red);
+        Debug.DrawRay(enemy.currentPosition.position, enemy.currentPosition.forward * enemy.sightRange, Color.red);
         RaycastHit hit;
-        if (Physics.Raycast(enemy.enemyPosition.position, enemy.enemyPosition.forward, out hit, enemy.sightRange))
+        if (Physics.Raycast(enemy.currentPosition.position, enemy.currentPosition.forward, out hit, enemy.sightRange))
         {
             if (hit.collider.CompareTag("Player"))
                 {
