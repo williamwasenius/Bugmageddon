@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
         playerCamera = Camera.main;
 
         InitializeWeapons();

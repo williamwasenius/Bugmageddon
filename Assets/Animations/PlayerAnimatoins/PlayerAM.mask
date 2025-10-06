@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerAM
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/location
+    m_Weight: 0
+  - m_Path: Armature/location/base
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe1joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe1joint.L/toe1tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe2joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe2joint.L/toe2tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe3joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe3joint.L/toe3tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe4joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toe4joint.L/toe4tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toeback1joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toeback1joint.L/toeback1tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toeback2joint.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.L/foot.L/toeback2joint.L/toeback2tip.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe1joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe1joint.R/toe1tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe2joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe2joint.R/toe2tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe3joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe3joint.R/toe3tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe4joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toe4joint.R/toe4tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toeback1joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toeback1joint.R/toeback1tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toeback2joint.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/IK.R/foot.R/toeback2joint.R/toeback2tip.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/ORG_head
+    m_Weight: 0
+  - m_Path: Armature/location/base/ORG_root
+    m_Weight: 0
+  - m_Path: Armature/location/base/root
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/head
+    m_Weight: 1
+  - m_Path: Armature/location/base/root/thigh.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.L/knee.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.L/knee.L/calf.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.L/knee.L/calf.L/ankle.L
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.R/knee.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.R/knee.R/calf.R
+    m_Weight: 0
+  - m_Path: Armature/location/base/root/thigh.R/knee.R/calf.R/ankle.R
+    m_Weight: 0
+  - m_Path: Cube.065
+    m_Weight: 0
+  - m_Path: Cube.066
+    m_Weight: 0
+  - m_Path: Cube.067
+    m_Weight: 0
+  - m_Path: Cube.068
+    m_Weight: 0
+  - m_Path: Cube.069
+    m_Weight: 0
+  - m_Path: Cube.070
+    m_Weight: 0
+  - m_Path: Cube.077
+    m_Weight: 0
+  - m_Path: Cube.078
+    m_Weight: 0
+  - m_Path: Cube.079
+    m_Weight: 0
+  - m_Path: Cube.080
+    m_Weight: 0
+  - m_Path: Cube.081
+    m_Weight: 0
+  - m_Path: Cube.082
+    m_Weight: 0
+  - m_Path: Cube.083
+    m_Weight: 0
+  - m_Path: Cylinder.009
+    m_Weight: 0
+  - m_Path: Sphere.004
+    m_Weight: 0
