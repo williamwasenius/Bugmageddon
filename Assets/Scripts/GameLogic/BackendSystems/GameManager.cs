@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     // Public Variables
-    public float destructibleRangeThreshold = 50f;
-    public float enemyRangeThreshold = 100f;
+    public float destructibleRangeThreshold = 200f;
+    public float enemyRangeThreshold = 200f;
     public float enemyInactiveTimeThreshold = 15f; 
     public List<GameObject> enemiesInScene = new List<GameObject>();
 
@@ -135,7 +135,6 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"{type} {obj.name} is now unloaded.");
                     }
 
-                    // Update inactive timer
                     if (type == "Enemy" && enemyInactiveTimers.ContainsKey(obj))
                     {
                         enemyInactiveTimers[obj] += Time.deltaTime;

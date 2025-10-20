@@ -41,7 +41,7 @@ public class CombatUIManager : MonoBehaviour
 
         if (player != null)
         {
-            DashCooldownImage.fillAmount = 1 - player.DashCooldownProgress();
+            //DashCooldownImage.fillAmount = 1 - player.DashCooldownProgress();
         }
 
     }

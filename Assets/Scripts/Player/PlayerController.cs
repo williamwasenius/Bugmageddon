@@ -1,41 +1,36 @@
-using Unity.VisualScripting;
 using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [Header("Movement Settings")]
-    public float speed;
-    public float acceleration;
-    public float deceleration;
+    public float speed = 10f;               
+    public float runSpeed = 30f;           
+    public float acceleration = 10f;
+    public float deceleration = 10f;
     private Vector3 currentVelocity;
 
     [Header("Body Parts")]
     public Transform legs;
     public Transform torso;
+    public Transform aimPivot;
 
     [Header("Weapons")]
     public GameObject weapon1;
     public GameObject weapon2;
-
-    [Header("Dash")]
-    public float dashCooldown = 2;
-    private float dashCooldownCounter;
-    public float dashForceMultiplier = 50;
+    public float wpnMaxRotation = 20f;
 
     [Header("Ability")]
-    public float abilityCooldown = 30;
+    public float abilityCooldown = 30f;
     private float abilityCooldownCounter;
-    public float abilityDuration = 12;
-    private float abilityDurationCounter;
+    public float abilityDuration = 12f;
     public bool abilityActive = false;
 
     private bool isShooting = false;
-    private Vector3 movement;
+    private bool isRunning = false;
 
     private Rigidbody rigidBody;
-   [SerializeField] private Animator animator;
+    [SerializeField] private Animator animator;
     private Camera playerCamera;
 
     private WeaponHandler weapon1Handler;
@@ -47,28 +42,19 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         playerCamera = Camera.main;
-
         InitializeWeapons();
     }
 
     void Update()
     {
         HandleShooting();
-
-        HandleDash();
-
+        HandleRun();
         Ability();
-
-        //  AdjustSpeedForShooting();
-
     }
 
     void FixedUpdate()
     {
-        InitializeWeapons();
-
         HandleMovement();
-
     }
 
     private void InitializeWeapons()
@@ -81,40 +67,37 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && weapon1Handler != null)
         {
+            Debug.Log("shooting weapon 1");
             weapon1Handler.shoot();
         }
 
         if (Input.GetKey(KeyCode.Mouse1) && weapon2Handler != null)
         {
+            Debug.Log("shooting weapon 2");
             weapon2Handler.shoot();
-        }
+         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             Debug.Log("Weapon stance switched");
-            armLock = !armLock; 
+            armLock = !armLock;
         }
 
         isShooting = Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1);
     }
 
-    private void HandleDash()
+    private void HandleRun()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= dashCooldownCounter)
-        {
-            Dash(movement);
-            dashCooldownCounter = Time.time + dashCooldown;
-        }
+        isRunning = Input.GetKey(KeyCode.LeftShift);
     }
 
-    private void Ability()
+    public void Ability()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time >= abilityCooldownCounter && !abilityActive)
         {
-            abilityDurationCounter = Time.time + abilityDuration;
             abilityActive = true;
-            StartCoroutine(DeactivateAbilityAfterDuration());
             abilityCooldownCounter = Time.time + abilityCooldown;
+            StartCoroutine(DeactivateAbilityAfterDuration());
         }
     }
 
@@ -130,16 +113,17 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
+        float targetSpeed = isRunning ? runSpeed : speed;
 
         if (targetDirection.magnitude > 0.1f)
         {
             currentVelocity = Vector3.MoveTowards(
                 currentVelocity,
-                targetDirection * speed,
+                targetDirection * targetSpeed,
                 acceleration * Time.fixedDeltaTime
             );
 
-            //animator.SetBool("IsWalking", true);
+            animator.SetBool("IsWalking", true);
         }
         else
         {
@@ -149,14 +133,18 @@ public class PlayerController : MonoBehaviour
                 deceleration * Time.fixedDeltaTime
             );
 
-            //animator.SetBool("IsWalking", false);
+            animator.SetBool("IsWalking", false);
         }
 
         rigidBody.linearVelocity = new Vector3(currentVelocity.x, rigidBody.linearVelocity.y, currentVelocity.z);
 
+        float currentSpeed = new Vector3(rigidBody.linearVelocity.x, 0, rigidBody.linearVelocity.z).magnitude;
+        animator.SetFloat("MoveSpeed", currentSpeed);
+
         HandleLegRotation(targetDirection);
         RotateTowardsMouse();
     }
+
     private void HandleLegRotation(Vector3 moveDir)
     {
         if (moveDir.sqrMagnitude > 0.01f)
@@ -174,34 +162,31 @@ public class PlayerController : MonoBehaviour
         if (groundPlane.Raycast(cameraRay, out float rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-
-            torso.LookAt(new Vector3(pointToLook.x, torso.position.y, pointToLook.z));
-
-            Vector3 weaponLookAtTarget = armLock
-                ? new Vector3(pointToLook.x, weapon1.transform.position.y, pointToLook.z)
+            Vector3 aimTarget = armLock
+                ? new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z)
                 : pointToLook;
 
-            weapon1.transform.LookAt(weaponLookAtTarget);
-            weapon2.transform.LookAt(weaponLookAtTarget);
+            float maxAngle = wpnMaxRotation;
+            Vector3 forward = aimPivot.transform.forward;
+
+            Vector3 aimDir1 = (aimTarget - weapon1.transform.position).normalized;
+            float angle1 = Vector3.Angle(forward, aimDir1);
+            if (angle1 > maxAngle)
+                aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
+
+            Vector3 aimDir2 = (aimTarget - weapon2.transform.position).normalized;
+            float angle2 = Vector3.Angle(forward, aimDir2);
+            if (angle2 > maxAngle)
+                aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
+
+            Quaternion rot1 = Quaternion.LookRotation(aimDir1);
+            Quaternion rot2 = Quaternion.LookRotation(aimDir2);
+
+            float rotationSpeed = 10f;
+            weapon1.transform.rotation = Quaternion.Slerp(weapon1.transform.rotation, rot1, rotationSpeed * Time.deltaTime);
+            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, rot2, rotationSpeed * Time.deltaTime);
         }
     }
 
 
-
-    private void Dash(Vector3 movementDirection)
-    {
-        Vector3 dashForce = movementDirection * dashForceMultiplier;
-        rigidBody.AddForce(dashForce, ForceMode.Impulse);
-    }
-
-    public float DashCooldownProgress()
-    {
-        return Mathf.Clamp01((dashCooldownCounter - Time.time) / dashCooldown);
-    }
-
-
-    private void AdjustSpeedForShooting()
-    {
-        speed = isShooting ? 1f : 2f;
-    }
 }

@@ -81,14 +81,21 @@ public class ProjectileLogic : MonoBehaviour
 
     private void SetDamage()
     {
-        if (playerController.abilityActive == true)
+        if (playerController != null)
         {
-            Debug.Log("Damage amplified");
-            damage = amplifiedDamage;
+            if (playerController.abilityActive == true)
+            {
+                Debug.Log("Damage amplified");
+                damage = amplifiedDamage;
+            }
+            else
+            {
+                currentDamage = damage;
+            }
         }
         else
         {
-            currentDamage = damage;
+            return;
         }
     }
 

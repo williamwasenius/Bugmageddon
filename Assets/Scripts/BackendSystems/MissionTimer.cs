@@ -10,26 +10,25 @@ public class MissionTimer : MonoBehaviour
 
     private void OnEnable()
     {
-        // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // Unsubscribe from the sceneLoaded event to prevent memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
     {
+        if (timerUI == null || manager == null)
+            return;
+
         if (manager.isLoading)
         {
-            // Hide the timer text if the game is loading
             timerUI.gameObject.SetActive(false);
         }
         else
         {
-            // Show the timer text and update the time when the game is not loading
             timerUI.gameObject.SetActive(true);
             elapsedTime += Time.deltaTime;
 
@@ -43,9 +42,11 @@ public class MissionTimer : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        GameObject obj = GameObject.FindGameObjectWithTag("MissionTimer");
+        timerUI = obj.GetComponent<TextMeshProUGUI>();
+
         if (scene.name == "MainMenu")
         {
-            // Reset the timer and the UI text when the main menu is loaded
             elapsedTime = 0f;
             timerUI.text = "00.00.0";
         }

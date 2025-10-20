@@ -9,29 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: c83f536103315f744aab2eebf0bedb68
   - enabled: 1
-    path: Assets/Scenes/Mission1(OLD).unity
-    guid: 53a6c7b74e7434446afdbf77af2a7328
-  - enabled: 1
     path: Assets/Scenes/Mission1.unity
     guid: 78e54d91ba7c6e44db195d7e76d2d69f
   - enabled: 1
     path: Assets/Scenes/Mission2.unity
-    guid: 2626b071517c5e84bb811edb9e527689
+    guid: e9fb5e0b9ce5e564688a58730fef30c4
   - enabled: 1
     path: Assets/Scenes/Mission3.unity
     guid: 4f92ce2c00a25714381ae1a99a414a72
   - enabled: 1
-    path: Assets/Scenes/mission4.unity
-    guid: 08dacbb54c1af9549816d7a7e83f0983
+    path: Assets/Scenes/Mission4.unity
+    guid: 591c27a0694caf040b23703abebef7c0
   - enabled: 1
     path: Assets/Scenes/Mission5.unity
     guid: dab546553e0666942a242c7b75588461
-  - enabled: 1
-    path: Assets/Scenes/MissionScrapped.unity
-    guid: 7a8961c5888c83946891c95f65acfbb1
-  - enabled: 1
-    path: Assets/Scenes/TestingScene.unity
-    guid: 8f89859637dc1e9488954677792c11a3
   - enabled: 1
     path: Assets/Scenes/WeaponSelection.unity
     guid: 37b43a2d8e9b920479fb2f7da2dd6ba0

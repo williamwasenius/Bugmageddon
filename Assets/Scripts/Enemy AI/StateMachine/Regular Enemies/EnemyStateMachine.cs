@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    // Public Variables
+    [Header("Standard stats")]
     public float sightRange = 50f;
     public float wanderSpeed = 5f;
     public float chaseSpeed = 10f;
@@ -12,12 +12,13 @@ public class EnemyStateMachine : MonoBehaviour
     public Vector3 targetPosition;
     public Vector3 velocity;
 
-
+    [Header("Ranged")]
     public bool isRanged;
     public GameObject projectile;
     public Transform shootingPoint;
     private Collider detectionTrigger;
 
+    [Header("Detonator")]
     public bool isDetonator;
     public float detonatorDamage = 500;
     public float explosionRadius = 5;
@@ -59,7 +60,6 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Velocity: " + velocity.magnitude);
         currentState.UpdateState();
         velocity = navMeshAgent.velocity;
 
