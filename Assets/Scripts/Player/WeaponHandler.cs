@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class WeaponHandler : MonoBehaviour
     public GameObject projectile;
     public Transform firePoint;
     public Transform barrel;
+    public VisualEffect muzzleFlash;
 
     [Header("Weapon Statistics")]
     public float weaponFireRate = 0.2f;
@@ -31,6 +33,7 @@ public class WeaponHandler : MonoBehaviour
             {
                 shootSound.Play();
             }
+            muzzleFlash.Play();
             Instantiate(projectile, firePoint.position, firePoint.rotation);
             cooldownCounter = Time.time + weaponFireRate;
         }

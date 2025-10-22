@@ -69,9 +69,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: 448
-    y: -491
-    width: 706
-    height: 1615
+    y: -493
+    width: 707
+    height: 1859
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +221,7 @@ VisualEffectResource:
     m_UpdateMode: 0
     m_PreWarmDeltaTime: 0.05
     m_PreWarmStepCount: 0
-    m_InitialEventName: OnPlay
+    m_InitialEventName: 
     m_InstancingMode: -1
     m_InstancingCapacity: 64
 --- !u!114 &8926484042661614529
@@ -1752,7 +1752,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.800000011920929,"y":0.800000011920929,"z":0.800000011920929}'
+      m_SerializableObject: '{"x":80.0,"y":80.0,"z":80.0}'
     m_Space: -1
   m_Property:
     name: A
@@ -1888,7 +1888,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":1.0,"y":1.5,"z":1.0}'
+      m_SerializableObject: '{"x":100.0,"y":150.0,"z":100.0}'
     m_Space: -1
   m_Property:
     name: B
