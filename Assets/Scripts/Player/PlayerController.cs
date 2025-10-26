@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         playerCamera = Camera.main;
-        InitializeWeapons();
     }
 
     void Update()
@@ -57,10 +56,12 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
-    private void InitializeWeapons()
+    public void AssignWeapon(WeaponHandler newWeapon)
     {
-        if (weapon1 != null) weapon1Handler = weapon1.GetComponentInChildren<WeaponHandler>();
-        if (weapon2 != null) weapon2Handler = weapon2.GetComponentInChildren<WeaponHandler>();
+        if (weapon1Handler == null)
+            weapon1Handler = newWeapon;
+        else if (weapon2Handler == null)
+            weapon2Handler = newWeapon;
     }
 
     private void HandleShooting()

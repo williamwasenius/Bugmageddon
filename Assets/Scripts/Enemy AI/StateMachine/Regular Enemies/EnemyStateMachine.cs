@@ -16,6 +16,8 @@ public class EnemyStateMachine : MonoBehaviour
     public bool isRanged;
     public GameObject projectile;
     public Transform shootingPoint;
+    public float attackRange = 15f;
+    public float followRange = 25f;
     private Collider detectionTrigger;
 
     [Header("Detonator")]
@@ -38,8 +40,6 @@ public class EnemyStateMachine : MonoBehaviour
 
     // Attack Behavior Variables
     [HideInInspector] public AttackState attackState;
-    [SerializeField] public float attackRange = 15f;
-    [SerializeField] public float followRange = 25f;
 
     // Unity Methods
 

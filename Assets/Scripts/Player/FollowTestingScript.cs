@@ -6,10 +6,17 @@ public class FollowTestingScript : MonoBehaviour
     public Transform player;
     public float maxDistance = 1000f;
     public float followRadius = 30f;
-    public float moveSpeed = 10f; // how fast the orb moves toward target
+    public float minRadius = 5f;
+    public float moveSpeed = 10f;
     public LayerMask groundMask;
 
     private Vector3 targetPosition;
+
+    private void Start()
+    {
+        transform.position = player.position;
+        targetPosition = player.position;
+    }
 
     void Update()
     {
@@ -28,8 +35,9 @@ public class FollowTestingScript : MonoBehaviour
         {
             Vector3 desiredPosition = hit.point;
             Vector3 offset = desiredPosition - player.position;
+            float distance = offset.magnitude;
 
-            if (offset.magnitude > followRadius)
+            if (distance > followRadius)
                 offset = offset.normalized * followRadius;
 
             targetPosition = player.position + offset;

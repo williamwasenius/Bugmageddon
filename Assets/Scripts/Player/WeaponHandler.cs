@@ -20,9 +20,13 @@ public class WeaponHandler : MonoBehaviour
     public bool rotatingBarrel = false;
     public int rotationSpeed;
 
-    private void Start()
+    void Awake()
     {
-
+        PlayerController player = GetComponentInParent<PlayerController>();
+        if (player != null)
+        {
+            player.AssignWeapon(this);
+        }
     }
 
     public void shoot()
@@ -33,7 +37,10 @@ public class WeaponHandler : MonoBehaviour
             {
                 shootSound.Play();
             }
-            muzzleFlash.Play();
+            if (shootSound != null)
+            {
+                muzzleFlash.Play();
+            }
             Instantiate(projectile, firePoint.position, firePoint.rotation);
             cooldownCounter = Time.time + weaponFireRate;
         }

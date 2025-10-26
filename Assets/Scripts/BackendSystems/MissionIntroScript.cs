@@ -22,6 +22,10 @@ public class MissionIntroScript : MonoBehaviour
 
     public void Continue()
     {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+        }
         StartCoroutine(FadeOutCanvas());
     }
 
