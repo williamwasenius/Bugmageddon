@@ -28,16 +28,16 @@ public class Mission3Script : MonoBehaviour
     private DestructibleScript genTwoStatus;
     private DestructibleScript genThreeStatus;
     private DestructibleScript finalGenStatus;
-    public TurretScript[] turretsOne;
-    public TurretScript[] turretsTwo;
-    public TurretScript[] turretsThree;
 
-    [Header("Attack Waves")]
+    private SmallReactor smallGen1;
+    private SmallReactor smallGen2;
+    private SmallReactor smallGen3;
+
+    [Header("Waves")]
     public AttackWaveManager waveManager;
 
     private float currentTimer = 0f;
     private bool timerRunning = false;
-
     private int completedGenerators = 0;
 
     private enum MissionState { Idle, DefendingGen1, DefendingGen2, DefendingGen3, FinalDefense, Complete }
@@ -51,6 +51,10 @@ public class Mission3Script : MonoBehaviour
         genTwoStatus = reactorTwo.GetComponent<DestructibleScript>();
         genThreeStatus = reactorThree.GetComponent<DestructibleScript>();
         finalGenStatus = largeReactor.GetComponent<DestructibleScript>();
+
+        smallGen1 = reactorOne.GetComponent<SmallReactor>();
+        smallGen2 = reactorTwo.GetComponent<SmallReactor>();
+        smallGen3 = reactorThree.GetComponent<SmallReactor>();
 
         objectiveText.text = "Activate and Defend the Generators!";
     }
@@ -91,30 +95,24 @@ public class Mission3Script : MonoBehaviour
             case MissionState.DefendingGen1:
                 completedGenerators++;
                 waveManager.EndWave(1);
-                foreach (TurretScript turret in turretsOne)
-                {
-                    turret.powered = true;
-                }
+                smallGen1.powered = true;
                 currentState = MissionState.Idle;
                 break;
+
             case MissionState.DefendingGen2:
                 completedGenerators++;
                 waveManager.EndWave(2);
-                foreach (TurretScript turret in turretsTwo)
-                {
-                    turret.powered = true;
-                }
+                smallGen2.powered = true; 
                 currentState = MissionState.Idle;
                 break;
+
             case MissionState.DefendingGen3:
                 completedGenerators++;
                 waveManager.EndWave(3);
-                foreach (TurretScript turret in turretsThree)
-                {
-                    turret.powered = true;
-                }
+                smallGen3.powered = true; 
                 currentState = MissionState.Idle;
                 break;
+
             case MissionState.FinalDefense:
                 waveManager.EndFinalWave();
                 MissionComplete();
@@ -152,7 +150,6 @@ public class Mission3Script : MonoBehaviour
 
         StartCoroutine(StartDefenseTimer());
     }
-
 
     private IEnumerator StartDefenseTimer()
     {

@@ -5,8 +5,9 @@ public class TurretScript : MonoBehaviour
 {
     public bool powered = false;
 
-    [Header("Weapons & Targeting")]
+    [Header("Turret Components")]
     public WeaponHandler[] weapons;
+    public GameObject turretCore;
 
     [Header("Turret stats")]
     public float rotationSpeed = 5f;
@@ -72,7 +73,7 @@ public class TurretScript : MonoBehaviour
             Vector3 direction = target.position - transform.position;
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+            turretCore.transform.rotation = Quaternion.Slerp(turretCore.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
@@ -99,7 +100,7 @@ public class TurretScript : MonoBehaviour
         }
 
         Quaternion targetRotation = idleStartRotation * Quaternion.Euler(0, idleCurrentAngle, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        turretCore.transform.rotation = Quaternion.Slerp(turretCore.transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 
     void Unpowered()

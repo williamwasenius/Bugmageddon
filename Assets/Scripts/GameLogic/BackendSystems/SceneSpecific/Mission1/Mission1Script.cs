@@ -37,9 +37,9 @@ public class Mission1Script : MonoBehaviour
 
     private void UpdateEnemyCount()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemiesRemaining = GameManager.Instance.enemiesInScene.Count;
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        enemiesRemaining = enemies.Length + spawners.Length;
+        enemiesRemaining += spawners.Length;
     }
 
     private void MissionComplete()

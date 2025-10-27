@@ -43,9 +43,9 @@ public class MissionTimer : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameObject obj = GameObject.FindGameObjectWithTag("MissionTimer");
-        timerUI = obj.GetComponent<TextMeshProUGUI>();
+        timerUI = obj ? obj.GetComponent<TextMeshProUGUI>() : null;
 
-        if (scene.name == "MainMenu")
+        if (scene.name == "MainMenu" && timerUI != null)
         {
             elapsedTime = 0f;
             timerUI.text = "00.00.0";

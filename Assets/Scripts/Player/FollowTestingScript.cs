@@ -15,13 +15,23 @@ public class FollowTestingScript : MonoBehaviour
     private void Start()
     {
         transform.position = player.position;
-        targetPosition = player.position;
+        if (player != null)
+        {
+            targetPosition = player.position;
+        }
+        else
+        {
+            Debug.Log("No Player registered in this scene");
+        }
     }
 
     void Update()
     {
-        UpdateTargetPosition();
-        MoveOrb();
+        if (player != null)
+        {
+            UpdateTargetPosition();
+            MoveOrb();
+        }
     }
 
     private void UpdateTargetPosition()
