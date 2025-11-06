@@ -1,15 +1,13 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    [Header("Standard stats")]
+    [Header("General Stats")]
     public float sightRange = 50f;
     public float wanderSpeed = 5f;
     public float chaseSpeed = 10f;
     public Transform currentPosition;
-    public Vector3 targetPosition;
     public Vector3 velocity;
 
     [Header("Ranged")]
@@ -18,7 +16,6 @@ public class EnemyStateMachine : MonoBehaviour
     public Transform shootingPoint;
     public float attackRange = 15f;
     public float followRange = 25f;
-    private Collider detectionTrigger;
 
     [Header("Detonator")]
     public bool isDetonator;
@@ -27,34 +24,35 @@ public class EnemyStateMachine : MonoBehaviour
     public GameObject explosion;
     public GameObject objective;
 
-    // State Variables
+    [Header("Charger")]
+    public bool isCharger;
+
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public IEnemyStates currentState;
     [HideInInspector] public WanderState wanderState;
     [HideInInspector] public NavMeshAgent navMeshAgent;
-    [SerializeField] private Animator animator;
+    public Animator animator;
 
-    // Wander Behavior Variables
-    [SerializeField] public float wanderRadius = 10f;
-    [SerializeField] public float wanderTimer = 5f;
+    [HideInInspector] public MeleeAttackState meleeAttackState;
+    [HideInInspector] public RangedAttackState rangedAttackState;
+    [HideInInspector] public ChargerAttackState chargerAttackState;
 
-    // Attack Behavior Variables
-    [HideInInspector] public AttackState attackState;
-
-    // Unity Methods
+    public Enemy enemyCore;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        attackState = new AttackState(this);
-        wanderState = new WanderState(this, wanderRadius, wanderTimer);
+        enemyCore = GetComponent<Enemy>();
+
+        wanderState = new WanderState(this, 10f, 5f);
+        meleeAttackState = new MeleeAttackState(this);
+        rangedAttackState = new RangedAttackState(this);
 
         currentState = wanderState;
     }
 
     private void Start()
     {
-        detectionTrigger = GetComponentInChildren<Collider>();
         objective = GameObject.FindGameObjectWithTag("Objective");
     }
 
@@ -63,25 +61,15 @@ public class EnemyStateMachine : MonoBehaviour
         currentState.UpdateState();
         velocity = navMeshAgent.velocity;
 
-        if (velocity.magnitude >= 0.01f)
-        {
-            animator.SetBool("IsMoving", true);
-        }
-        else
-        {
-            animator.SetBool("IsMoving", false);
-        }
-
+        animator.SetBool("IsMoving", velocity.magnitude >= 0.1f);
     }
-
-    // Trigger & Collision Handlers
 
     private void OnTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(other);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         currentState.OnCollisionEnter(collision);
     }

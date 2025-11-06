@@ -12,8 +12,11 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     // Unity Methods
 
-    private void start()
+
+    void Start()
     {
+        CurrentHealth = maxHealth;
+
         if (NaturalObject)
         {
             float randomScale = Random.Range(0.8f, 1.2f);
@@ -22,11 +25,6 @@ public class DestructibleScript : MonoBehaviour, IDamageable
             float randomRotation = Random.Range(0, 360);
             transform.rotation = Quaternion.Euler(0, randomRotation, 0);
         }
-    }
-
-    void Start()
-    {
-        CurrentHealth = maxHealth;
     }
 
     // Public Methods

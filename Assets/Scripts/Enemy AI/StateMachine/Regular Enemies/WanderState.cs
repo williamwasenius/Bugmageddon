@@ -7,31 +7,35 @@ public class WanderState : IEnemyStates
     private float wanderRadius;
     private float wanderTimer;
     private float timer;
-    private float timeToNextWander;
 
     public WanderState(EnemyStateMachine statePatternEnemy, float radius, float initialWanderTime)
     {
         enemy = statePatternEnemy;
         wanderRadius = radius;
         wanderTimer = initialWanderTime;
-        this.timer = wanderTimer;
-
-        timeToNextWander = Random.Range(1f, 6f);
+        timer = wanderTimer;
     }
 
-    public void ToWanderState()
-    {
-
-    }
+    public void ToWanderState() { }
 
     public void ToAttackState()
     {
-        enemy.currentState = enemy.attackState;
+        if (enemy.isDetonator)
+        {
+            enemy.currentState = enemy.meleeAttackState;
+        }
+        else if (enemy.isRanged)
+        {
+            enemy.currentState = enemy.rangedAttackState;
+        }
+        else
+        {
+            enemy.currentState = enemy.meleeAttackState;
+        }
     }
 
     public void UpdateState()
     {
-
         if (enemy.isDetonator)
         {
             SeekObjective();
@@ -47,7 +51,6 @@ public class WanderState : IEnemyStates
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("player entered");
             enemy.chaseTarget = other.transform;
             ToAttackState();
         }
@@ -55,25 +58,26 @@ public class WanderState : IEnemyStates
 
     public void OnCollisionEnter(Collision collision)
     {
-
-    }
-
-    void Look()
-    {
-        Debug.DrawRay(enemy.currentPosition.position, enemy.currentPosition.forward * enemy.sightRange, Color.red);
-        RaycastHit hit;
-        if (Physics.Raycast(enemy.currentPosition.position, enemy.currentPosition.forward, out hit, enemy.sightRange))
+        if (enemy.isDetonator && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective")))
         {
-            if (hit.collider.CompareTag("Player"))
-                {
-                    enemy.chaseTarget = hit.transform;
-                       ToAttackState();
-
-                }
+            enemy.currentState = enemy.meleeAttackState; 
         }
     }
 
-    void Wander()
+    private void Look()
+    {
+        Debug.DrawRay(enemy.currentPosition.position, enemy.currentPosition.forward * enemy.sightRange, Color.red);
+        if (Physics.Raycast(enemy.currentPosition.position, enemy.currentPosition.forward, out RaycastHit hit, enemy.sightRange))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                enemy.chaseTarget = hit.transform;
+                ToAttackState();
+            }
+        }
+    }
+
+    private void Wander()
     {
         enemy.navMeshAgent.speed = enemy.wanderSpeed;
 
@@ -83,13 +87,13 @@ public class WanderState : IEnemyStates
         {
             Vector3 newPos = RandomNavSphere(enemy.transform.position, wanderRadius, -1);
             enemy.navMeshAgent.SetDestination(newPos);
-            timer = 0;
+            timer = 0f;
 
             wanderTimer = Random.Range(3f, 7f);
         }
     }
 
-    void SeekObjective()
+    private void SeekObjective()
     {
         if (enemy.objective != null)
         {

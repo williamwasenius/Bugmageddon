@@ -25,6 +25,7 @@ public class PlayerSystems : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        Debug.Log(damage + " taken");
         if (CurrentHealth <= 0)
         {
             Die();
