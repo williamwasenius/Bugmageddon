@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     // Private Variables
     private GameObject player;
+    private string currentScene;
     private List<GameObject> destructiblesInRange = new List<GameObject>();
     private Dictionary<GameObject, float> enemyInactiveTimers = new Dictionary<GameObject, float>();
 
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Scene loaded: {scene.name}");
 
+        currentScene = scene.name;
+
         player = GameObject.FindWithTag("Player");
 
         AddDestructiblesAndEnemies();
@@ -74,10 +77,17 @@ public class GameManager : MonoBehaviour
 
     public void RegisterEnemy(GameObject enemy)
     {
-        if (enemy != null && !enemiesInScene.Contains(enemy))
+        if (currentScene != "MainMenu")
+        { 
+            if (enemy != null && !enemiesInScene.Contains(enemy))
+            {
+                enemiesInScene.Add(enemy);
+                enemyInactiveTimers[enemy] = 0f;
+            }
+        }
+        else
         {
-            enemiesInScene.Add(enemy);
-            enemyInactiveTimers[enemy] = 0f; 
+            return;
         }
     }
 

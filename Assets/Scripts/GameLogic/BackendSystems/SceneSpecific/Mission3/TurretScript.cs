@@ -12,8 +12,8 @@ public class TurretScript : MonoBehaviour
     [Header("Turret stats")]
     public float rotationSpeed = 5f;
 
-    [SerializeField] private Transform target;
-    [SerializeField] private List<Transform> enemiesInRange = new List<Transform>();
+    [SerializeField] private GameObject target;
+    [SerializeField] private List<GameObject> enemiesInRange = new List<GameObject>();
     public Collider detectionTrigger;
 
     [Header("Idling")]
@@ -32,7 +32,7 @@ public class TurretScript : MonoBehaviour
     {
         if (powered)
         {
-            if (target == null) UpdateTarget();
+            if (target == null || !target.activeInHierarchy) UpdateTarget();
 
             if (target != null)
             {
@@ -52,12 +52,14 @@ public class TurretScript : MonoBehaviour
 
     void UpdateTarget()
     {
-        enemiesInRange.RemoveAll(e => e == null); 
+        enemiesInRange.RemoveAll(e => e == null || !e.activeInHierarchy); 
         target = null;
+
         float closestDistance = Mathf.Infinity;
-        foreach (Transform enemy in enemiesInRange)
+
+        foreach (GameObject enemy in enemiesInRange)
         {
-            float distance = Vector3.Distance(transform.position, enemy.position);
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
@@ -70,7 +72,7 @@ public class TurretScript : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 direction = target.position - transform.position;
+            Vector3 direction = target.transform.position - transform.position;
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             turretCore.transform.rotation = Quaternion.Slerp(turretCore.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
@@ -111,10 +113,10 @@ public class TurretScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") && !enemiesInRange.Contains(other.transform))
+        if (other.CompareTag("Enemy") && !enemiesInRange.Contains(other.gameObject))
         {
             Debug.Log("bug entered");
-            enemiesInRange.Add(other.transform);
+            enemiesInRange.Add(other.gameObject);
         }
     }
 
@@ -122,7 +124,7 @@ public class TurretScript : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            enemiesInRange.Remove(other.transform);
+            enemiesInRange.Remove(other.gameObject);
             if (other == target)
             {
                 target = null;
