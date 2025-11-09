@@ -6,37 +6,19 @@ public class MissionTutorialScript : MonoBehaviour
 {
     public GameObject player;
     public bool tutorialComplete = false;
+    public SphereCollider endPointTrigger;
 
-    private void Awake()
+    private void OnTriggerEnter(Collider other)
     {
-    }
-    public void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-
-        if (player == null)
+        if (other.CompareTag("Player"))
         {
-            Lose();
-        }
-
-        {
-            Debug.Log("Mission Complete! All enemies are defeated.");
-            // MissionComplete();
+            MissionComplete();
         }
     }
 
     private void MissionComplete()
     {
-        Debug.Log("Congratulations! You completed the mission.");
         tutorialComplete = true;
-        SceneManager.LoadScene("Mission2");
-    }
-    private void Lose()
-    {
-        SceneManager.LoadScene("GameLoss");
+        SceneManager.LoadScene("MainMenu");
     }
 }

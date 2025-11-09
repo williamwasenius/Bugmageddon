@@ -6,37 +6,78 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject tutorialPopup;
 
-    public void Start()
+    private GameManager gameManager;
+    private MissionTracker missionTracker;
+
+    private void Start()
     {
         if (Cursor.visible == false)
-        {  
-            Cursor.visible = true; 
+        {
+            Cursor.visible = true;
         }
+
         SaveManager.Instance.LoadPlayerData();
+
+        FindGameSystems();
     }
 
-    public void StartGame()
+    private void FindGameSystems()
     {
+        gameManager = GameManager.Instance;
+
+        if (gameManager == null)
+        {
+            GameObject gmObj = GameObject.FindWithTag("GameManager");
+            if (gmObj != null)
+            {
+                gameManager = gmObj.GetComponent<GameManager>();
+            }
+        }
+
+        if (gameManager != null)
+        {
+            missionTracker = gameManager.GetComponent<MissionTracker>();
+        }
+
+        if (missionTracker == null)
+        {
+            missionTracker = MissionTracker.Instance;
+            if (missionTracker == null)
+            {
+                missionTracker = FindAnyObjectByType<MissionTracker>();
+            }
+        }
+    }
+
+    public void StartNewGame()
+    {
+        FindGameSystems(); 
         if (!SaveManager.Instance.tutorialMission)
         {
             Options(tutorialPopup);
         }
         else
         {
+            if (missionTracker != null)
+            {
+                missionTracker.ResetProgress(); 
+                missionTracker.nextMission = "Mission1";
+            }
+
             SceneManager.LoadScene("WeaponSelection");
         }
     }
 
+    public void ContinueGame()
+    {
+        FindGameSystems();
+
+        SceneManager.LoadScene("WeaponSelection");
+    }
+
     public void Options(GameObject panel)
     {
-        if (panel.activeSelf == true)
-        {
-            panel.SetActive(false);
-        }
-        else
-        {
-            panel.SetActive(true);
-        }
+        panel.SetActive(!panel.activeSelf);
     }
 
     public void Exit()
@@ -46,12 +87,20 @@ public class MainMenu : MonoBehaviour
 
     public void TutorialYes()
     {
-        SceneManager.LoadScene("WeaponSelection");
+        SceneManager.LoadScene("Tutorial");
     }
+
     public void TutorialNo()
     {
         SaveManager.Instance.tutorialMission = true;
         SaveManager.Instance.SavePlayerData();
+
+        if (missionTracker != null)
+        {
+            missionTracker.ResetProgress();
+            missionTracker.nextMission = "Mission1";
+        }
+
         SceneManager.LoadScene("WeaponSelection");
     }
 }

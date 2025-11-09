@@ -50,12 +50,16 @@ public class MissionTracker : MonoBehaviour
     {
         lastMissionFailed = true;
         lastMissionComplete = false;
-
-        nextMission = "Mission1";
+        ResetProgress();
     }
 
     public string GetNextMissionScene()
     {
         return nextMission;
+    }
+
+    public void ResetProgress()
+    {
+        nextMission = "Mission1";
     }
 }

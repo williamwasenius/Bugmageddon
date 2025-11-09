@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float speed = 10f;               
-    public float runSpeed = 30f;           
+    public float speed = 10f;
+    public float runSpeed = 30f;
     public float acceleration = 10f;
     public float deceleration = 10f;
+    public float legRotationSpeed = 10f;
     private Vector3 currentVelocity;
 
     [Header("Body Parts")]
@@ -18,7 +19,9 @@ public class PlayerController : MonoBehaviour
     [Header("Weapons")]
     public GameObject weapon1;
     public GameObject weapon2;
+    public bool armLock = false;
     public float wpnMaxRotation = 20f;
+    public float wpnRotationSpeed = 10f;
 
     [Header("Ability")]
     public float abilityCooldown = 30f;
@@ -35,8 +38,6 @@ public class PlayerController : MonoBehaviour
 
     private WeaponHandler weapon1Handler;
     private WeaponHandler weapon2Handler;
-
-    private bool armLock = true;
 
     void Start()
     {
@@ -68,19 +69,16 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && weapon1Handler != null)
         {
-            Debug.Log("shooting weapon 1");
             weapon1Handler.shoot();
         }
 
         if (Input.GetKey(KeyCode.Mouse1) && weapon2Handler != null)
         {
-            Debug.Log("shooting weapon 2");
             weapon2Handler.shoot();
-         }
+        }
 
-        if (Input.GetKeyDown(KeyCode.Mouse2))
+        if (Input.GetKey(KeyCode.Mouse3))
         {
-            Debug.Log("Weapon stance switched");
             armLock = !armLock;
         }
 
@@ -148,10 +146,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLegRotation(Vector3 moveDir)
     {
-        if (moveDir.sqrMagnitude > 0.01f)
+        Vector3 velocityDir = new Vector3(rigidBody.linearVelocity.x, 0, rigidBody.linearVelocity.z);
+        if (velocityDir.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-            legs.rotation = Quaternion.Slerp(legs.rotation, targetRotation, 10f * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(velocityDir, Vector3.up);
+            legs.rotation = Quaternion.Slerp(legs.rotation, targetRotation, legRotationSpeed * Time.deltaTime);
         }
     }
 
@@ -163,9 +162,7 @@ public class PlayerController : MonoBehaviour
         if (groundPlane.Raycast(cameraRay, out float rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Vector3 aimTarget = armLock
-                ? new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z)
-                : pointToLook;
+            Vector3 aimTarget = !armLock ? pointToLook : new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z);
 
             float maxAngle = wpnMaxRotation;
             Vector3 forward = aimPivot.transform.forward;
@@ -183,10 +180,11 @@ public class PlayerController : MonoBehaviour
             Quaternion rot1 = Quaternion.LookRotation(aimDir1);
             Quaternion rot2 = Quaternion.LookRotation(aimDir2);
 
-            float rotationSpeed = 10f;
-            weapon1.transform.rotation = Quaternion.Slerp(weapon1.transform.rotation, rot1, rotationSpeed * Time.deltaTime);
-            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, rot2, rotationSpeed * Time.deltaTime);
+            weapon1.transform.rotation = Quaternion.Slerp( weapon1.transform.rotation,rot1,wpnRotationSpeed * Time.deltaTime);
+
+            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, rot2, wpnRotationSpeed * Time.deltaTime);
         }
     }
+
 
 }

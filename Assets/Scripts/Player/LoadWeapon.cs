@@ -11,6 +11,18 @@ public class LoadWeapon : MonoBehaviour
     int selectedWeapon1 = WeaponManager.Instance.selectedWeapon1;
     int selectedWeapon2 = WeaponManager.Instance.selectedWeapon2;
 
+    if (selectedWeapon1 < 0 || selectedWeapon1 >= WeaponManager.Instance.weaponPrefabsRight.Length)
+        {
+            selectedWeapon1 = 0;
+            WeaponManager.Instance.selectedWeapon1 = 0;
+        }
+
+    if (selectedWeapon2 < 0 || selectedWeapon2 >= WeaponManager.Instance.weaponPrefabsLeft.Length)
+        {
+            selectedWeapon2 = 0;
+            WeaponManager.Instance.selectedWeapon2 = 0;
+        }
+
     GameObject prefab1 = WeaponManager.Instance.weaponPrefabsRight[selectedWeapon1];
     GameObject prefab2 = WeaponManager.Instance.weaponPrefabsLeft[selectedWeapon2];
 

@@ -1,18 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEditor;
+using UnityEngine.Playables;
 
 public class MissionIntroScript : MonoBehaviour
 {
+    [Header("UI References")]
     public GameObject combatUI;
     public GameObject missionUI;
-    private GameManager gameManager;
-    public Image blackScreen; 
+    public Image blackScreen;
     public float fadeDuration = 1f;
 
-    public void Start()
+    [Header("Cutscene")]
+    public PlayableDirector cutsceneDirector;
+
+    private GameManager gameManager;
+
+    private void Start()
     {
+        if (Time.timeScale == 1f)
+            Time.timeScale = 0f;
+
         gameManager = GameManager.Instance;
         if (gameManager == null)
         {
@@ -23,15 +31,22 @@ public class MissionIntroScript : MonoBehaviour
     public void Continue()
     {
         if (Time.timeScale == 0f)
-        {
             Time.timeScale = 1f;
+
+        if (cutsceneDirector != null)
+        {
+
+            cutsceneDirector.gameObject.SetActive(true);
+            StartCoroutine(FadeOutThenPlayCutscene());
         }
-        StartCoroutine(FadeOutCanvas());
+        else
+        {
+            StartCoroutine(FadeOutThenStartGameplay());
+        }
     }
 
-    private IEnumerator FadeOutCanvas()
+    private IEnumerator FadeOutThenPlayCutscene()
     {
-
         float elapsedTime = 0f;
         Color color = blackScreen.color;
 
@@ -43,8 +58,26 @@ public class MissionIntroScript : MonoBehaviour
             yield return null;
         }
 
-        color.a = 0; 
+        color.a = 0f;
         blackScreen.color = color;
+
+        gameObject.SetActive(false);
+
+        cutsceneDirector.stopped += OnCutsceneFinished;
+        cutsceneDirector.Play();
+    }
+
+    private void OnCutsceneFinished(PlayableDirector director)
+    {
+        cutsceneDirector.stopped -= OnCutsceneFinished;
+        cutsceneDirector.gameObject.SetActive(false);
+
+        StartCoroutine(FadeOutThenStartGameplay());
+    }
+
+    private IEnumerator FadeOutThenStartGameplay()
+    {
+        yield return null;
 
         gameObject.SetActive(false);
         combatUI.SetActive(true);

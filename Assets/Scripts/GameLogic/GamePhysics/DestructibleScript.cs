@@ -8,9 +8,11 @@ public class DestructibleScript : MonoBehaviour, IDamageable
     public float MaxHealth => maxHealth;
     public float maxHealth = 100f;
     public float armor = 0f;
-    public bool NaturalObject = false;
 
-    // Unity Methods
+    public GameObject dustVFX;
+
+    public bool NaturalObject = false;
+    public bool fragile = false;
 
 
     void Start()
@@ -42,7 +44,7 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (NaturalObject)
+        if (NaturalObject || fragile)
         {
             Die();
         }
@@ -50,6 +52,10 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (dustVFX != null)
+        {
+            GameObject dust = Instantiate(dustVFX, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 }

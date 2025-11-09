@@ -439,7 +439,11 @@ PrefabInstance:
     - target: {fileID: 6214918444778039587, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 518490601, guid: 7a22a6315774a6a4088e9ac0820a4cf7, type: 3}
+      objectReference: {fileID: 787331110, guid: d52d6e50557c4f946a29bd89da6f4f76, type: 3}
+    - target: {fileID: 6214918444778039587, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6567858858941271018, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

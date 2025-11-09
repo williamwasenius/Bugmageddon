@@ -6,7 +6,7 @@ public class CombatUIManager : MonoBehaviour
 
     public Image weapon1CooldownImage;
     public Image weapon2CooldownImage;
-    public Image DashCooldownImage;
+   // public Image DashCooldownImage;
 
     private WeaponHandler weapon1Handler;
     private WeaponHandler weapon2Handler;
