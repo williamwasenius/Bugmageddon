@@ -6,11 +6,11 @@ public class MissionTutorialScript : MonoBehaviour
 {
     public GameObject player;
     public bool tutorialComplete = false;
-    public SphereCollider endPointTrigger;
+    public Mission2EndTrigger MissionFinished;
 
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        if (other.CompareTag("Player"))
+        if (MissionFinished.EndTrigger == true)
         {
             MissionComplete();
         }

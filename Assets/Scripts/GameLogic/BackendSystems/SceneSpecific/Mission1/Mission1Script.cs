@@ -45,16 +45,19 @@ public class Mission1Script : MonoBehaviour
 
     private void MissionComplete()
     {
+        MissionTracker.Instance.MissionFailed();
+        SceneManager.LoadScene("MainMenu");
+        /*
+           MissionTracker.Instance.MissionComplete("Mission1");
 
-        MissionTracker.Instance.MissionComplete("Mission1");
+           if (!SaveManager.Instance.mission1)
+           {
+               SaveManager.Instance.mission1 = true;
+               SaveManager.Instance.SavePlayerData();
+           }
 
-        if (!SaveManager.Instance.mission1)
-        {
-            SaveManager.Instance.mission1 = true;
-            SaveManager.Instance.SavePlayerData();
-        }
-
-        SceneManager.LoadScene("WeaponSelection");
+           SceneManager.LoadScene("WeaponSelection");
+        */
     }
 
     private void Lose()

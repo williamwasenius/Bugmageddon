@@ -51,7 +51,12 @@ public class MainMenu : MonoBehaviour
 
     public void StartNewGame()
     {
-        FindGameSystems(); 
+        FindGameSystems();
+
+        // default ----- make a new function
+        SaveManager.Instance.tutorialMission = false;
+        SaveManager.Instance.mission1 = false;
+
         if (!SaveManager.Instance.tutorialMission)
         {
             Options(tutorialPopup);

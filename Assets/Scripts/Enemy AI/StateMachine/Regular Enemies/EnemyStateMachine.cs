@@ -37,12 +37,12 @@ public class EnemyStateMachine : MonoBehaviour
     [HideInInspector] public RangedAttackState rangedAttackState;
     [HideInInspector] public ChargerAttackState chargerAttackState;
 
-    public Enemy enemyCore;
+    public Enemy enemyCoreScript;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        enemyCore = GetComponent<Enemy>();
+        enemyCoreScript = GetComponent<Enemy>();
 
         wanderState = new WanderState(this, 10f, 5f);
         meleeAttackState = new MeleeAttackState(this);

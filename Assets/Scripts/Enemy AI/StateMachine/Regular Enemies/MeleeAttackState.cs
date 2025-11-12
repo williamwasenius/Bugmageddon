@@ -14,12 +14,14 @@ public class MeleeAttackState : IEnemyStates
     {
         if (enemy.chaseTarget == null)
         {
+            enemy.navMeshAgent.speed = enemy.wanderSpeed;
             ToWanderState();
             return;
         }
 
         if (isAttacking) return;
 
+        enemy.navMeshAgent.speed = enemy.chaseSpeed;
         enemy.navMeshAgent.isStopped = false;
         enemy.navMeshAgent.destination = enemy.chaseTarget.position;
     }
