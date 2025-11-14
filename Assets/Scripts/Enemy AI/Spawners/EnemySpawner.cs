@@ -122,6 +122,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
                     spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
                     yield return new WaitForSeconds(0.1f);
                 }
+                yield break;
             }
             else if (enemyPrefab.name.Contains("Medium"))
             {
@@ -138,6 +139,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
                     spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
                     yield return new WaitForSeconds(0.1f);
                 }
+                yield break;
             }
             else if (enemyPrefab.name.Contains("Medium"))
             {
@@ -147,11 +149,20 @@ public class EnemySpawner : MonoBehaviour, IDamageable
                     spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
                     yield return new WaitForSeconds(0.1f);
                 }
+                yield break;
             }
             else if (enemyPrefab.name.Contains("Large"))
             {
                 spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position, spawningLocation.rotation);
             }
         }
+
+        if (spawnedEnemy != null)
+        {
+            spawnedEnemy.GetComponent<Enemy>().isPreplaced = false;
+        }
+
+        yield return null;
+
     }
 }

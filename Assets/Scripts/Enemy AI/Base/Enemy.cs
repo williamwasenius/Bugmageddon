@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public bool isBoss = false;
+    public bool isPreplaced = true;
 
     public float CurrentHealth { get; set; }
     public float Armor => armor;

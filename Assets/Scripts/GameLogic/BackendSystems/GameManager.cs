@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
             if (obj != null)
             {
                 float distance = Vector3.Distance(player.transform.position, obj.transform.position);
+                Enemy enemyComponent = obj.GetComponent<Enemy>();
 
                 if (distance > rangeThreshold)
                 {
@@ -145,16 +146,19 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"{type} {obj.name} is now unloaded.");
                     }
 
-                    if (type == "Enemy" && enemyInactiveTimers.ContainsKey(obj))
+                    if (type == "Enemy" && enemyComponent != null && !enemyComponent.isPreplaced)
                     {
-                        enemyInactiveTimers[obj] += Time.deltaTime;
-
-                        if (enemyInactiveTimers[obj] >= enemyInactiveTimeThreshold)
+                        if (enemyInactiveTimers.ContainsKey(obj))
                         {
-                            Destroy(obj);
-                            objects.Remove(obj);
-                            enemyInactiveTimers.Remove(obj);
-                            Debug.Log($"Enemy {obj.name} was inactive for too long and has been destroyed.");
+                            enemyInactiveTimers[obj] += Time.deltaTime;
+
+                            if (enemyInactiveTimers[obj] >= enemyInactiveTimeThreshold)
+                            {
+                                Destroy(obj);
+                                objects.Remove(obj);
+                                enemyInactiveTimers.Remove(obj);
+                                Debug.Log($"Enemy {obj.name} was inactive for too long and has been destroyed.");
+                            }
                         }
                     }
                 }
