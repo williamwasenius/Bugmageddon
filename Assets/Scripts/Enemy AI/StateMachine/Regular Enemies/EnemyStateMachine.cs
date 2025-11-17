@@ -14,6 +14,7 @@ public class EnemyStateMachine : MonoBehaviour
     public bool isRanged;
     public GameObject projectile;
     public Transform shootingPoint;
+    public WeaponHandler weaponHandler;
     public float attackRange = 15f;
     public float followRange = 25f;
 
@@ -54,6 +55,8 @@ public class EnemyStateMachine : MonoBehaviour
     private void Start()
     {
         objective = GameObject.FindGameObjectWithTag("Objective");
+        weaponHandler = GetComponentInChildren<WeaponHandler>();
+        weaponHandler.projectile = projectile;
     }
 
     private void Update()

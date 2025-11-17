@@ -30,7 +30,24 @@ public class MeleeAttackState : IEnemyStates
     {
         if (isAttacking) return;
 
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective"))
+        else if (enemy.isDetonator && collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective"))
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, enemy.explosionRadius);
+
+            foreach (Collider hitCollider in hitColliders)
+            {
+                if (hitCollider.isTrigger)
+                    continue;
+
+                IDamageable targetDamageable = hitCollider.GetComponent<IDamageable>();
+                if (targetDamageable != null)
+                {
+                    targetDamageable.TakeDamage(enemy.detonatorDamage - targetDamageable.Armor);
+                }
+            }
+            enemy.enemyCoreScript.Die();
+        }
+        else if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective"))
         {
             StartAttack();
         }
