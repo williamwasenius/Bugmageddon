@@ -1883,7 +1883,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.25461357831954958,"g":0.5849056243896484,"b":0.06345675140619278,"a":1.0}'
+      m_SerializableObject: '{"r":0.08865560591220856,"g":0.5775806307792664,"b":0.2158605307340622,"a":1.0}'
     m_Space: -1
   m_Property:
     name: _Color
@@ -2049,7 +2049,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.7
+      m_SerializableObject: 0.01
     m_Space: -1
   m_Property:
     name: Distortion
@@ -2117,7 +2117,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.05
+      m_SerializableObject: 0.1
     m_Space: -1
   m_Property:
     name: DistortionVertex
@@ -2185,7 +2185,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.2
+      m_SerializableObject: 5
     m_Space: -1
   m_Property:
     name: NormalStrength
@@ -2219,7 +2219,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0
+      m_SerializableObject: 0.1
     m_Space: -1
   m_Property:
     name: SpecularFloat
@@ -4088,7 +4088,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.25415217876434328,"g":0.5840786099433899,"b":0.06301002949476242,"a":1.0}'
+      m_SerializableObject: '{"r":0.08865560591220856,"g":0.5775806307792664,"b":0.2158605307340622,"a":1.0}'
     m_Space: -1
   m_Property:
     name: _Color
