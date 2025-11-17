@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
-
+interface IInteractable
+{
+    void Activate();
+}
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -39,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private WeaponHandler weapon1Handler;
     private WeaponHandler weapon2Handler;
 
+    private IInteractable currentInteractable;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -47,6 +52,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
+        {
+            currentInteractable.Activate();
+        }
+
         HandleShooting();
         HandleRun();
         Ability();
@@ -186,5 +196,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    void OnTriggerEnter(Collider other)
+    {
+        currentInteractable = other.GetComponent<IInteractable>();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<IInteractable>() == currentInteractable)
+        {
+            currentInteractable = null;
+        }
+    }
 
 }
