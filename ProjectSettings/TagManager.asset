@@ -12,6 +12,7 @@ TagManager:
   - GameManager
   - Spawner
   - MissionTimer
+  - TargetPoint
   layers:
   - Default
   - TransparentFX

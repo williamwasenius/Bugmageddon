@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,74 +7,66 @@ using UnityEngine.UI;
 
 public class Mission3Script : MonoBehaviour
 {
+    [System.Serializable]
+    public class GeneratorData
+    {
+        public GameObject reactor;  
+        public TextMeshProUGUI uiText;
+        public DestructibleScript destructible;
+        public SmallReactor smallScript;
+    }
+
     [Header("Mission Objects")]
     public GameObject player;
-    public GameObject reactorOne;
-    public GameObject reactorTwo;
-    public GameObject reactorThree;
     public GameObject largeReactor;
     public GameObject enemyTargetPoint;
-    public GameObject currentReactor;
+
+    [Header("Generators")]
+    public GeneratorData[] generators; 
+    public GeneratorData finalGenerator;
 
     [Header("UI")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI objectiveText;
     public Image finalGeneratorHealthBar;
 
-    public TextMeshProUGUI gen1Text;
-    public TextMeshProUGUI gen2Text;
-    public TextMeshProUGUI gen3Text;
-    public TextMeshProUGUI currentReactorText;
-
     [Header("Settings")]
     public float defendDuration = 60f;
     public float finalDefenseDuration = 120f;
-
-    [Header("Scripts")]
-    private DestructibleScript genOneStatus;
-    private DestructibleScript genTwoStatus;
-    private DestructibleScript genThreeStatus;
-    private DestructibleScript finalGenStatus;
-
-    private SmallReactor smallGen1;
-    private SmallReactor smallGen2;
-    private SmallReactor smallGen3;
 
     [Header("Waves")]
     public AttackWaveManager waveManager;
 
     private float currentTimer = 0f;
     private bool timerRunning = false;
-    private int completedGenerators = 0;
+    private int currentGeneratorIndex = -1; 
 
-    private enum MissionState { Idle, DefendingGen1, DefendingGen2, DefendingGen3, FinalDefense, Complete }
+    private enum MissionState { Idle, Defending, FinalDefense, Complete }
     private MissionState currentState = MissionState.Idle;
+
+    private GameObject currentReactor;
+    private TextMeshProUGUI currentReactorText;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        genOneStatus = reactorOne.GetComponent<DestructibleScript>();
-        genTwoStatus = reactorTwo.GetComponent<DestructibleScript>();
-        genThreeStatus = reactorThree.GetComponent<DestructibleScript>();
-        finalGenStatus = largeReactor.GetComponent<DestructibleScript>();
-
-        smallGen1 = reactorOne.GetComponent<SmallReactor>();
-        smallGen2 = reactorTwo.GetComponent<SmallReactor>();
-        smallGen3 = reactorThree.GetComponent<SmallReactor>();
-
         objectiveText.text = "Activate and Defend the Generators!";
+        foreach (var gen in generators)
+        {
+            if (gen.reactor == null) continue;
+
+            gen.destructible = gen.reactor.GetComponent<DestructibleScript>();
+            gen.smallScript = gen.reactor.GetComponent<SmallReactor>();
+        }
     }
 
     void Update()
     {
-        if (player == null || largeReactor == null)
+        if (player == null || finalGenerator.reactor == null)
         {
             Lose();
             return;
         }
-
-        UpdateFinalGeneratorHealth();
 
         if (timerRunning)
         {
@@ -82,7 +75,9 @@ public class Mission3Script : MonoBehaviour
 
             if (currentReactor == null)
             {
+                timerRunning = false;
                 OnDefenseFail();
+                return;
             }
             else if (currentTimer <= 0)
             {
@@ -92,115 +87,118 @@ public class Mission3Script : MonoBehaviour
         }
     }
 
-    private void UpdateFinalGeneratorHealth()
-    {
-        float normalizedHealth = Mathf.Clamp01(finalGenStatus.CurrentHealth / finalGenStatus.maxHealth);
-        finalGeneratorHealthBar.fillAmount = normalizedHealth;
-    }
+    // ---------------------- DEFENSE START ----------------------
 
-    private void OnDefenseComplete()
-    {
-        switch (currentState)
-        {
-            case MissionState.DefendingGen1:
-                completedGenerators++;
-                waveManager.EndWave(1);
-                smallGen1.powered = true;
-                currentReactorText.color = Color.green;
-                currentReactor = largeReactor;
-                currentState = MissionState.Idle;
-                break;
-
-            case MissionState.DefendingGen2:
-                completedGenerators++;
-                waveManager.EndWave(2);
-                smallGen2.powered = true;
-                currentReactorText.color = Color.green;
-                currentReactor = largeReactor;
-                currentState = MissionState.Idle;
-                break;
-
-            case MissionState.DefendingGen3:
-                completedGenerators++;
-                waveManager.EndWave(3);
-                smallGen3.powered = true;
-                currentReactorText.color = Color.green;
-                currentReactor = largeReactor;
-                currentState = MissionState.Idle;
-                break;
-
-            case MissionState.FinalDefense:
-                waveManager.EndFinalWave();
-                MissionComplete();
-                break;
-        }
-    }
-
-    private void OnDefenseFail()
-    {
-        completedGenerators++;
-        currentReactorText.fontStyle = FontStyles.Strikethrough;
-        currentReactorText.color = Color.red;
-        waveManager.EndWave(1);
-        waveManager.EndWave(2);
-        waveManager.EndWave(3);
-        currentState = MissionState.Idle;
-    }
-
-    public void StartGeneratorDefense(int genIndex)
+    public void StartGeneratorDefense(int index)
     {
         if (timerRunning) return;
 
-        switch (genIndex)
+        if (index == 4)
         {
-            case 1:
-                currentState = MissionState.DefendingGen1;
-                currentReactor = reactorOne;
-                currentReactorText = gen1Text;
-                enemyTargetPoint.transform.position = reactorOne.transform.position;
-                gen1Text.color = Color.turquoise;
-                waveManager.Wave1Attack();
-                break;
-            case 2:
-                currentState = MissionState.DefendingGen2;
-                currentReactor = reactorTwo;
-                currentReactorText = gen2Text;
-                enemyTargetPoint.transform.position = reactorTwo.transform.position;
-                waveManager.Wave2Attack();
-                break;
-            case 3:
-                currentState = MissionState.DefendingGen3;
-                currentReactor = reactorThree;
-                currentReactorText = gen3Text;
-                enemyTargetPoint.transform.position = reactorThree.transform.position;
-                waveManager.Wave3Attack();
-                break;
-            case 4:
-                currentState = MissionState.FinalDefense;
-                currentReactor = largeReactor;
-                enemyTargetPoint.transform.position = largeReactor.transform.position;
-                waveManager.FinalWaveAttack();
-                break;
+            StartFinalDefense();
+            return;
         }
 
-        StartCoroutine(StartDefenseTimer());
+        currentGeneratorIndex = index - 1;
+        var gen = generators[currentGeneratorIndex];
+
+        currentState = MissionState.Defending;
+        currentReactor = gen.reactor;
+        currentReactorText = gen.uiText;
+
+        gen.uiText.color = Color.cyan;
+        enemyTargetPoint.transform.position = gen.reactor.transform.position;
+
+        waveManager.StartWave(index);
+        StartDefenseTimer();
     }
 
-    private IEnumerator StartDefenseTimer()
+    private void StartFinalDefense()
+    {
+        currentGeneratorIndex = -1;
+        currentState = MissionState.FinalDefense;
+
+        currentReactor = finalGenerator.reactor;
+        finalGeneratorHealthBar.gameObject.SetActive(true);
+       // currentReactorText = finalGenerator.uiText;
+
+       // finalGenerator.uiText.color = Color.cyan;
+        enemyTargetPoint.transform.position = finalGenerator.reactor.transform.position;
+
+        waveManager.StartWave(4);
+        StartDefenseTimer();
+    }
+    private void StartDefenseTimer()
     {
         timerRunning = true;
         currentTimer = (currentState == MissionState.FinalDefense) ? finalDefenseDuration : defendDuration;
 
-        objectiveText.text = $"Defending {currentState}...";
-        yield return new WaitForSeconds(currentTimer);
-
-        OnDefenseComplete();
+        objectiveText.text = currentState == MissionState.FinalDefense
+            ? "Defending Final Generator..."
+            : $"Defending Generator {currentGeneratorIndex + 1}...";
     }
+
+    // ---------------------- DEFENSE RESULT ----------------------
+
+    private void OnDefenseComplete()
+    {
+        if (currentState == MissionState.FinalDefense)
+        {
+            waveManager.EndWave(4);
+            MissionComplete();
+            return;
+        }
+
+        CompleteSmallGenerator(currentGeneratorIndex);
+    }
+
+
+    private void CompleteSmallGenerator(int index)
+    {
+        var gen = generators[index];
+
+        gen.smallScript.Powered();
+        MarkGeneratorSuccess(gen.uiText);
+
+        waveManager.EndWave(index + 1);
+
+        currentState = MissionState.Idle;
+        currentReactor = finalGenerator.reactor;
+    }
+
+    private void OnDefenseFail()
+    {
+        if (currentGeneratorIndex >= 0)
+            MarkGeneratorFailed(generators[currentGeneratorIndex].uiText);
+
+        waveManager.EndWave(1);
+        waveManager.EndWave(2);
+        waveManager.EndWave(3);
+
+        enemyTargetPoint.transform.position = finalGenerator.reactor.transform.position;
+        currentState = MissionState.Idle;
+    }
+
+    // ---------------------- UI HELPERS ----------------------
+
+    private void MarkGeneratorFailed(TextMeshProUGUI ui)
+    {
+        ui.fontStyle = FontStyles.Strikethrough;
+        ui.color = Color.red;
+    }
+
+    private void MarkGeneratorSuccess(TextMeshProUGUI ui)
+    {
+        ui.color = Color.green;
+    }
+
+    // ---------------------- MISSION END ----------------------
 
     private void MissionComplete()
     {
         currentState = MissionState.Complete;
         objectiveText.text = "Mission Complete!";
+
         MissionTracker.Instance.MissionComplete("Mission3");
 
         if (!SaveManager.Instance.mission3)

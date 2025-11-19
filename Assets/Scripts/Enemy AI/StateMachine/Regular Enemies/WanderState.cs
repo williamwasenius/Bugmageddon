@@ -95,9 +95,9 @@ public class WanderState : IEnemyStates
 
     private void SeekObjective()
     {
-        if (enemy.objective != null)
+        if (enemy.targetPoint != null)
         {
-            enemy.chaseTarget = enemy.objective.transform;
+            enemy.chaseTarget = enemy.targetPoint.transform;
             ToAttackState();
         }
     }

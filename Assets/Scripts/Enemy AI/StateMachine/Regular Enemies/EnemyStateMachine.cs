@@ -23,7 +23,7 @@ public class EnemyStateMachine : MonoBehaviour
     public float detonatorDamage = 500;
     public float explosionRadius = 5;
     public GameObject explosion;
-    public GameObject objective;
+    public GameObject targetPoint;
 
     [Header("Charger")]
     public bool isCharger;
@@ -54,9 +54,12 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Start()
     {
-        objective = GameObject.FindGameObjectWithTag("Objective");
+        targetPoint = GameObject.FindGameObjectWithTag("TargetPoint");
         weaponHandler = GetComponentInChildren<WeaponHandler>();
-        weaponHandler.projectile = projectile;
+        if (isRanged)
+        {
+            weaponHandler.projectile = projectile;
+        }
     }
 
     private void Update()

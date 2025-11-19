@@ -3,36 +3,55 @@ using UnityEngine;
 public class AttackWaveManager : MonoBehaviour
 {
     [Header("Waves")]
+    public GameObject[][] waves;
+
+    [Header("Wave Lists (Assign here)")]
     public GameObject[] wave1Enemies;
     public GameObject[] wave2Enemies;
     public GameObject[] wave3Enemies;
     public GameObject[] finalWaveEnemies;
 
-    public void Wave1Attack() => ActivateWave(wave1Enemies);
-    public void Wave2Attack() => ActivateWave(wave2Enemies);
-    public void Wave3Attack() => ActivateWave(wave3Enemies);
-    public void FinalWaveAttack() => ActivateWave(finalWaveEnemies);
+    private GameObject[][] waveArray;
 
-    public void EndWave(int waveIndex)
+    void Awake()
     {
-        switch (waveIndex)
+        waveArray = new GameObject[][]
         {
-            case 1: DeactivateWave(wave1Enemies); break;
-            case 2: DeactivateWave(wave2Enemies); break;
-            case 3: DeactivateWave(wave3Enemies); break;
-        }
+            wave1Enemies,
+            wave2Enemies,
+            wave3Enemies,
+            finalWaveEnemies
+        };
     }
 
-    public void EndFinalWave()
+    public void StartWave(int index)
     {
-        DeactivateWave(finalWaveEnemies);
+        if (index <= 0 || index > waveArray.Length)
+        {
+            Debug.LogWarning("Wave index out of range.");
+            return;
+        }
+
+        ActivateWave(waveArray[index - 1]);
+    }
+
+    public void EndWave(int index)
+    {
+        if (index <= 0 || index > waveArray.Length)
+        {
+            Debug.LogWarning("Wave index out of range.");
+            return;
+        }
+
+        DeactivateWave(waveArray[index - 1]);
     }
 
     private void ActivateWave(GameObject[] enemies)
     {
         foreach (var enemy in enemies)
         {
-            if (enemy != null) enemy.SetActive(true);
+            if (enemy != null)
+                enemy.SetActive(true);
         }
     }
 
@@ -40,7 +59,8 @@ public class AttackWaveManager : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            if (enemy != null) enemy.SetActive(false);
+            if (enemy != null)
+                enemy.SetActive(false);
         }
     }
 }

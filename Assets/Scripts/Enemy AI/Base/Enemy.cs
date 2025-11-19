@@ -22,10 +22,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("References")]
     public GameManager gameManager;
+    public EnemyStateMachine stateMachine;
 
     void Start()
     {
         gameManager = GameManager.Instance;
+        stateMachine = GetComponent<EnemyStateMachine>();
         gameManager.RegisterEnemy(gameObject);
         CurrentHealth = maxHealth;
     }
@@ -47,6 +49,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        if (stateMachine.isDetonator)
+        {
+            GameObject explosion = Instantiate(stateMachine.explosion, transform.position, Quaternion.identity);
+        }
         gameManager.DeregisterEnemy(gameObject);
         Destroy(gameObject);
     }

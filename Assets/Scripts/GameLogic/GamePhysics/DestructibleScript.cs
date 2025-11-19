@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DestructibleScript : MonoBehaviour, IDamageable
 {
     // Public Variables
     public float CurrentHealth { get; set; }
+
+    public GameObject hpContainer;
+    public Image healthBar;
+
     public float Armor => armor;
     public float MaxHealth => maxHealth;
     public float maxHealth = 100f;
@@ -27,9 +32,22 @@ public class DestructibleScript : MonoBehaviour, IDamageable
             float randomRotation = Random.Range(0, 360);
             transform.rotation = Quaternion.Euler(0, randomRotation, 0);
         }
+
+        if (healthBar != null)
+        {
+            CurrentHealth = maxHealth;
+        }
+
     }
 
-    // Public Methods
+    private void Update()
+    {
+        if (healthBar != null)
+        {
+            float normalizedHealth = Mathf.Clamp01(CurrentHealth / maxHealth);
+            healthBar.fillAmount = normalizedHealth;
+        }
+    }
 
     public void TakeDamage(float damage)
     {
@@ -39,8 +57,6 @@ public class DestructibleScript : MonoBehaviour, IDamageable
             Die();
         }
     }
-
-    // Private Methods
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -52,6 +68,10 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (hpContainer != null)
+        {
+            hpContainer.SetActive(false);
+        }
         if (dustVFX != null)
         {
             GameObject dust = Instantiate(dustVFX, transform.position, Quaternion.identity);

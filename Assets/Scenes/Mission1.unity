@@ -10524,6 +10524,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (7)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -10532,10 +10536,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11886,6 +11886,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (2)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11894,10 +11898,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18746,6 +18746,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (11)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -18754,10 +18758,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (11)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21456,20 +21456,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 260583424545760604, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.341492
+      value: -16.341492
       objectReference: {fileID: 0}
     - target: {fileID: 260583424545760604, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.155388
+      value: 49.899998
       objectReference: {fileID: 0}
     - target: {fileID: 260583424545760604, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.365356
+      value: -18.365356
       objectReference: {fileID: 0}
     - target: {fileID: 386242660687967936, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 1972678631}
+      objectReference: {fileID: 7465930376007912415}
     - target: {fileID: 1071274687844282620, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: field of view
       value: 60
@@ -21532,15 +21532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7418919481241331211, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.341492
+      value: -16.341492
       objectReference: {fileID: 0}
     - target: {fileID: 7418919481241331211, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.155388
+      value: 49.899998
       objectReference: {fileID: 0}
     - target: {fileID: 7418919481241331211, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.365356
+      value: -18.365356
       objectReference: {fileID: 0}
     - target: {fileID: 7418919481241331211, guid: 4505816edb33fe74e9d753537c14e735, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25104,6 +25104,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -25112,10 +25116,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37608,6 +37608,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (5)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -37616,10 +37620,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (5)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39712,6 +39712,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (8)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -39720,10 +39724,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40123,6 +40123,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -40131,10 +40135,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48506,6 +48506,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (4)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -48514,10 +48518,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50377,6 +50377,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (3)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -50385,10 +50389,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -55065,6 +55065,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (10)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -55073,10 +55077,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (10)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57606,6 +57606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
+      propertyPath: m_Name
+      value: lamp_small_01_metallic (9)
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fb85e452fb4b84640b0cff3766d97815, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -57614,10 +57618,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -6128621523187507830, guid: 6a1221c0fbbe33c4c9411b6d46fdeb46, type: 3}
-    - target: {fileID: 5196190983752709294, guid: 6015bc33f7c4960479550ee9b09859d7, type: 3}
-      propertyPath: m_Name
-      value: lamp_small_01_metallic (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
