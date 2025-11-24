@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             if (obj != null)
             {
                 float distance = Vector3.Distance(player.transform.position, obj.transform.position);
-                Enemy enemyComponent = obj.GetComponent<Enemy>();
+                EnemyCore enemyComponent = obj.GetComponent<EnemyCore>();
 
                 if (distance > rangeThreshold)
                 {

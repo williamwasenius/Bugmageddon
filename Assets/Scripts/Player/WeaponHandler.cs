@@ -17,8 +17,16 @@ public class WeaponHandler : MonoBehaviour
 
     [Header("Weapon properties")]
     public AudioSource shootSound;
+    public AudioSource chargeSound;
+
     public bool rotatingBarrel = false;
     public int rotationSpeed;
+
+    public bool chargedWeapon = false;
+    public bool isCharging = false;
+    public bool fullyCharged = false;
+    public float totalChargeTime;
+    public float currentCharge;
 
     void Awake()
     {
@@ -29,32 +37,78 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    public void shoot()
+    private void Start()
+    {
+        currentCharge = 0f;
+    }
+    public void StartCharging()
+    {
+        if (!chargedWeapon || Time.time < cooldownCounter) return;
+
+        isCharging = true;
+        currentCharge += Time.deltaTime;
+
+        if (chargeSound != null && !chargeSound.isPlaying)
+            chargeSound.Play();
+
+        if (currentCharge >= totalChargeTime)
+        {
+            currentCharge = totalChargeTime;
+            fullyCharged = true;
+        }
+    }
+
+    public void ReleaseShot()
+    {
+        if (!chargedWeapon) return;
+
+        if (fullyCharged)
+        {
+            ShootBullet();
+        }
+
+        currentCharge = 0f;
+        fullyCharged = false;
+        isCharging = false;
+
+        cooldownCounter = Time.time + weaponFireRate;
+
+    }
+
+    public void AutoFire()
     {
         if (Time.time >= cooldownCounter)
         {
-            if (shootSound != null)
-            {
-                shootSound.Play();
-            }
-            if (shootSound != null)
-            {
-                muzzleFlash.Play();
-            }
-            Instantiate(projectile, firePoint.position, firePoint.rotation);
-            cooldownCounter = Time.time + weaponFireRate;
+            ShootBullet();
         }
 
         if (rotatingBarrel && barrel != null)
         {
-            barrel.transform.Rotate(0, 0, rotationSpeed);
+            barrel.Rotate(0, 0, rotationSpeed);
         }
+    }
 
+    private void ShootBullet()
+    {
+        if (Time.time < cooldownCounter) return;
+
+        if (shootSound) shootSound.Play();
+        if (muzzleFlash) muzzleFlash.Play();
+
+        Instantiate(projectile, firePoint.position, firePoint.rotation);
+        cooldownCounter = Time.time + weaponFireRate;
     }
 
     public float GetCooldownProgress()
     {
-        return Mathf.Clamp01((cooldownCounter - Time.time) / weaponFireRate);
+        if (chargedWeapon)
+        {
+            return Mathf.Clamp01(currentCharge / totalChargeTime);
+        }
+        else
+        {
+            return 1f - Mathf.Clamp01((cooldownCounter - Time.time) / weaponFireRate);
+        }
     }
 
 }

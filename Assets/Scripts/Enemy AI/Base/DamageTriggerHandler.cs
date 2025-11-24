@@ -2,16 +2,24 @@ using UnityEngine;
 
 public class DamageTriggerHandler : MonoBehaviour
 {
-    private EnemyStateMachine enemy;
+    private EnemyStateMachine EnemySM;
+    public Collider trigger;
     public float triggerDamage = 0f;
+    public bool singleInstance;
+    public bool staticDamage;
 
     private void Start()
     {
-        enemy = GetComponentInParent<EnemyStateMachine>();
+        trigger = GetComponent<Collider>();
 
-        if (enemy != null ) 
+        if (!staticDamage)
         {
-            triggerDamage = enemy.enemyCoreScript.meleeDamage;
+            EnemySM = GetComponentInParent<EnemyStateMachine>();
+
+            if (EnemySM != null)
+            {
+                triggerDamage = EnemySM.EnemyCS.meleeDamage;
+            }
         }
     }
 
@@ -24,7 +32,7 @@ public class DamageTriggerHandler : MonoBehaviour
         if (target == null)
             return;
 
-        if (enemy != null)
+        if (EnemySM != null)
         {
             if (!other.CompareTag("Player") && !other.CompareTag("Objective"))
                 return;
@@ -32,6 +40,11 @@ public class DamageTriggerHandler : MonoBehaviour
 
         float damage = Mathf.Max(0f, triggerDamage - target.Armor);
         target.TakeDamage(damage);
+
+        if (singleInstance)
+        {
+            trigger.enabled = false;
+        }
     }
 
 }

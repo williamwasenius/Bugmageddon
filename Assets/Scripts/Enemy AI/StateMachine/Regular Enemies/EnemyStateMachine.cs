@@ -3,80 +3,48 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    [Header("General Stats")]
-    public float sightRange = 50f;
-    public float wanderSpeed = 5f;
-    public float chaseSpeed = 10f;
-    public Transform currentPosition;
-    public Vector3 velocity;
-
-    [Header("Ranged")]
-    public bool isRanged;
-    public GameObject projectile;
-    public Transform shootingPoint;
-    public WeaponHandler weaponHandler;
-    public float attackRange = 15f;
-    public float followRange = 25f;
-
-    [Header("Detonator")]
-    public bool isDetonator;
-    public float detonatorDamage = 500;
-    public float explosionRadius = 5;
-    public GameObject explosion;
-    public GameObject targetPoint;
-
-    [Header("Charger")]
-    public bool isCharger;
-
-    [HideInInspector] public Transform chaseTarget;
-    [HideInInspector] public IEnemyStates currentState;
-    [HideInInspector] public WanderState wanderState;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
+    public EnemyCore enemy;
     public Animator animator;
+    public NavMeshAgent agent;
 
-    [HideInInspector] public MeleeAttackState meleeAttackState;
-    [HideInInspector] public RangedAttackState rangedAttackState;
-    [HideInInspector] public ChargerAttackState chargerAttackState;
+    private IEnemyStates currentState;
 
-    public Enemy enemyCoreScript;
+    public WanderState wanderState;
+    public ChaseState chaseState;
+
+    public MeleeAttackState meleeState;
+    public RangedAttackState rangedState;
+    public ChargerAttackState chargerState;
 
     private void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        enemyCoreScript = GetComponent<Enemy>();
+        enemy = GetComponent<EnemyCore>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
 
-        wanderState = new WanderState(this, 10f, 5f);
-        meleeAttackState = new MeleeAttackState(this);
-        rangedAttackState = new RangedAttackState(this);
+        wanderState = new WanderState(this, enemy.coreStats.wanderRadius, enemy.coreStats.wanderIntervals);
+        chaseState = new ChaseState(this);
 
-        currentState = wanderState;
+        if (enemy.meleeStats) meleeState = new MeleeAttackState(this);
+        if (enemy.rangedStats) rangedState = new RangedAttackState(this);
+        if (enemy.chargerStats) chargerState = new ChargerAttackState(this);
     }
 
     private void Start()
     {
-        targetPoint = GameObject.FindGameObjectWithTag("TargetPoint");
-        weaponHandler = GetComponentInChildren<WeaponHandler>();
-        if (isRanged)
-        {
-            weaponHandler.projectile = projectile;
-        }
+        ChangeState(wanderState);
+    }
+
+    public void ChangeState(IEnemyStates newState)
+    {
+        currentState?.ExitState();
+        currentState = newState;
+        currentState?.EnterState();
     }
 
     private void Update()
     {
-        currentState.UpdateState();
-        velocity = navMeshAgent.velocity;
-
-        animator.SetBool("IsMoving", velocity.magnitude >= 0.1f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        currentState.OnTriggerEnter(other);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        currentState.OnCollisionEnter(collision);
+        currentState?.UpdateState();
+        animator.SetBool("IsMoving", agent.velocity.magnitude >= 0.1f);
     }
 }

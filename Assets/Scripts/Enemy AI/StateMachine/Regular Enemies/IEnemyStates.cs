@@ -2,14 +2,13 @@ using UnityEngine;
 
 public interface IEnemyStates
 {
-    void OnTriggerEnter(Collider other);
-
-    void OnCollisionEnter(Collision collision);
-
-    void UpdateState();
-
-    void ToWanderState();
-
+    public void EnterState();
+    public void ExitState();
+    public void UpdateState();
+    public void OnTriggerEnter(Collider other);
+    public void Ontriggerstay(Collider other);
+    public void OnTriggerExit(Collider other);
+    public void OnCollisionEnter(Collider other);
 
 
 }

@@ -2,9 +2,20 @@ using UnityEngine;
 
 public class BossPhase2 : IBossStates
 {
-    private BossStateMachine boss;
-    private Enemy stats;
+    private BossStateMachine BossSM;
+    private EnemyCore BossCS;
+    public BossPhase2(BossStateMachine bossStateMachine)
+    {
+        BossSM = bossStateMachine;
+        BossCS = bossStateMachine.BossCS;
+    }
+    public void EnterState()
+    {
+    }
 
+    public void ExitState()
+    {
+    }
     public void Phase1()
     {
 
@@ -17,40 +28,9 @@ public class BossPhase2 : IBossStates
 
     public void Phase3()
     {
-        boss.StartPhase3();
     }
 
     public void UpdateState()
     {
-        boss.AttackPlayer();
-
-        if (Time.time >= boss.chargeCooldown)
-        {
-            boss.StartCoroutine(boss.ChargeAbility());
-            boss.chargeCooldown = Time.time + boss.chargeRechargeTime;
-        }
-
-        if (Time.time >= boss.acidBarrageRechargeTime)
-        {
-            boss.StartCoroutine(boss.BarrageAbility());
-            boss.acidBarrageRechargeTime = Time.time + boss.acidBarrageCooldown;
-        }
-
-        if (Time.time >= boss.callGuardsRechargeTime)
-        {
-            boss.StartCoroutine(boss.CallGuards());
-            boss.callGuardsRechargeTime = Time.time + boss.callGuardsCooldown;
-        }
-
-        if (stats.CurrentHealth <= (stats.maxHealth * 0.33))
-        {
-            Phase3();
-        }
-    }
-
-    public void Initialize(BossStateMachine boss, Enemy stats)
-    {
-        this.boss = boss;
-        this.stats = stats;
     }
 }

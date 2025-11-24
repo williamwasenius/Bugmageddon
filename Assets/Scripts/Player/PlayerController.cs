@@ -77,22 +77,39 @@ public class PlayerController : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && weapon1Handler != null)
+        if (weapon1Handler != null)
         {
-            weapon1Handler.shoot();
+            if (weapon1Handler.chargedWeapon)
+            {
+                if (Input.GetKey(KeyCode.Mouse0))
+                    weapon1Handler.StartCharging();
+
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                    weapon1Handler.ReleaseShot();
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.Mouse0))
+                    weapon1Handler.AutoFire();
+            }
         }
 
-        if (Input.GetKey(KeyCode.Mouse1) && weapon2Handler != null)
+        if (weapon2Handler != null)
         {
-            weapon2Handler.shoot();
-        }
+            if (weapon2Handler.chargedWeapon)
+            {
+                if (Input.GetKey(KeyCode.Mouse1))
+                    weapon2Handler.StartCharging();
 
-        if (Input.GetKey(KeyCode.Mouse3))
-        {
-            armLock = !armLock;
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                    weapon2Handler.ReleaseShot();
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.Mouse1))
+                    weapon2Handler.AutoFire();
+            }
         }
-
-        isShooting = Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1);
     }
 
     private void HandleRun()

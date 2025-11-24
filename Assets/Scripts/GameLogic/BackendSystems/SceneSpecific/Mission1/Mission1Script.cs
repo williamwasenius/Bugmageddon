@@ -45,9 +45,6 @@ public class Mission1Script : MonoBehaviour
 
     private void MissionComplete()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("MainMenu");
-        /*
            MissionTracker.Instance.MissionComplete("Mission1");
 
            if (!SaveManager.Instance.mission1)
@@ -57,7 +54,6 @@ public class Mission1Script : MonoBehaviour
            }
 
            SceneManager.LoadScene("WeaponSelection");
-        */
     }
 
     private void Lose()

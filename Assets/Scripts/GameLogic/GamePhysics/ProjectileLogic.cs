@@ -53,7 +53,7 @@ public class ProjectileLogic : MonoBehaviour
             }
         }
 
-        if (isPierce == false)
+        if (!isPierce)
         {
             Destroy(gameObject);
         }

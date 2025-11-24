@@ -159,7 +159,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
         if (spawnedEnemy != null)
         {
-            spawnedEnemy.GetComponent<Enemy>().isPreplaced = false;
+            spawnedEnemy.GetComponent<EnemyCore>().isPreplaced = false;
         }
 
         yield return null;

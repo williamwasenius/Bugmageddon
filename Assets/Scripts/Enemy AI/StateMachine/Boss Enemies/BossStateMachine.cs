@@ -2,175 +2,148 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class BossStateMachine : MonoBehaviour
 {
-    // Public Variables
-    public float chaseSpeed = 5;
+    [Header("General Data")]
+    public GameObject chaseTarget;
+    public int currentPhaseINT;
 
-    // Charge ability
-    public float chargeForce = 3000;
-    public float chargeInterval = 1;
-    public float chargeCooldown = 10;
-    public float chargeRechargeTime = 0;
+    [Header("Script References")]
+    public EnemyCore BossCS;
+    public EnemyAttackTriggerActivator enemyAttackTriggerActivator;
 
-    //AcidBarrage Ability
-    public GameObject bugProjectile;
-    public List<Transform> firingPoints;
-    public GameObject alert;
-    public int acidBarrageCount = 5;
-    public float acidBarrageCooldown = 10;
-    public float acidBarrageRechargeTime = 0;
+    [Header("Component References")]
+    public Animator animator;
 
-    //Summon Guards Ability
-    public GameObject guards;
+    [Header("Arm Attack")]
+    public GameObject armAttack;
+
+    [Header("Summon Guard Ability")]
+    public GameObject[] guards;
+    public GameObject EliteGuards;
     public float callGuardsCooldown = 30;
     public float callGuardsRechargeTime = 0;
 
-    //Current Phase Bools
-    public bool phase2abilities = false;
-    public bool phase3abilities = false;
+    [Header("Tail Attack Ability")]
+    public GameObject tailAttackContainer;
+    public GameObject tailAttackTails;
+    public float tailAttackDamage;
+    public float tailAttackDelay = 2;
+    public float tailAttackCooldown = 30;
+    public float tailAttackRechargeTime = 0;
 
-    // Private References
-    private Collider detectionTrigger;
-    [HideInInspector] public Transform chaseTarget;
+    // ======== HIDDEN DATA ======== //
+
     [HideInInspector] public IBossStates currentState;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public Transform currentPosition;
+    [HideInInspector] public Transform chaseTargetPosition;
+    [HideInInspector] public Vector3 velocity;
+
+    // ======== BOSS PHASE STATES ======== //
+
     [HideInInspector] public BossPhase1 phase1;
     [HideInInspector] public BossPhase2 phase2;
     [HideInInspector] public BossPhase3 phase3;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
-    public Rigidbody rigidBody;
-    private BossStateMachine stateMachine;
+
+    // ======== BOSS ABILITY STATES ======== //
+
+    [HideInInspector] public BossSummonGuardsAbility bossSummonGuardsAbility;
+    [HideInInspector] public BossArmAttack bossArmAttack;
+    [HideInInspector] public BossTailAttack bossTailAttack;
+
 
     // Unity Methods
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        stateMachine = GetComponent<BossStateMachine>();
-        rigidBody = GetComponent<Rigidbody>();
 
-        phase1 = new BossPhase1();
-        phase2 = new BossPhase2();
-        phase3 = new BossPhase3();
+        phase1 = new BossPhase1(this);
+        phase2 = new BossPhase2(this);
+        phase3 = new BossPhase3(this);
 
-        phase1.Initialize(this, GetComponent<Enemy>());
-        phase2.Initialize(this, GetComponent<Enemy>());
-        phase3.Initialize(this, GetComponent<Enemy>());
+        bossSummonGuardsAbility = new BossSummonGuardsAbility(this);
+        bossArmAttack = new BossArmAttack(this);
+        bossTailAttack = new BossTailAttack(this); 
     }
 
     private void Start()
     {
-        detectionTrigger = GetComponentInChildren<Collider>();
+        chaseTarget = GameObject.FindGameObjectWithTag("Player");
+        navMeshAgent.speed = BossCS.chaseSpeed;
+        chaseTargetPosition = chaseTarget.transform;
+        currentPosition = BossCS.transform;
+
+        currentState = phase1;
+        currentPhaseINT = 1;
+
+        DamageTriggerHandler tailDamageTrigger = tailAttackTails.GetComponent<DamageTriggerHandler>();
+        tailDamageTrigger.triggerDamage = tailAttackDamage;
+
+        DamageTriggerHandler armAttackTrigger = armAttack.GetComponent<DamageTriggerHandler>();
+        armAttackTrigger.triggerDamage = BossCS.meleeDamage;
+
     }
 
     private void Update()
     {
-        currentState?.UpdateState();
+        currentState.UpdateState();
+        velocity = navMeshAgent.velocity;
+        AbilityCooldown();
     }
 
-    // Trigger Handlers
-    public void OnTriggerEnter(Collider other)
+    public void ChangeState(IBossStates newState)
     {
-        if (other.CompareTag("Player"))
+        currentState.ExitState();
+        currentState = newState;
+        currentState.EnterState();
+    }
+
+    public void StopMoving()
+    {
+        animator.SetBool("IsMoving", false);
+        navMeshAgent.isStopped = true;
+        navMeshAgent.destination = currentPosition.position;
+    }
+
+    public void AbilityCooldown()
+    {
+        if (tailAttackRechargeTime > 0)
         {
-            Debug.Log("Player entered, Phase 1");
-            chaseTarget = other.transform;
-            chargeRechargeTime = 5;
-            acidBarrageRechargeTime = 5;
-            currentState = phase1;
+            tailAttackRechargeTime -= Time.deltaTime;
         }
-    }
 
-    // Phase Management
-    public void StartPhase3()
-    {
-        Debug.Log("Phase 3");
-        phase3abilities = true;
-        transform.localScale *= 1.25f;
-        acidBarrageCount = 10;
-        chargeInterval = 0.5f;
-        currentState = phase3;
-    }
-
-    public void StartPhase2()
-    {
-        Debug.Log("Phase 2");
-        phase2abilities = true;
-        chaseSpeed = 10;
-        acidBarrageCooldown = 5;
-        chargeInterval = 0.75f;
-        currentState = phase2;
-    }
-
-    // Attacking Player
-    public void AttackPlayer()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, chaseTarget.position);
-        Vector3 directionToPlayer = (chaseTarget.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-
-        navMeshAgent.speed = chaseSpeed;
-        navMeshAgent.destination = chaseTarget.position;
-    }
-
-    // Charge Ability
-    public IEnumerator ChargeAbility()
-    {
-        yield return StartCoroutine(ChargeFunction());
-
-        if (phase2abilities) yield return StartCoroutine(ChargeFunction());
-        if (phase3abilities) yield return StartCoroutine(ChargeFunction());
-    }
-
-    private IEnumerator ChargeFunction()
-    {
-        alert.SetActive(true);
-        yield return new WaitForSeconds(chargeInterval);
-
-        Vector3 dashForce = (stateMachine.chaseTarget.position - transform.position).normalized * chargeForce;
-        rigidBody.AddForce(dashForce, ForceMode.Impulse);
-
-        transform.LookAt(new Vector3(chaseTarget.position.x, transform.position.y, chaseTarget.position.z));
-
-        alert.SetActive(false);
-    }
-
-    // Calling Guards
-    public IEnumerator CallGuards()
-    {
-        foreach (Transform firingPoint in firingPoints)
+        if (callGuardsRechargeTime > 0)
         {
-            Instantiate(guards, firingPoint.position, firingPoint.rotation);
-            yield return new WaitForSeconds(0.2f);
+            callGuardsRechargeTime -= Time.deltaTime;
         }
+
     }
 
-    // Acid Barrage Ability
-    public IEnumerator BarrageAbility()
+    public void SummonGuards()
     {
-        Debug.Log("Shooting!");
-        for (int i = 0; i < acidBarrageCount; i++)
+        int randomIndex = Random.Range(0, guards.Length);
+        GameObject enemyPrefab = guards[randomIndex];
+        GameObject spawnedEnemy = null;
+
+        if (currentPhaseINT == 1)
         {
-            foreach (Transform firingPoint in firingPoints)
+            for (int i = 0; i < 5; i++)
             {
-                if (phase3abilities)
-                {
-                    Instantiate(bugProjectile, firingPoint.position, firingPoint.rotation);
-                    Instantiate(bugProjectile, -firingPoint.position, firingPoint.rotation);
-                }
-                else
-                {
-                    Instantiate(bugProjectile, firingPoint.position, firingPoint.rotation);
-                }
-
-                yield return new WaitForSeconds(0.1f);
+                Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+                spawnedEnemy = Instantiate(enemyPrefab, currentPosition.position + spawnOffset, currentPosition.rotation);
             }
         }
     }
-
-    // Die Method
-    public void Die()
+    private void CheckAttackRange(IBossStates toAttackState)
     {
-        Destroy(gameObject);
+        float distance = Vector3.Distance(transform.position, chaseTargetPosition.position);
+
+       if (distance <= BossCS.strikeRange)
+        {
+
+        }
     }
 }

@@ -85,7 +85,7 @@ public class TurretScript : MonoBehaviour
         {
             foreach (WeaponHandler weapon in weapons)
             {
-                weapon?.shoot();
+                weapon?.AutoFire();
             }
         }
     }

@@ -1994,6 +1994,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
+    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(Out) (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.490265
@@ -2033,10 +2037,6 @@ PrefabInstance:
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(Out) (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8272,6 +8272,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
+    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(Out) (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 131.39
@@ -8311,10 +8315,6 @@ PrefabInstance:
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(Out) (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29765,34 +29765,6 @@ PrefabInstance:
       value: 84.94
       objectReference: {fileID: 0}
     - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -69.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 135
-      objectReference: {fileID: 0}
-    - target: {fileID: 6367895673986076383, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(In) (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 84.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -29827,6 +29799,10 @@ PrefabInstance:
     - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367895673986076383, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(In) (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32373,14 +32349,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "MISSION 1 - \u201CB-DAY\u201D\n\nIT WAS A PEACEFUL DAY, JUST LIKE ANY
-    OTHER, WHEN THE WORLD CAME TO AN END.\n\nBUGS THE SIZE OF BUILDINGS BURST FROM
-    THE GROUND, DESTROYING AND DEVOURING ALL IN THEIR PATH. conventional WEAPONS
-    DID LITTLE TO STOP THEIR ONSLAUGHT.\n\nSO HUMANITY BANDED TOGETHER, POOLING THEIR
-    RESOURCES TO CREATE SOMETHING THAT COULD FIGHT THESE GIANT CREATURES. \n\nPROJECT
-    \u201CBUGSTOMPER\u201D, A MECH THAT COULD MATCH THE SIZE AND STRENGTH OF THE
-    BUGS, AND YOU ARE ITS PILOT!\n\nTODAY IS THE DAY HUMANITY STRIKES BACK, AND WILL
-    RETAKE THEIR LOST HOMES!\n\nGOOD LUCK PILOT!"
+  m_text: 'MISSION 1 - "B-DAY"
+
+
+    ALL DEFENSES ARE OVERRUN. HUMANITY SITS ON THE
+    BRINK OF EXTINCTION. YOU ARE OUR LAST HOPE  AT DEFEATING THE BUG MENACE!
+
+
+    YOUR
+    FIRST OBJECTIVE:
+
+
+    DEFEAT ALL BUGS INSIDE THE BASE!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
   m_sharedMaterial: {fileID: 2118036077212545858, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
@@ -32415,7 +32395,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -54785,6 +54765,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
+    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(Out) (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 207
@@ -54824,10 +54808,6 @@ PrefabInstance:
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(Out) (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58955,6 +58935,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
+    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(Out) (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.51
@@ -58994,10 +58978,6 @@ PrefabInstance:
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(Out) (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61063,6 +61043,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
+    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(Out) (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalPosition.x
       value: -96.33026
@@ -61102,10 +61086,6 @@ PrefabInstance:
     - target: {fileID: 7167571345433074768, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804412619251188977, guid: f0a9401ceca40d44a9427944aacaecef, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(Out) (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62792,10 +62772,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026050729}
     m_Modifications:
-    - target: {fileID: 6367895673986076383, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
-      propertyPath: m_Name
-      value: Wall_45_angle(In)
-      objectReference: {fileID: 0}
     - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -48.710266
@@ -62835,6 +62811,10 @@ PrefabInstance:
     - target: {fileID: 325847062597510938, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367895673986076383, guid: 4bb9a4a639956ce4a954f939d261b87d, type: 3}
+      propertyPath: m_Name
+      value: Wall_45_angle(In)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

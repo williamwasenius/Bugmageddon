@@ -31,12 +31,12 @@ public class CombatUIManager : MonoBehaviour
     {
         if (weapon1Handler != null)
         {
-            weapon1CooldownImage.fillAmount = 1 - weapon1Handler.GetCooldownProgress();
+            weapon1CooldownImage.fillAmount = weapon1Handler.GetCooldownProgress();
         }
 
         if (weapon2Handler != null)
         {
-            weapon2CooldownImage.fillAmount = 1 - weapon2Handler.GetCooldownProgress();
+            weapon2CooldownImage.fillAmount = weapon2Handler.GetCooldownProgress();
         }
 
         if (player != null)

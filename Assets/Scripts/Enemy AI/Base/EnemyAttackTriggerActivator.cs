@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class EnemyAttackTriggerActivator : MonoBehaviour
 {
+    [Header("Attack Triggers")]
+    public GameObject[] attackTriggers;
 
-    public Collider attackTrigger;
-
-    public void EnableAttackTrigger()
+    public void EnableTrigger(int index)
     {
-        attackTrigger.enabled = true;
+        if (index < 0 || index >= attackTriggers.Length) return;
+        attackTriggers[index]?.SetActive(true);
     }
-    
-    public void DisableAttackTrigger()
+
+    public void DisableTrigger(int index)
     {
-        attackTrigger.enabled = false;
+        if (index < 0 || index >= attackTriggers.Length) return;
+        attackTriggers[index]?.SetActive(false);
     }
 }

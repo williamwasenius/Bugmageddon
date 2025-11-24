@@ -4,9 +4,20 @@ using Unity.VisualScripting;
 
 public class BossPhase3 : IBossStates
 {
-    private BossStateMachine boss;
-    private Enemy stats;
+    private BossStateMachine BossSM;
+    private EnemyCore BossCS;
+    public BossPhase3(BossStateMachine bossStateMachine)
+    {
+        BossSM = bossStateMachine;
+        BossCS = bossStateMachine.BossCS;
+    }
+    public void EnterState()
+    {
+    }
 
+    public void ExitState()
+    {
+    }
     public void Phase1()
     {
 
@@ -24,28 +35,5 @@ public class BossPhase3 : IBossStates
 
     public void UpdateState()
     {
-        boss.AttackPlayer();
-
-        if (Time.time >= boss.chargeCooldown)
-        {
-            boss.StartCoroutine(boss.ChargeAbility());
-            boss.chargeCooldown = Time.time + boss.chargeRechargeTime;
-        }
-
-        if (Time.time >= boss.acidBarrageRechargeTime)
-        {
-            boss.StartCoroutine(boss.BarrageAbility());
-            boss.acidBarrageRechargeTime = Time.time + boss.acidBarrageCooldown;
-        }
-
-        if (stats.CurrentHealth <= 0)
-        {
-            boss.Die();
-        }
-    }
-    public void Initialize(BossStateMachine boss, Enemy stats)
-    {
-        this.boss = boss;
-        this.stats = stats;
     }
 }

@@ -1,84 +1,123 @@
 using UnityEngine;
+using System.Collections;
 
 public class MeleeAttackState : IEnemyStates
 {
-    private EnemyStateMachine enemy;
-    private bool isAttacking = false;
+    private readonly EnemyStateMachine EnemySM;
+    private readonly EnemyCore EnemyCS;
+    private float attackCooldown;
+    private bool isAttacking;
 
-    public MeleeAttackState(EnemyStateMachine statePatternEnemy)
+    public MeleeAttackState(EnemyStateMachine EnemyStateMachine)
     {
-        enemy = statePatternEnemy;
+        EnemySM = EnemyStateMachine;
+        EnemyCS = EnemyStateMachine.EnemyCS;
     }
+
+    // ----------------------------------- ENTER / EXIT ----------------------------------- //
+
+    public void EnterState()
+    {
+        if (EnemyCS.isBurster)
+        {
+            Burst();
+        }
+        else
+        {
+            TryAttack();
+        }
+    }
+
+    public void ExitState()
+    {
+        StopAttack();
+    }
+
+    // ----------------------------------- UPDATE ----------------------------------- //
 
     public void UpdateState()
     {
-        if (enemy.chaseTarget == null)
+        if (!isAttacking && attackCooldown != 0)
         {
-            enemy.navMeshAgent.speed = enemy.wanderSpeed;
+            attackCooldown -= Time.deltaTime;
+
+            if (attackCooldown <= 0)
+            {
+                TryAttack();
+            }
+
+        }
+
+        if (EnemySM.chaseTarget != null && Vector3.Distance(EnemySM.transform.position, EnemySM.chaseTarget.position) > EnemyCS.strikeRange)
+        {
+            ToChaseState();
+        }
+
+        else if (EnemySM.chaseTarget == null)
+        {
             ToWanderState();
             return;
         }
-
-        if (isAttacking) return;
-
-        enemy.navMeshAgent.speed = enemy.chaseSpeed;
-        enemy.navMeshAgent.isStopped = false;
-        enemy.navMeshAgent.destination = enemy.chaseTarget.position;
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (isAttacking) return;
+    // ----------------------------------- ATTACK LOGIC ----------------------------------- //
 
-        else if (enemy.isDetonator && collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective"))
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, enemy.explosionRadius);
-
-            foreach (Collider hitCollider in hitColliders)
-            {
-                if (hitCollider.isTrigger)
-                    continue;
-
-                IDamageable targetDamageable = hitCollider.GetComponent<IDamageable>();
-                if (targetDamageable != null)
-                {
-                    targetDamageable.TakeDamage(enemy.detonatorDamage - targetDamageable.Armor);
-                }
-            }
-            enemy.enemyCoreScript.Die();
-        }
-        else if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective"))
-        {
-            StartAttack();
-        }
-    }
-
-    private void StartAttack()
+    private void TryAttack()
     {
         isAttacking = true;
-        enemy.navMeshAgent.isStopped = true;
-        enemy.animator.SetBool("IsAttacking", true);
-        enemy.StartCoroutine(ResetAfterAttack());
+        attackCooldown = EnemyCS.attackSpeed;
+
+        Vector3 direction = EnemySM.chaseTarget.position - EnemySM.transform.position;
+        direction.y = 0;
+        EnemySM.transform.rotation = Quaternion.LookRotation(direction);
+
+        EnemySM.navMeshAgent.isStopped = true;
+        EnemySM.StartCoroutine(AttackRoutine());
     }
 
-    private System.Collections.IEnumerator ResetAfterAttack()
+    private IEnumerator AttackRoutine()
     {
-        float attackLength = enemy.animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(attackLength);
 
-        enemy.animator.SetBool("IsAttacking", false);
-        enemy.navMeshAgent.isStopped = false;
+        Debug.Log("Attack start");
+        EnemySM.animator.SetBool("IsAttacking", true);
+
+        yield return new WaitForSeconds(EnemyCS.attackDuration);
+
+        EnemySM.animator.SetBool("IsAttacking", false);
         isAttacking = false;
+        Debug.Log("Attack end");
+
+    }
+
+    private void StopAttack()
+    {
+        EnemySM.animator.SetBool("IsAttacking", false);
+        EnemySM.navMeshAgent.isStopped = false;
+        isAttacking = false;
+    }
+
+    private void Burst()
+    {
+        EnemyCS.Die();
+    }
+
+    // ----------------------------------- TRANSITIONS ----------------------------------- //
+
+    private void ToChaseState()
+    {
+        EnemySM.ChangeState(EnemySM.chaseState);
     }
 
     public void ToWanderState()
     {
-        if (isAttacking) return;
-        enemy.animator.SetBool("IsAttacking", false);
-        enemy.navMeshAgent.isStopped = false;
-        enemy.currentState = enemy.wanderState;
+        EnemySM.ChangeState(EnemySM.wanderState);
     }
 
-    public void ToAttackState() { }
+    // ----------------------------------- UNUSED CALLBACKS ----------------------------------- //
+
     public void OnTriggerEnter(Collider other) { }
+    public void OnTriggerExit(Collider other) { }
+    public void Ontriggerstay(Collider other) { }
+    public void OnCollisionEnter(Collision collision) { }
+    public void OnCollisionEnter(Collider other) { }
 }

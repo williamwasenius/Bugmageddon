@@ -1,55 +1,67 @@
-using UnityEngine;
 using System.Collections;
-using UnityEngine.AI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class BossPhase1 : IBossStates
 {
-    private BossStateMachine boss;
-    private Enemy stats;
+    private BossStateMachine BossSM;
+    private EnemyCore BossCS;
+    public BossPhase1(BossStateMachine bossStateMachine)
+    {
+        BossSM = bossStateMachine;
+        BossCS = bossStateMachine.BossCS;
+    }
+
+    public void EnterState()
+    {
+        Debug.Log("chase state entered");
+        BossSM.navMeshAgent.isStopped = false;
+    }
+
+    public void ExitState()
+    {
+        BossSM.StopMoving();
+    }
 
     public void Phase1()
     {
 
     }
 
-    public void Phase2()
-    {
-        boss.StartPhase2();
-    }
-
-    public void Phase3()
-    {
-
-    }
-
     public void UpdateState()
     {
-        boss.AttackPlayer();
-
-
-        if (Time.time >= boss.chargeCooldown)
+        if (BossSM.tailAttackRechargeTime <= 0)
         {
-            boss.StartCoroutine(boss.ChargeAbility());
-            boss.chargeCooldown = Time.time + boss.chargeRechargeTime; 
-        } 
+            BossSM.ChangeState(BossSM.bossTailAttack);
 
-        if (Time.time >= boss.acidBarrageRechargeTime)
+        }
+        else
         {
-            boss.acidBarrageRechargeTime = Time.time + boss.acidBarrageCooldown;
-            boss.StartCoroutine(boss.BarrageAbility());
+            CheckAttackRange();
+
+            BossSM.animator.SetBool("IsMoving", BossSM.velocity.magnitude >= 0.1f);
         }
 
-        if (stats.CurrentHealth <= (stats.maxHealth * 0.66))
-        {
-            Phase2();
-        }
     }
 
-    public void Initialize(BossStateMachine boss, Enemy stats)
+    public void CheckAttackRange()
     {
-        this.boss = boss;
-        this.stats = stats;
+        float distance = Vector3.Distance(BossSM.transform.position, BossSM.chaseTargetPosition.position);
+
+        if (distance <= BossCS.strikeRange)
+        {
+            BossSM.ChangeState(BossSM.bossArmAttack);
+        }
+        else
+        {
+            ChaseTarget();
+        }
+    }
+    public void ChaseTarget()
+    {
+        BossSM.navMeshAgent.destination = BossSM.chaseTargetPosition.position;
     }
 
 }
