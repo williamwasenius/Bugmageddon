@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 23bf609520363e24c8a170a98890dd9a, type: 3}
   - {fileID: 21300000, guid: a888c05f6e664214b91ee83111314c1b, type: 3}
   - {fileID: 21300000, guid: 576dffab9dfe6384fb766c5fe7742b24, type: 3}
-  vfx: {fileID: 0}
+  vfx: {fileID: 1485256712156583493, guid: 48ea3fe057713284a889a12d4c7b4986, type: 3}
   prefab: {fileID: 6896128875213623012, guid: 48ea3fe057713284a889a12d4c7b4986, type: 3}
 --- !u!4 &618653177
 Transform:
@@ -1176,6 +1176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6017379419415623251, guid: 48ea3fe057713284a889a12d4c7b4986, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6896128875213623012, guid: 48ea3fe057713284a889a12d4c7b4986, type: 3}
       propertyPath: m_Name
       value: BugSplatVFX

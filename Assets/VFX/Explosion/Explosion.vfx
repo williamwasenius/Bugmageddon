@@ -39,10 +39,10 @@ MonoBehaviour:
   - title: Sparks
     position:
       serializedVersion: 2
-      x: 2801
-      y: -1377
+      x: 2729
+      y: -1365
       width: 723
-      height: 2009
+      height: 2058
     contents:
     - model: {fileID: 8926484042661615126}
       id: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 660
     y: -1434
-    width: 2864
+    width: 2792
     height: 2178
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615128}
-  m_UIPosition: {x: 3075, y: -1318}
+  m_UIPosition: {x: 3003, y: -1306}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615147}
   - {fileID: 8926484042661615166}
   - {fileID: 8926484042661615175}
-  m_UIPosition: {x: 3075, y: -1037}
+  m_UIPosition: {x: 3003, y: -1025}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2646,7 +2646,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615533}
-  m_UIPosition: {x: 3075, y: -322}
+  m_UIPosition: {x: 3003, y: -310}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2686,7 +2686,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615198}
   - {fileID: 8926484042661615202}
   - {fileID: 8926484042661615205}
-  m_UIPosition: {x: 3075, y: -123}
+  m_UIPosition: {x: 3003, y: -111}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3625,7 +3625,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 2826, y: -1222}
+  m_UIPosition: {x: 2754, y: -1210}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
