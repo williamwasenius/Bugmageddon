@@ -29,7 +29,7 @@ public class BossArmAttack : IBossStates
         Debug.Log("Attack start");
         BossSM.animator.SetBool("IsArmAttacking", true);
 
-        yield return new WaitForSeconds(BossCS.attackDuration);
+        yield return new WaitForSeconds(BossCS.meleeStats.attackDuration);
 
         BossSM.animator.SetBool("IsArmAttacking", false);
         Debug.Log("Attack end");

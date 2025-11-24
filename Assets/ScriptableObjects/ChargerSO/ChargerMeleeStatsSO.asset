@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9ac0fb004a9264ea4661842be451dc, type: 3}
   m_Name: ChargerMeleeStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeStatsSO
-  meleeDamage: 50
+  damage: 0
   attackSpeed: 3
-  attackDuration: 0
   strikeRange: 6
+  attackClip: {fileID: 7400000, guid: 3309496d92d7d134c80271a3b50c0e03, type: 2}

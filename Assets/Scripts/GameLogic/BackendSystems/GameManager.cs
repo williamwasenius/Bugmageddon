@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"{type} {obj.name} is now unloaded.");
                     }
 
-                    if (type == "Enemy" && enemyComponent != null && !enemyComponent.isPreplaced)
+                    if (type == "Enemy" && enemyComponent != null && !enemyComponent.coreStats.isPreplaced)
                     {
                         if (enemyInactiveTimers.ContainsKey(obj))
                         {

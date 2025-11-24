@@ -72,7 +72,7 @@ public class BossStateMachine : MonoBehaviour
     private void Start()
     {
         chaseTarget = GameObject.FindGameObjectWithTag("Player");
-        navMeshAgent.speed = BossCS.chaseSpeed;
+        navMeshAgent.speed = BossCS.coreStats.chaseSpeed;
         chaseTargetPosition = chaseTarget.transform;
         currentPosition = BossCS.transform;
 
@@ -83,7 +83,7 @@ public class BossStateMachine : MonoBehaviour
         tailDamageTrigger.triggerDamage = tailAttackDamage;
 
         DamageTriggerHandler armAttackTrigger = armAttack.GetComponent<DamageTriggerHandler>();
-        armAttackTrigger.triggerDamage = BossCS.meleeDamage;
+        armAttackTrigger.triggerDamage = BossCS.meleeStats.damage;
 
     }
 
@@ -141,7 +141,7 @@ public class BossStateMachine : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, chaseTargetPosition.position);
 
-       if (distance <= BossCS.strikeRange)
+       if (distance <= BossCS.meleeStats.strikeRange)
         {
 
         }

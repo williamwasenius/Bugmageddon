@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1492b007545cbc7428b19601fb5ad602, type: 3}
   m_Name: DetonatorAbilityStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetonatorStatsSO
-  detonatorDamage: 50
+  explosionDamage: 100
   explosionRadius: 5
-  explosion: {fileID: 4439557229569339894, guid: 42fabf2fed2f2d547b167ccf24b4b011, type: 3}
+  explosionPrefab: {fileID: 4439557229569339894, guid: 42fabf2fed2f2d547b167ccf24b4b011, type: 3}

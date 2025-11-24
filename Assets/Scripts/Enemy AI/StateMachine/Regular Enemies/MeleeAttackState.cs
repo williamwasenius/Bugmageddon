@@ -3,29 +3,31 @@ using System.Collections;
 
 public class MeleeAttackState : IEnemyStates
 {
-    private readonly EnemyStateMachine EnemySM;
-    private readonly EnemyCore EnemyCS;
-    private float attackCooldown;
-    private bool isAttacking;
+    private readonly EnemyStateMachine enemySM;
+    private readonly EnemyCore enemy;
+    private readonly EnemyMeleeStatsSO meleeStatsSO;
 
-    public MeleeAttackState(EnemyStateMachine EnemyStateMachine)
+    private bool isAttacking;
+    private float cooldown;
+
+    public MeleeAttackState(EnemyStateMachine stateMachine)
     {
-        EnemySM = EnemyStateMachine;
-        EnemyCS = EnemyStateMachine.EnemyCS;
+        enemySM = stateMachine;
+        enemy = stateMachine.enemyCS;
+        meleeStatsSO = enemy.meleeStats;
     }
 
     // ----------------------------------- ENTER / EXIT ----------------------------------- //
 
     public void EnterState()
     {
-        if (EnemyCS.isBurster)
+        if (enemy.bursterStats != null)
         {
-            Burst();
+            enemy.Die();
+            return;
         }
-        else
-        {
-            TryAttack();
-        }
+
+        TryAttack();
     }
 
     public void ExitState()
@@ -37,26 +39,24 @@ public class MeleeAttackState : IEnemyStates
 
     public void UpdateState()
     {
-        if (!isAttacking && attackCooldown != 0)
-        {
-            attackCooldown -= Time.deltaTime;
-
-            if (attackCooldown <= 0)
-            {
-                TryAttack();
-            }
-
-        }
-
-        if (EnemySM.chaseTarget != null && Vector3.Distance(EnemySM.transform.position, EnemySM.chaseTarget.position) > EnemyCS.strikeRange)
-        {
-            ToChaseState();
-        }
-
-        else if (EnemySM.chaseTarget == null)
+        if (enemySM.chaseTarget == null)
         {
             ToWanderState();
             return;
+        }
+
+        float distance = Vector3.Distance(enemySM.transform.position, enemySM.chaseTarget.position);
+
+        if (distance > meleeStatsSO.strikeRange && !isAttacking)
+        {
+            ToChaseState();
+            return;
+        }
+
+        if (!isAttacking && cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0) TryAttack();
         }
     }
 
@@ -64,57 +64,56 @@ public class MeleeAttackState : IEnemyStates
 
     private void TryAttack()
     {
+        if (isAttacking) return;
+
         isAttacking = true;
-        attackCooldown = EnemyCS.attackSpeed;
+        cooldown = meleeStatsSO.attackSpeed;
 
-        Vector3 direction = EnemySM.chaseTarget.position - EnemySM.transform.position;
-        direction.y = 0;
-        EnemySM.transform.rotation = Quaternion.LookRotation(direction);
+        FaceTarget();
 
-        EnemySM.navMeshAgent.isStopped = true;
-        EnemySM.StartCoroutine(AttackRoutine());
+        enemySM.nMAgent.isStopped = true;
+        enemySM.StartCoroutine(AttackRoutine());
     }
 
     private IEnumerator AttackRoutine()
     {
+        enemySM.animator.SetBool("IsAttacking", true);
 
-        Debug.Log("Attack start");
-        EnemySM.animator.SetBool("IsAttacking", true);
+        yield return new WaitForSeconds(meleeStatsSO.attackDuration);
 
-        yield return new WaitForSeconds(EnemyCS.attackDuration);
-
-        EnemySM.animator.SetBool("IsAttacking", false);
+        enemySM.animator.SetBool("IsAttacking", false);
         isAttacking = false;
-        Debug.Log("Attack end");
-
     }
 
     private void StopAttack()
     {
-        EnemySM.animator.SetBool("IsAttacking", false);
-        EnemySM.navMeshAgent.isStopped = false;
+        enemySM.animator.SetBool("IsAttacking", false);
+        enemySM.nMAgent.isStopped = false;
         isAttacking = false;
     }
 
-    private void Burst()
+    private void FaceTarget()
     {
-        EnemyCS.Die();
+        Vector3 dir = enemySM.chaseTarget.position - enemySM.transform.position;
+        dir.y = 0;
+
+        if (dir != Vector3.zero)
+            enemySM.transform.rotation = Quaternion.LookRotation(dir);
     }
 
     // ----------------------------------- TRANSITIONS ----------------------------------- //
 
     private void ToChaseState()
     {
-        EnemySM.ChangeState(EnemySM.chaseState);
+        enemySM.ChangeState(enemySM.chaseState);
     }
 
     public void ToWanderState()
     {
-        EnemySM.ChangeState(EnemySM.wanderState);
+        enemySM.ChangeState(enemySM.wanderState);
     }
 
     // ----------------------------------- UNUSED CALLBACKS ----------------------------------- //
-
     public void OnTriggerEnter(Collider other) { }
     public void OnTriggerExit(Collider other) { }
     public void Ontriggerstay(Collider other) { }

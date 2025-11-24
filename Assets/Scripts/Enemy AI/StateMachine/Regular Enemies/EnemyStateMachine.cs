@@ -3,9 +3,12 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    public EnemyCore enemy;
+    public EnemyCore enemyCS;
+    public EnemyCoreStatsSO coreStats;
     public Animator animator;
-    public NavMeshAgent agent;
+    public NavMeshAgent nMAgent;
+
+    public Transform chaseTarget;
 
     private IEnemyStates currentState;
 
@@ -15,23 +18,30 @@ public class EnemyStateMachine : MonoBehaviour
     public MeleeAttackState meleeState;
     public RangedAttackState rangedState;
     public ChargerAttackState chargerState;
+    public BursterState bursterState;
 
     private void Awake()
     {
-        enemy = GetComponent<EnemyCore>();
-        agent = GetComponent<NavMeshAgent>();
+        enemyCS = GetComponent<EnemyCore>();
+        nMAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
 
-        wanderState = new WanderState(this, enemy.coreStats.wanderRadius, enemy.coreStats.wanderIntervals);
+        wanderState = new WanderState(this, enemyCS.coreStats.wanderRadius, enemyCS.coreStats.wanderIntervals);
         chaseState = new ChaseState(this);
 
-        if (enemy.meleeStats) meleeState = new MeleeAttackState(this);
-        if (enemy.rangedStats) rangedState = new RangedAttackState(this);
-        if (enemy.chargerStats) chargerState = new ChargerAttackState(this);
+        if (enemyCS.meleeStats) meleeState = new MeleeAttackState(this);
+        if (enemyCS.rangedStats) rangedState = new RangedAttackState(this);
+        if (enemyCS.chargerStats) chargerState = new ChargerAttackState(this);
+        if (enemyCS.bursterStats) bursterState = new BursterState(this);
+
     }
 
     private void Start()
     {
+        if (enemyCS.bursterStats)
+        {
+            ChangeState(bursterState);
+        }
         ChangeState(wanderState);
     }
 
@@ -45,6 +55,15 @@ public class EnemyStateMachine : MonoBehaviour
     private void Update()
     {
         currentState?.UpdateState();
-        animator.SetBool("IsMoving", agent.velocity.magnitude >= 0.1f);
+        animator.SetBool("IsMoving", nMAgent.velocity.magnitude >= 0.1f);
+
+        if (enemyCS.chargerStats != null)
+        {
+            if (enemyCS.chargerStats.chargeRechargeTimer < 0 && !enemyCS.chargerStats.isCharging)
+            {
+                enemyCS.chargerStats.chargeRechargeTimer -= Time.deltaTime;
+            }
+        }
     }
+
 }

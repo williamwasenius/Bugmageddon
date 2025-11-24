@@ -50,7 +50,7 @@ public class BossPhase1 : IBossStates
     {
         float distance = Vector3.Distance(BossSM.transform.position, BossSM.chaseTargetPosition.position);
 
-        if (distance <= BossCS.strikeRange)
+        if (distance <= BossCS.meleeStats.strikeRange)
         {
             BossSM.ChangeState(BossSM.bossArmAttack);
         }

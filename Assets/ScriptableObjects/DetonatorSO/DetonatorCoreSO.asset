@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4c387eaf37fbc4c957a453384f2f97, type: 3}
   m_Name: DetonatorCoreSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatsSO
+  isPreplaced: 1
   maxHealth: 200
   armor: 0
   wanderSpeed: 4

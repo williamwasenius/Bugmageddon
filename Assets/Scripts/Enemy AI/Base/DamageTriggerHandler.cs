@@ -18,7 +18,7 @@ public class DamageTriggerHandler : MonoBehaviour
 
             if (EnemySM != null)
             {
-                triggerDamage = EnemySM.EnemyCS.meleeDamage;
+                triggerDamage = EnemySM.enemyCS.meleeStats.damage;
             }
         }
     }

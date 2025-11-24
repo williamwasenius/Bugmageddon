@@ -4,17 +4,19 @@ using System.Collections;
 
 public class ChargerAttackState : IEnemyStates
 {
-    private readonly EnemyStateMachine EnemySM;
-    private readonly EnemyCore EnemyCS;
+    private readonly EnemyStateMachine enemySM;
+    private readonly EnemyCore enemyCS;
+    private readonly EnemyChargerStatsSO chargerStatsSO;
 
     private bool isPreparing;
 
     private Transform chargeTargetPoint;
 
-    public ChargerAttackState(EnemyStateMachine sm)
+    public ChargerAttackState(EnemyStateMachine stateMachine)
     {
-        EnemySM = sm;
-        EnemyCS = sm.EnemyCS;
+        enemySM = stateMachine;
+        enemyCS = stateMachine.enemyCS;
+        chargerStatsSO = enemyCS.chargerStats;
 
         chargeTargetPoint = new GameObject("ChargePoint").transform;
         chargeTargetPoint.gameObject.hideFlags = HideFlags.HideInHierarchy;
@@ -24,7 +26,7 @@ public class ChargerAttackState : IEnemyStates
 
     public void EnterState()
     {
-        if (EnemySM.currentChargeCooldown <= 0 && !isPreparing)
+        if (chargerStatsSO.chargeRechargeTimer <= 0 && !isPreparing)
             TryCharge();
         else
             ToChaseState();
@@ -39,9 +41,9 @@ public class ChargerAttackState : IEnemyStates
 
     public void UpdateState()
     {
-        if (EnemySM.isCharging)
+        if (chargerStatsSO.isCharging)
         {
-            if (!EnemySM.navMeshAgent.hasPath || EnemySM.navMeshAgent.remainingDistance < 1f)
+            if (!enemySM.nMAgent.hasPath || enemySM.nMAgent.remainingDistance < 1f)
             {
                 EndCharge();
             }
@@ -58,21 +60,21 @@ public class ChargerAttackState : IEnemyStates
     {
         isPreparing = true;
 
-        EnemySM.navMeshAgent.isStopped = true;
-        EnemySM.navMeshAgent.destination = EnemySM.currentPosition.position;
-        EnemySM.animator.SetBool("IsPreparing", true);
+        enemySM.nMAgent.isStopped = true;
+        enemySM.nMAgent.destination = enemySM.transform.position;
+        enemySM.animator.SetBool("IsPreparing", true);
 
-        Vector3 dir = (EnemySM.chaseTarget.position - EnemySM.transform.position).normalized;
-        chargeTargetPoint.position = EnemySM.chaseTarget.position + dir * 20f;
+        Vector3 dir = (enemySM.chaseTarget.position - enemySM.transform.position).normalized;
+        chargeTargetPoint.position = enemySM.chaseTarget.position + dir * 20f;
 
-        EnemySM.transform.forward = dir;
+        enemySM.transform.forward = dir;
 
-        EnemySM.StartCoroutine(PrepareChargeCoroutine());
+        enemySM.StartCoroutine(PrepareChargeCoroutine());
     }
 
     private System.Collections.IEnumerator PrepareChargeCoroutine()
     {
-        float duration = EnemySM.animator.GetCurrentAnimatorStateInfo(0).length;
+        float duration = enemySM.animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(duration);
 
         StartCharge();
@@ -81,23 +83,21 @@ public class ChargerAttackState : IEnemyStates
     private void StartCharge()
     {
         isPreparing = false;
-        EnemySM.isCharging = true;
+        chargerStatsSO.isCharging = true;
 
-        EnemySM.animator.SetBool("IsPreparing", false);
-        EnemySM.animator.SetBool("IsCharging", true);
+        enemySM.animator.SetBool("IsPreparing", false);
+        enemySM.animator.SetBool("IsCharging", true);
 
-        EnemyCS.chargerCollider.enabled = true;
-
-        EnemySM.navMeshAgent.isStopped = false;
-        EnemySM.navMeshAgent.updateRotation = false;
-        EnemySM.navMeshAgent.speed = EnemyCS.chargeSpeed;
-        EnemySM.navMeshAgent.destination = chargeTargetPoint.position;
+        enemySM.nMAgent.isStopped = false;
+        enemySM.nMAgent.updateRotation = false;
+        enemySM.nMAgent.speed = chargerStatsSO.chargeSpeed;
+        enemySM.nMAgent.destination = chargeTargetPoint.position;
     }
 
     private void EndCharge()
     {
-        EnemySM.isCharging = false;
-        EnemySM.currentChargeCooldown = EnemyCS.chargeCooldown;
+        chargerStatsSO.isCharging = false;
+        chargerStatsSO.chargeRechargeTimer = chargerStatsSO.chargeCooldown;
 
         StopAllActions();
         ToChaseState();
@@ -105,27 +105,25 @@ public class ChargerAttackState : IEnemyStates
 
     private void StopAllActions()
     {
-        EnemySM.animator.SetBool("IsPreparing", false);
-        EnemySM.animator.SetBool("IsCharging", false);
+        enemySM.animator.SetBool("IsPreparing", false);
+        enemySM.animator.SetBool("IsCharging", false);
 
-        EnemyCS.chargerCollider.enabled = false;
-
-        EnemySM.navMeshAgent.updateRotation = true;
-        EnemySM.navMeshAgent.isStopped = false;
+        enemySM.nMAgent.updateRotation = true;
+        enemySM.nMAgent.isStopped = false;
     }
 
     // ------------------ TRANSITIONS ------------------ //
 
     private void ToChaseState()
     {
-        EnemySM.ChangeState(EnemySM.chaseState);
+        enemySM.ChangeState(enemySM.chaseState);
     }
 
     // ------------------ COLLISION ------------------ //
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (EnemySM.isCharging && collision.gameObject.CompareTag("Player"))
+        if (chargerStatsSO.isCharging && collision.gameObject.CompareTag("Player"))
             EndCharge();
     }
 

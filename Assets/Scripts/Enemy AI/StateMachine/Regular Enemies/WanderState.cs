@@ -3,19 +3,19 @@ using UnityEngine.AI;
 
 public class WanderState : IEnemyStates
 {
-    private readonly EnemyStateMachine EnemySM;
-    private readonly EnemyCore EnemyCS;
+    private readonly EnemyStateMachine enemySM;
+    private readonly EnemyCore enemyCS;
+    private readonly EnemyCoreStatsSO coreStats;
 
-    private float wanderRadius;
     private float wanderTimer;
     private float timer;
 
-    public WanderState(EnemyStateMachine statePatternEnemy, float radius, float initialWanderTime)
+    public WanderState(EnemyStateMachine stateMachine, float radius, float initialWanderTime)
     {
-        EnemySM = statePatternEnemy;
-        EnemyCS = statePatternEnemy.EnemyCS;
+        enemySM = stateMachine;
+        enemyCS = stateMachine.enemyCS;
+        coreStats = enemyCS.coreStats;
 
-        wanderRadius = radius;
         wanderTimer = initialWanderTime;
         timer = wanderTimer;
     }
@@ -24,112 +24,84 @@ public class WanderState : IEnemyStates
 
     public void EnterState()
     {
-
+        enemySM.nMAgent.isStopped = false;
+        enemySM.nMAgent.speed = coreStats.wanderSpeed;
     }
 
-    public void ExitState()
-    {
-
-    }
+    public void ExitState() { }
 
     // ------------------ UPDATE ------------------ //
 
     public void UpdateState()
     {
-        if (EnemyCS.isBurster)
+        Wander();
+        LookForTarget();
+    }
+
+    // ------------------ WANDER LOGIC ------------------ //
+
+    private void Wander()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= wanderTimer)
         {
-            SeekObjective();
+            Vector3 newPos = RandomNavSphere(enemySM.transform.position, coreStats.wanderRadius);
+            enemySM.nMAgent.SetDestination(newPos);
+
+            timer = 0f;
+            wanderTimer = Random.Range(coreStats.wanderIntervals * 0.5f, coreStats.wanderIntervals * 1.5f);
         }
-        else
+    }
+
+    // ------------------ DETECTION ------------------ //
+
+    private void LookForTarget()
+    {
+        Ray ray = new Ray(enemySM.transform.position + Vector3.up, enemySM.transform.forward);
+
+        Debug.DrawRay(ray.origin, ray.direction * coreStats.sightRange, Color.red);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, coreStats.sightRange))
         {
-            Wander();
-            Look();
+            if (hit.collider.CompareTag("Player"))
+            {
+                enemySM.chaseTarget = hit.transform;
+                ToChaseState();
+            }
         }
     }
 
     // ------------------ TRANSITIONS ------------------ //
 
-    private void ToAttackState()
+    private void ToChaseState()
     {
-        if (EnemyCS.isSpitter)
-            EnemySM.ChangeState(EnemySM.rangedAttackState);
-
-        else if (EnemyCS.isCharger)
-            EnemySM.ChangeState(EnemySM.chargerAttackState);
-
-        else
-            EnemySM.ChangeState(EnemySM.meleeAttackState);
-    }
-
-    // ------------------ WANDER / LOOK LOGIC ------------------ //
-
-    private void Look()
-    {
-        Debug.DrawRay(EnemyCS.modelCenterpoint, EnemySM.transform.forward * EnemyCS.sightRange, Color.red);
-
-        if (Physics.Raycast(EnemyCS.modelCenterpoint, EnemySM.transform.forward, out RaycastHit hit, EnemyCS.sightRange))
-        {
-            if (hit.collider.CompareTag("Player"))
-            {
-                EnemySM.chaseTarget = hit.transform;
-                ToAttackState();
-            }
-        }
-    }
-
-    private void Wander()
-    {
-        EnemySM.navMeshAgent.speed = EnemyCS.wanderSpeed;
-        timer += Time.deltaTime;
-
-        if (timer >= wanderTimer)
-        {
-            Vector3 newPos = RandomNavSphere(EnemySM.transform.position, wanderRadius, -1);
-            EnemySM.navMeshAgent.SetDestination(newPos);
-            timer = 0f;
-
-            wanderTimer = Random.Range(3f, 7f);
-        }
-    }
-
-    private void SeekObjective()
-    {
-        if (EnemySM.bursterTargetPoint != null)
-        {
-            EnemySM.chaseTarget = EnemySM.bursterTargetPoint.transform;
-            ToAttackState();
-        }
+        enemySM.ChangeState(enemySM.chaseState);
     }
 
     // ------------------ UTILITIES ------------------ //
 
-    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    private static Vector3 RandomNavSphere(Vector3 origin, float dist)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist + origin;
-        NavMesh.SamplePosition(randDirection, out NavMeshHit navHit, dist, layermask);
+        NavMesh.SamplePosition(randDirection, out NavMeshHit navHit, dist, NavMesh.AllAreas);
         return navHit.position;
     }
 
-    // ------------------ COLLISIONS ------------------ //
+    // ------------------ COLLISION CALLBACKS ------------------ //
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            EnemySM.chaseTarget = other.transform;
-            EnemySM.ChangeState(EnemySM.chaseState);
-        }
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (EnemyCS.isBurster && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Objective")))
-        {
-            EnemySM.currentState = EnemySM.meleeAttackState;
+            Debug.Log("player entered");
+            enemySM.chaseTarget = other.transform;
+            ToChaseState();
         }
     }
 
     public void OnTriggerExit(Collider other) { }
     public void Ontriggerstay(Collider other) { }
+    public void OnCollisionEnter(Collision collision) { }
     public void OnCollisionEnter(Collider other) { }
 }

@@ -7,13 +7,14 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public EnemyCoreStatsSO coreStats;
     public EnemyMeleeStatsSO meleeStats;
     public EnemyRangedStatsSO rangedStats;
-    public EnemyDetonatorStatsSO detonatorStats;
+    public EnemyDetonatorStatsSO bursterStats;
     public EnemyChargerStatsSO chargerStats;
 
     [Header("References")]
     public Canvas healthbarUI;
     public Image filler;
     public Animator animator;
+    public DamageTriggerHandler damageTrigger;
 
     public float CurrentHealth { get; set; }
     public float MaxHealth => coreStats.maxHealth;
@@ -21,15 +22,18 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
     private GameManager gameManager;
 
-    public GameObject vfxPrefab;
-    public GameObject vfxSpawnlocation;
-
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
         gameManager = GameManager.Instance;
         CurrentHealth = coreStats.maxHealth;
         gameManager.RegisterEnemy(gameObject);
+
+        if (meleeStats && !damageTrigger)
+        {
+            damageTrigger = GetComponentInChildren<DamageTriggerHandler>();
+            damageTrigger.triggerDamage = meleeStats.damage;
+        }
     }
 
     private void Update()
@@ -49,11 +53,10 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        if (detonatorStats != null)
-            Instantiate(detonatorStats.explosionPrefab, transform.position, Quaternion.identity);
+        if (bursterStats != null)
+            Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity);
 
         gameManager.DeregisterEnemy(gameObject);
-        Instantiate(vfxPrefab, vfxSpawnlocation.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

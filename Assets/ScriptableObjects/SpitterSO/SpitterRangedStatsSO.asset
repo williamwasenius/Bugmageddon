@@ -12,15 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182eadaf0256f1244b0ccbd8b68eeba5, type: 3}
   m_Name: SpitterRangedStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangedStatsSO
-  maxHealth: 100
-  armor: 0
-  wanderSpeed: 5
-  chaseSpeed: 10
-  wanderRadius: 10
-  wanderIntervals: 5
-  sightRange: 50
-  detectionRange: 30
-  projectile: {fileID: 3507545866655647117, guid: 1e776bfd74c15f14fa7e0f88aa04de19, type: 3}
+  projectilePrefab: {fileID: 3507545866655647117, guid: 1e776bfd74c15f14fa7e0f88aa04de19, type: 3}
   projectileDamage: 15
   shootRange: 30
   followRange: 50
+  shootClip: {fileID: 7400000, guid: 225cc316ec7792c4482bdface07ea76a, type: 2}

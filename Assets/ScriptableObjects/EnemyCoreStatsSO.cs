@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy/Stats/Core")]
 public class EnemyCoreStatsSO : ScriptableObject
 {
+    public bool isPreplaced = true;
+
     [Header("Defense")]
     public float maxHealth;
     public float armor;

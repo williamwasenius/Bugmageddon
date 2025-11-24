@@ -4,14 +4,17 @@ using System.Collections;
 
 public class RangedAttackState : IEnemyStates
 {
-    private readonly EnemyStateMachine EnemySM;
-    private readonly EnemyCore EnemyCS;
+    private readonly EnemyStateMachine enemySM;
+    private readonly EnemyCore enemy;
+    private readonly EnemyRangedStatsSO rangedStatsSO;
+
     private bool isAttacking;
 
-    public RangedAttackState(EnemyStateMachine EnemyStateMachine)
+    public RangedAttackState(EnemyStateMachine stateMachine)
     {
-        EnemySM = EnemyStateMachine;
-        EnemyCS = EnemyStateMachine.EnemyCS;
+        enemySM = stateMachine;
+        enemy = stateMachine.enemyCS;
+        rangedStatsSO = enemy.rangedStats;
     }
 
     // ----------------------------------- ENTER / EXIT ----------------------------------- //
@@ -30,17 +33,17 @@ public class RangedAttackState : IEnemyStates
 
     public void UpdateState()
     {
-        if (EnemySM.chaseTarget == null)
+        if (enemySM.chaseTarget == null)
         {
             ToWanderState();
             return;
         }
 
-        float distance = Vector3.Distance(EnemySM.transform.position, EnemySM.chaseTarget.position);
-
         RotateTowardsTarget();
 
-        if (distance > EnemyCS.shootRange)
+        float distance = Vector3.Distance(enemySM.transform.position, enemySM.chaseTarget.position);
+
+        if (distance > rangedStatsSO.shootRange && !isAttacking)
         {
             ToChaseState();
         }
@@ -51,23 +54,23 @@ public class RangedAttackState : IEnemyStates
     private void TryAttack()
     {
         if (isAttacking) return;
-        EnemySM.navMeshAgent.isStopped = true;
-        EnemySM.StartCoroutine(AttackRoutine());
+
+        enemySM.nMAgent.isStopped = true;
+        enemySM.StartCoroutine(AttackRoutine());
     }
 
     private IEnumerator AttackRoutine()
     {
         isAttacking = true;
 
-        while (EnemySM.chaseTarget != null &&
-               Vector3.Distance(EnemySM.transform.position, EnemySM.chaseTarget.position) <= EnemyCS.shootRange)
+        while (enemySM.chaseTarget != null &&
+               Vector3.Distance(enemySM.transform.position, enemySM.chaseTarget.position) <= rangedStatsSO.shootRange)
         {
-            EnemySM.animator.SetBool("IsAttacking", true);
+            enemySM.animator.SetBool("IsAttacking", true);
 
-            yield return new WaitForSeconds(EnemyCS.attackSpeed);
+            yield return new WaitForSeconds(rangedStatsSO.ShootDuration);
 
-            EnemySM.animator.SetBool("IsAttacking", false);
-
+            enemySM.animator.SetBool("IsAttacking", false);
         }
 
         ToChaseState();
@@ -75,39 +78,41 @@ public class RangedAttackState : IEnemyStates
 
     private void StopAttack()
     {
-        EnemySM.animator.SetBool("IsAttacking", false);
-        EnemySM.navMeshAgent.isStopped = false;
+        enemySM.animator.SetBool("IsAttacking", false);
+        enemySM.nMAgent.isStopped = false;
         isAttacking = false;
+    }
+
+    // ----------------------------------- ROTATION ----------------------------------- //
+
+    private void RotateTowardsTarget()
+    {
+        Vector3 dir = (enemySM.chaseTarget.position - enemySM.transform.position).normalized;
+        dir.y = 0;
+
+        if (dir != Vector3.zero)
+        {
+            Quaternion rot = Quaternion.LookRotation(dir);
+            enemySM.transform.rotation = Quaternion.Slerp(enemySM.transform.rotation, rot, Time.deltaTime * 7f);
+        }
     }
 
     // ----------------------------------- TRANSITIONS ----------------------------------- //
 
     private void ToChaseState()
     {
-        EnemySM.ChangeState(EnemySM.chaseState);
+        enemySM.ChangeState(enemySM.chaseState);
     }
 
     public void ToWanderState()
     {
-        EnemySM.ChangeState(EnemySM.wanderState);
+        enemySM.ChangeState(enemySM.wanderState);
     }
 
-    // ----------------------------------- ROTATION / EVENTS ----------------------------------- //
-
-    private void RotateTowardsTarget()
-    {
-        Vector3 dir = (EnemySM.chaseTarget.position - EnemySM.transform.position).normalized;
-        if (dir != Vector3.zero)
-        {
-            Quaternion rot = Quaternion.LookRotation(dir);
-            EnemySM.transform.rotation = Quaternion.Slerp(EnemySM.transform.rotation, rot, Time.deltaTime * 5f);
-        }
-    }
-
+    // ----------------------------------- UNUSED CALLBACKS ----------------------------------- //
     public void OnTriggerEnter(Collider other) { }
     public void OnTriggerExit(Collider other) { }
     public void Ontriggerstay(Collider other) { }
     public void OnCollisionEnter(Collision collision) { }
     public void OnCollisionEnter(Collider other) { }
-
 }

@@ -3,21 +3,21 @@ using UnityEngine.AI;
 
 public class ChaseState : IEnemyStates
 {
-    private readonly EnemyStateMachine EnemySM;
-    private readonly EnemyCore EnemyCS;
+    private readonly EnemyStateMachine enemySM;
+    private readonly EnemyCore enemyCS;
 
-    public ChaseState(EnemyStateMachine enemyStateMachine)
+    public ChaseState(EnemyStateMachine stateMachine)
     {
-        EnemySM = enemyStateMachine;
-        EnemyCS = enemyStateMachine.EnemyCS;
+        enemySM = stateMachine;
+        enemyCS = stateMachine.enemyCS;
     }
 
     // ----------------------------------- ENTER / EXIT ----------------------------------- //
 
     public void EnterState()
     {
-        EnemySM.navMeshAgent.isStopped = false;
-        EnemySM.navMeshAgent.speed = EnemyCS.chaseSpeed;
+        enemySM.nMAgent.isStopped = false;
+        enemySM.nMAgent.speed = enemyCS.coreStats.chaseSpeed;
     }
 
     public void ExitState() { }
@@ -26,72 +26,55 @@ public class ChaseState : IEnemyStates
 
     public void UpdateState()
     {
-        if (EnemySM.chaseTarget == null)
+        if (enemySM.chaseTarget == null)
         {
             ToWanderState();
             return;
         }
 
         UpdateMovement();
-        CheckAttackRange();
+        TryAttack();
     }
 
     // ----------------------------------- CHASE LOGIC ----------------------------------- //
 
     private void UpdateMovement()
     {
-        EnemySM.navMeshAgent.speed = EnemyCS.chaseSpeed;
-        EnemySM.navMeshAgent.isStopped = false;
+        enemySM.nMAgent.speed = enemyCS.coreStats.chaseSpeed;
+        enemySM.nMAgent.isStopped = false;
+        enemySM.nMAgent.destination = enemySM.chaseTarget.position;
+    }
 
-        if (EnemyCS.isBurster)
+    private void TryAttack()
+    {
+        float distance = Vector3.Distance(enemySM.transform.position, enemySM.chaseTarget.position);
+
+        if (enemyCS.chargerStats && CanCharge(distance))
         {
-            EnemySM.navMeshAgent.destination = EnemySM.bursterTargetPoint.transform.position;
+            enemySM.ChangeState(enemySM.chargerState);
         }
-        else
+        else if (enemyCS.rangedStats && distance <= enemyCS.rangedStats.shootRange)
         {
-            EnemySM.navMeshAgent.destination = EnemySM.chaseTarget.position;
+            enemySM.ChangeState(enemySM.rangedState);
+        }
+        else if (enemyCS.meleeStats && distance <= enemyCS.meleeStats.strikeRange)
+        {
+            enemySM.ChangeState(enemySM.meleeState);
         }
     }
 
-    private void CheckAttackRange()
+    private bool CanCharge(float distance)
     {
-        float distance = Vector3.Distance(EnemySM.transform.position, EnemySM.chaseTarget.position);
-
-        if (EnemyCS.isSpitter && distance <= EnemyCS.shootRange)
-            {
-                ToAttackState("Spitter");
-            }
-        else if (EnemyCS.isCharger && EnemyCS.minChargeRange <= distance && distance <= EnemyCS.chargeRange && EnemySM.currentChargeCooldown <= 0) 
-            {
-                ToAttackState("Charger");
-            }
-        else if (!EnemyCS.isSpitter && distance <= EnemyCS.strikeRange)
-            {
-                ToAttackState("Other");
-            }
+        return distance >= enemyCS.chargerStats.minChargeRange &&
+               distance <= enemyCS.chargerStats.chargeRange &&
+               enemyCS.chargerStats.chargeRechargeTimer <= 0;
     }
 
     // ----------------------------------- TRANSITIONS ----------------------------------- //
 
-    public void ToAttackState(string unit)
-    {
-        if (unit == "Spitter")
-        {
-            EnemySM.ChangeState(EnemySM.rangedAttackState);
-        }
-        else if (unit == "Charger")
-        {
-            EnemySM.ChangeState(EnemySM.chargerAttackState);
-        }
-        else
-        {
-            EnemySM.ChangeState(EnemySM.meleeAttackState);
-        }
-    }
-
     public void ToWanderState()
     {
-        EnemySM.ChangeState(EnemySM.wanderState);
+        enemySM.ChangeState(enemySM.wanderState);
     }
 
     // ----------------------------------- COLLISIONS ----------------------------------- //
