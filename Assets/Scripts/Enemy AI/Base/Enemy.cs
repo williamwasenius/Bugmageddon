@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour, IDamageable
     public GameManager gameManager;
     public EnemyStateMachine stateMachine;
 
+    public GameObject vfxPrefab;
+    public GameObject vfxSpawnlocation;
+
     void Start()
     {
         gameManager = GameManager.Instance;
@@ -54,6 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
             GameObject explosion = Instantiate(stateMachine.explosion, transform.position, Quaternion.identity);
         }
         gameManager.DeregisterEnemy(gameObject);
+        Instantiate(vfxPrefab, vfxSpawnlocation.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
