@@ -21,6 +21,9 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
     private GameManager gameManager;
 
+    public GameObject vfxPrefab;
+    public GameObject vfxSpawnlocation;
+
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -50,6 +53,7 @@ public class EnemyCore : MonoBehaviour, IDamageable
             Instantiate(detonatorStats.explosionPrefab, transform.position, Quaternion.identity);
 
         gameManager.DeregisterEnemy(gameObject);
+        Instantiate(vfxPrefab, vfxSpawnlocation.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
