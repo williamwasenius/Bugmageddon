@@ -14,7 +14,7 @@ public class BossSummonGuardsAbility : IBossStates
     public void EnterState()
     {
         BossSM.callGuardsRechargeTime = BossSM.callGuardsCooldown;
-        SummonGuards();
+        BossSM.StartCoroutine(SummonGuards());
         BossSM.animator.SetBool("IsRoaring", true);
     }
 
@@ -40,12 +40,15 @@ public class BossSummonGuardsAbility : IBossStates
     private IEnumerator SummonGuards()
     {
         float duration = BossSM.animator.GetCurrentAnimatorStateInfo(0).length;
-        BossSM.SummonGuards();
+        BossEvents.OnQueenRoar?.Invoke();
+        Debug.Log("Help called");
         yield return new WaitForSeconds(duration);
         BossSM.animator.SetBool("IsRoaring", false);
 
         BossSM.ChangeState(BossSM.phase1);
 
     }
+
+
 
 }

@@ -8,11 +8,13 @@ public class BossStateMachine : MonoBehaviour
 {
     [Header("General Data")]
     public GameObject chaseTarget;
-    public int currentPhaseINT;
+    public int currentPhaseINT = 1;
 
     [Header("Script References")]
     public EnemyCore BossCS;
-    public EnemyAttackTriggerActivator enemyAttackTriggerActivator;
+    public EnemyCoreStatsSO BossCSSO;
+    public EnemyMeleeStatsSO BossMSSO;
+    public AttackTriggerActivator AttackTriggerActivator;
 
     [Header("Component References")]
     public Animator animator;
@@ -21,8 +23,6 @@ public class BossStateMachine : MonoBehaviour
     public GameObject armAttack;
 
     [Header("Summon Guard Ability")]
-    public GameObject[] guards;
-    public GameObject EliteGuards;
     public float callGuardsCooldown = 30;
     public float callGuardsRechargeTime = 0;
 
@@ -58,7 +58,20 @@ public class BossStateMachine : MonoBehaviour
     // Unity Methods
     private void Awake()
     {
+
+    }
+
+    private void Start()
+    {
+        BossCS = GetComponent<EnemyCore>();
+        BossCSSO = BossCS.coreStats;
+        BossMSSO = BossCS.meleeStats;
+        animator = GetComponentInChildren<Animator>();
+        chaseTarget = GameObject.FindGameObjectWithTag("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = BossCS.coreStats.chaseSpeed;
+        chaseTargetPosition = chaseTarget.transform;
+        currentPosition = BossCS.transform;
 
         phase1 = new BossPhase1(this);
         phase2 = new BossPhase2(this);
@@ -66,15 +79,7 @@ public class BossStateMachine : MonoBehaviour
 
         bossSummonGuardsAbility = new BossSummonGuardsAbility(this);
         bossArmAttack = new BossArmAttack(this);
-        bossTailAttack = new BossTailAttack(this); 
-    }
-
-    private void Start()
-    {
-        chaseTarget = GameObject.FindGameObjectWithTag("Player");
-        navMeshAgent.speed = BossCS.coreStats.chaseSpeed;
-        chaseTargetPosition = chaseTarget.transform;
-        currentPosition = BossCS.transform;
+        bossTailAttack = new BossTailAttack(this);
 
         currentState = phase1;
         currentPhaseINT = 1;
@@ -92,6 +97,16 @@ public class BossStateMachine : MonoBehaviour
         currentState.UpdateState();
         velocity = navMeshAgent.velocity;
         AbilityCooldown();
+
+        if (BossCS.CurrentHealth <= (BossCSSO.maxHealth / 3) * 2)
+        {
+            Phase2();
+        }
+        else if (BossCS.CurrentHealth <= BossCSSO.maxHealth / 3)
+        {
+            Phase3();
+        }
+
     }
 
     public void ChangeState(IBossStates newState)
@@ -122,28 +137,32 @@ public class BossStateMachine : MonoBehaviour
 
     }
 
-    public void SummonGuards()
-    {
-        int randomIndex = Random.Range(0, guards.Length);
-        GameObject enemyPrefab = guards[randomIndex];
-        GameObject spawnedEnemy = null;
-
-        if (currentPhaseINT == 1)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                spawnedEnemy = Instantiate(enemyPrefab, currentPosition.position + spawnOffset, currentPosition.rotation);
-            }
-        }
-    }
-    private void CheckAttackRange(IBossStates toAttackState)
+    public void CheckAttackRange()
     {
         float distance = Vector3.Distance(transform.position, chaseTargetPosition.position);
 
-       if (distance <= BossCS.meleeStats.strikeRange)
+        if (distance <= BossCS.meleeStats.strikeRange)
         {
-
+            ChangeState(bossArmAttack);
+        }
+        else
+        {
+            ChaseTarget();
         }
     }
+    public void ChaseTarget()
+    {
+        navMeshAgent.destination = chaseTargetPosition.position;
+    }
+
+    public void Phase2()
+    {
+        currentPhaseINT = 2;
+    }
+
+    public void Phase3()
+    {
+        currentPhaseINT = 3;
+    }
+
 }

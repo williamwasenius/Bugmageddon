@@ -14,20 +14,29 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public Canvas healthbarUI;
     public Image filler;
     public Animator animator;
-    public DamageTriggerHandler damageTrigger;
+    private DamageTriggerHandler damageTrigger;
 
     public float CurrentHealth { get; set; }
     public float MaxHealth => coreStats.maxHealth;
     public float Armor => coreStats.armor;
 
-    private GameManager gameManager;
+    private EntityManagerScript entityManagerScript;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        gameManager = GameManager.Instance;
+
+        GameObject managerObj = GameObject.FindGameObjectWithTag("MissionHandler");
+        if (managerObj != null)
+        {
+            entityManagerScript = managerObj.GetComponent<EntityManagerScript>();
+            if (entityManagerScript != null)
+            {
+                entityManagerScript.RegisterEnemy(gameObject);
+            }
+        }
+
         CurrentHealth = coreStats.maxHealth;
-        gameManager.RegisterEnemy(gameObject);
 
         if (meleeStats && !damageTrigger)
         {
@@ -56,7 +65,7 @@ public class EnemyCore : MonoBehaviour, IDamageable
         if (bursterStats != null)
             Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity);
 
-        gameManager.DeregisterEnemy(gameObject);
+        entityManagerScript.DeregisterEnemy(gameObject);
         Destroy(gameObject);
     }
 }

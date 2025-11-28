@@ -27,8 +27,6 @@ public class EnemySpawner : MonoBehaviour, IDamageable
     public Image filler;
 
     // Private Variables
-    private int enemiesRemaining = 0;
-    private GameManager gameManager;
     public GameObject player;
     private float nextSpawnTime;
 
@@ -36,26 +34,16 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
     void Start()
     {
-
-        gameManager = GameManager.Instance;
+        player = GameObject.FindGameObjectWithTag("Player");
         CurrentHealth = maxHealth;
 
     }
 
     void FixedUpdate()
     {
-        if (gameManager.isLoading)
-        { return; }
-
-
-        if (IsPlayerWithinRadius())
+        if (IsPlayerWithinRadius() && Time.time >= nextSpawnTime)
         {
-            if (Time.time >= nextSpawnTime && specializedSpawner)
-            {
-                StartCoroutine(SpawnEnemy());
-                nextSpawnTime = Time.time + spawningFrequency;
-            }
-            else if(Time.time >= nextSpawnTime && gameManager.enemiesInScene.Count < spawnLimit)
+            if (EntityManagerScript.Instance.enemiesInScene.Count < spawnLimit || specializedSpawner)
             {
                 StartCoroutine(SpawnEnemy());
                 nextSpawnTime = Time.time + spawningFrequency;
@@ -160,6 +148,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
         if (spawnedEnemy != null)
         {
             spawnedEnemy.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
+            EntityManagerScript.Instance.RegisterEnemy(spawnedEnemy);
         }
 
         yield return null;

@@ -32,36 +32,27 @@ public class BossPhase1 : IBossStates
 
     public void UpdateState()
     {
-        if (BossSM.tailAttackRechargeTime <= 0)
+        if (BossSM.animator.GetBool("IsWalking") && !BossSM.animator.GetBool("IsRoaring"))
+        {
+            return;
+        }
+
+        else if (BossSM.tailAttackRechargeTime <= 0)
         {
             BossSM.ChangeState(BossSM.bossTailAttack);
 
         }
+        else if (BossSM.currentPhaseINT == 2 && BossSM.callGuardsRechargeTime <= 0)
+        {
+            BossSM.ChangeState(BossSM.bossSummonGuardsAbility);
+        }
         else
         {
-            CheckAttackRange();
+            BossSM.CheckAttackRange();
 
             BossSM.animator.SetBool("IsMoving", BossSM.velocity.magnitude >= 0.1f);
         }
 
-    }
-
-    public void CheckAttackRange()
-    {
-        float distance = Vector3.Distance(BossSM.transform.position, BossSM.chaseTargetPosition.position);
-
-        if (distance <= BossCS.meleeStats.strikeRange)
-        {
-            BossSM.ChangeState(BossSM.bossArmAttack);
-        }
-        else
-        {
-            ChaseTarget();
-        }
-    }
-    public void ChaseTarget()
-    {
-        BossSM.navMeshAgent.destination = BossSM.chaseTargetPosition.position;
     }
 
 }

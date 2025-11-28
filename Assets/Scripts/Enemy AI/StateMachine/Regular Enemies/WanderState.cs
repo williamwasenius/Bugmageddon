@@ -94,7 +94,7 @@ public class WanderState : IEnemyStates
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("player entered");
+            Debug.Log("Player entered");
             enemySM.chaseTarget = other.transform;
             ToChaseState();
         }

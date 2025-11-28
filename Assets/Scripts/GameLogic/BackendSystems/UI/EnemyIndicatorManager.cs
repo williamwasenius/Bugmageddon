@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class EnemyIndicatorManager : MonoBehaviour
 {
-    [Header("Indicator Settings")]
+    /*[Header("Indicator Settings")]
     public RectTransform canvasTransform;
     public GameObject arrowPrefab;
     public float indicatorRadius = 200f;
@@ -135,5 +135,5 @@ public class EnemyIndicatorManager : MonoBehaviour
             arrowPool.Add(kvp.Value);
         }
         activeIndicators.Clear();
-    }
+    }*/
 }

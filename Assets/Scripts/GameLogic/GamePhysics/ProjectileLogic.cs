@@ -46,7 +46,7 @@ public class ProjectileLogic : MonoBehaviour
         }
         else
         {
-            IDamageable targetDamageable = other.gameObject.GetComponent<IDamageable>();
+            IDamageable targetDamageable = other.gameObject.GetComponentInParent<IDamageable>();
             if (targetDamageable != null)
             {
                 targetDamageable.TakeDamage(damage - targetDamageable.Armor);

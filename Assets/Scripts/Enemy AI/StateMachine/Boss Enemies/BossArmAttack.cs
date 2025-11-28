@@ -14,10 +14,12 @@ public class BossArmAttack : IBossStates
     {
         Debug.Log("arm attack state entered");
         BossSM.StartCoroutine(ArmAttack());
+        BossSM.animator.SetBool("IsMoving", false);
     }
 
     public void ExitState()
     {
+
     }
 
     public void UpdateState()
@@ -35,7 +37,6 @@ public class BossArmAttack : IBossStates
         Debug.Log("Attack end");
 
         BossSM.ChangeState(BossSM.phase1);
-
     }
 
 }

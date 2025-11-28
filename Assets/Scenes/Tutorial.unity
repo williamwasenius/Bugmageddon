@@ -4660,6 +4660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5391704040173477877, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 1206505262}
     - target: {fileID: 9164618450655417267, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
       propertyPath: healthBar
       value: 
@@ -4676,12 +4680,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &254692931 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7301460136106133647, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4041898195123033431, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
   m_PrefabInstance: {fileID: 254692929}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &254692932 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 490093296402249717, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8948078234049651765, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
   m_PrefabInstance: {fileID: 254692929}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &256555765 stripped
@@ -17235,6 +17239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1206505262 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4328583382109144617, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+  m_PrefabInstance: {fileID: 1206505257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1210698634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24809,9 +24818,9 @@ GameObject:
   - component: {fileID: 1753671249}
   - component: {fileID: 1753671248}
   - component: {fileID: 1753671247}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

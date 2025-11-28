@@ -15,6 +15,11 @@ public class Mission1Script : MonoBehaviour
         UpdateEnemyCount();
     }
 
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     public void Update()
     {
         enemyCounter.text = enemiesRemaining.ToString();
@@ -38,9 +43,8 @@ public class Mission1Script : MonoBehaviour
 
     private void UpdateEnemyCount()
     {
-        enemiesRemaining = GameManager.Instance.enemiesInScene.Count;
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        enemiesRemaining += spawners.Length;
+        enemiesRemaining = EntityManagerScript.Instance.enemiesInScene.Count;
+        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
     private void MissionComplete()

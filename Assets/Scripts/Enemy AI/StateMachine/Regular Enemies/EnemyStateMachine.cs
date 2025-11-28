@@ -4,7 +4,6 @@ using UnityEngine.AI;
 public class EnemyStateMachine : MonoBehaviour
 {
     public EnemyCore enemyCS;
-    public EnemyCoreStatsSO coreStats;
     public Animator animator;
     public NavMeshAgent nMAgent;
 
@@ -42,7 +41,10 @@ public class EnemyStateMachine : MonoBehaviour
         {
             ChangeState(bursterState);
         }
-        ChangeState(wanderState);
+        else
+        {
+            ChangeState(wanderState);
+        }
     }
 
     public void ChangeState(IEnemyStates newState)
@@ -65,5 +67,14 @@ public class EnemyStateMachine : MonoBehaviour
             }
         }
     }
-
+    public void OnTriggerEnter(Collider other)
+    {
+        currentState.OnTriggerEnter(other);
+    }
+    public void OnTriggerExit(Collider other) { }
+    public void Ontriggerstay(Collider other) { }
+    public void OnCollisionEnter(Collision collision) 
+    { 
+        currentState.OnCollisionEnter(collision.collider);
+    }
 }

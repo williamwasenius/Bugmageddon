@@ -58,7 +58,7 @@ public class DestructibleScript : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         if (NaturalObject || fragile)
         {

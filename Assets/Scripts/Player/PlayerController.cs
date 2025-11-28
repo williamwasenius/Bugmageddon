@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+
 interface IInteractable
 {
     void Activate();
 }
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -13,6 +15,11 @@ public class PlayerController : MonoBehaviour
     public float deceleration = 10f;
     public float legRotationSpeed = 10f;
     private Vector3 currentVelocity;
+
+    [Header("Ground Settings")]
+    public LayerMask groundMask;  
+    public float groundRayDistance = 3f;
+    public Transform groundRayOriginPoint;
 
     [Header("Body Parts")]
     public Transform legs;
@@ -32,8 +39,8 @@ public class PlayerController : MonoBehaviour
     public float abilityDuration = 12f;
     public bool abilityActive = false;
 
-    private bool isShooting = false;
     private bool isRunning = false;
+    private bool isAccelerated = false;
 
     private Rigidbody rigidBody;
     [SerializeField] private Animator animator;
@@ -41,7 +48,6 @@ public class PlayerController : MonoBehaviour
 
     private WeaponHandler weapon1Handler;
     private WeaponHandler weapon2Handler;
-
     private IInteractable currentInteractable;
 
     void Start()
@@ -53,9 +59,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
-        {
             currentInteractable.Activate();
-        }
+
+        if (animator.GetBool("IsStomping"))
+            return;
+
+        if (Input.GetKeyDown(KeyCode.F) && !isAccelerated)
+            StartCoroutine(StompRoutine());
 
         HandleShooting();
         HandleRun();
@@ -64,16 +74,51 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (animator.GetBool("IsStomping"))
+        {
+            rigidBody.linearVelocity = Vector3.zero;
+            return;
+        }
+
         HandleMovement();
+
+        LockToGround();
     }
 
-    public void AssignWeapon(WeaponHandler newWeapon)
+    private void LockToGround()
     {
-        if (weapon1Handler == null)
-            weapon1Handler = newWeapon;
-        else if (weapon2Handler == null)
-            weapon2Handler = newWeapon;
+        Vector3 origin = groundRayOriginPoint.position + Vector3.up * 0.5f;
+        Debug.DrawRay(origin, transform.up * -groundRayDistance, Color.red);
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, groundRayDistance, groundMask))
+        {
+            Vector3 pos = rigidBody.position;
+            pos.y = hit.point.y;
+            rigidBody.position = pos;
+        }
+
+        Vector3 v = rigidBody.linearVelocity;
+        v.y = 0;
+        rigidBody.linearVelocity = v;
     }
+
+    private IEnumerator StompRoutine()
+    {
+        rigidBody.linearVelocity = Vector3.zero;
+        currentVelocity = Vector3.zero;
+        animator.SetBool("IsStomping", true);
+
+        float stompTime = 1f;
+        yield return new WaitForSeconds(stompTime);
+
+        animator.SetBool("IsStomping", false);
+    }
+
+    public void AssignWeapon(WeaponHandler newWeapon) 
+    { 
+        if (weapon1Handler == null) 
+            weapon1Handler = newWeapon; 
+        else if (weapon2Handler == null) 
+            weapon2Handler = newWeapon; }
 
     private void HandleShooting()
     {
@@ -81,40 +126,29 @@ public class PlayerController : MonoBehaviour
         {
             if (weapon1Handler.chargedWeapon)
             {
-                if (Input.GetKey(KeyCode.Mouse0))
-                    weapon1Handler.StartCharging();
-
-                if (Input.GetKeyUp(KeyCode.Mouse0))
-                    weapon1Handler.ReleaseShot();
+                if (Input.GetKey(KeyCode.Mouse0)) weapon1Handler.StartCharging();
+                if (Input.GetKeyUp(KeyCode.Mouse0)) weapon1Handler.ReleaseShot();
             }
-            else
-            {
-                if (Input.GetKey(KeyCode.Mouse0))
-                    weapon1Handler.AutoFire();
-            }
+            else if (Input.GetKey(KeyCode.Mouse0))
+                weapon1Handler.AutoFire();
         }
 
         if (weapon2Handler != null)
         {
             if (weapon2Handler.chargedWeapon)
             {
-                if (Input.GetKey(KeyCode.Mouse1))
-                    weapon2Handler.StartCharging();
-
-                if (Input.GetKeyUp(KeyCode.Mouse1))
-                    weapon2Handler.ReleaseShot();
+                if (Input.GetKey(KeyCode.Mouse1)) weapon2Handler.StartCharging();
+                if (Input.GetKeyUp(KeyCode.Mouse1)) weapon2Handler.ReleaseShot();
             }
-            else
-            {
-                if (Input.GetKey(KeyCode.Mouse1))
-                    weapon2Handler.AutoFire();
-            }
+            else if (Input.GetKey(KeyCode.Mouse1))
+                weapon2Handler.AutoFire();
         }
     }
 
     private void HandleRun()
     {
         isRunning = Input.GetKey(KeyCode.LeftShift);
+        animator.SetBool("IsRunning", isRunning);
     }
 
     public void Ability()
@@ -123,11 +157,11 @@ public class PlayerController : MonoBehaviour
         {
             abilityActive = true;
             abilityCooldownCounter = Time.time + abilityCooldown;
-            StartCoroutine(DeactivateAbilityAfterDuration());
+            StartCoroutine(DeactivateAbility());
         }
     }
 
-    private IEnumerator DeactivateAbilityAfterDuration()
+    private IEnumerator DeactivateAbility()
     {
         yield return new WaitForSeconds(abilityDuration);
         abilityActive = false;
@@ -137,8 +171,8 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
         Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
+
         float targetSpeed = isRunning ? runSpeed : speed;
 
         if (targetDirection.magnitude > 0.1f)
@@ -148,7 +182,6 @@ public class PlayerController : MonoBehaviour
                 targetDirection * targetSpeed,
                 acceleration * Time.fixedDeltaTime
             );
-
             animator.SetBool("IsWalking", true);
         }
         else
@@ -158,7 +191,6 @@ public class PlayerController : MonoBehaviour
                 Vector3.zero,
                 deceleration * Time.fixedDeltaTime
             );
-
             animator.SetBool("IsWalking", false);
         }
 
@@ -166,6 +198,8 @@ public class PlayerController : MonoBehaviour
 
         float currentSpeed = new Vector3(rigidBody.linearVelocity.x, 0, rigidBody.linearVelocity.z).magnitude;
         animator.SetFloat("MoveSpeed", currentSpeed);
+
+        isAccelerated = currentSpeed > speed;
 
         HandleLegRotation(targetDirection);
         RotateTowardsMouse();
@@ -196,23 +230,16 @@ public class PlayerController : MonoBehaviour
 
             Vector3 aimDir1 = (aimTarget - weapon1.transform.position).normalized;
             float angle1 = Vector3.Angle(forward, aimDir1);
-            if (angle1 > maxAngle)
-                aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
+            if (angle1 > maxAngle) aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
 
             Vector3 aimDir2 = (aimTarget - weapon2.transform.position).normalized;
             float angle2 = Vector3.Angle(forward, aimDir2);
-            if (angle2 > maxAngle)
-                aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
+            if (angle2 > maxAngle) aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
 
-            Quaternion rot1 = Quaternion.LookRotation(aimDir1);
-            Quaternion rot2 = Quaternion.LookRotation(aimDir2);
-
-            weapon1.transform.rotation = Quaternion.Slerp( weapon1.transform.rotation,rot1,wpnRotationSpeed * Time.deltaTime);
-
-            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, rot2, wpnRotationSpeed * Time.deltaTime);
+            weapon1.transform.rotation = Quaternion.Slerp(weapon1.transform.rotation, Quaternion.LookRotation(aimDir1), wpnRotationSpeed * Time.deltaTime);
+            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, Quaternion.LookRotation(aimDir2), wpnRotationSpeed * Time.deltaTime);
         }
     }
-
 
     void OnTriggerEnter(Collider other)
     {
@@ -222,9 +249,6 @@ public class PlayerController : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<IInteractable>() == currentInteractable)
-        {
             currentInteractable = null;
-        }
     }
-
 }

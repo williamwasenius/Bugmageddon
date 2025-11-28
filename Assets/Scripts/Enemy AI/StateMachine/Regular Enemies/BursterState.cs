@@ -26,7 +26,7 @@ public class BursterState : IEnemyStates
 
     public void UpdateState()
     {
-        SeekObjective();
+
     }
 
     // -------------------------------- BURSTER SPECIFIC LOGIC -------------------------------- //
@@ -38,16 +38,13 @@ public class BursterState : IEnemyStates
             if (targetPoint == null)
                 targetPoint = GameObject.FindGameObjectWithTag("Player");
 
-            if (targetPoint != null)
-                enemySM.chaseTarget = targetPoint.transform;
+            enemySM.chaseTarget = targetPoint.transform;
+            enemySM.nMAgent.destination = enemySM.chaseTarget.position;
     }
 
     // ----------------------------------- TRANSITIONS ----------------------------------- //
 
-    public void ToWanderState()
-    {
-        enemySM.ChangeState(enemySM.wanderState);
-    }
+
 
     // ----------------------------------- COLLISIONS ----------------------------------- //
     public void OnTriggerEnter(Collider other) { }
