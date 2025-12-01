@@ -82,10 +82,10 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement();
 
-        LockToGround();
+        //LockToGround();
     }
 
-    private void LockToGround()
+    /*private void LockToGround()
     {
         Vector3 origin = groundRayOriginPoint.position + Vector3.up * 0.5f;
         Debug.DrawRay(origin, transform.up * -groundRayDistance, Color.red);
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         Vector3 v = rigidBody.linearVelocity;
         v.y = 0;
         rigidBody.linearVelocity = v;
-    }
+    }*/
 
     private IEnumerator StompRoutine()
     {
