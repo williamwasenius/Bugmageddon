@@ -28,7 +28,7 @@ public class Mission3Script : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI objectiveText;
-    public Image finalGeneratorHealthBar;
+    public GameObject finalWaveUI;
 
     [Header("Settings")]
     public float defendDuration = 60f;
@@ -119,7 +119,7 @@ public class Mission3Script : MonoBehaviour
         currentState = MissionState.FinalDefense;
 
         currentReactor = finalGenerator.reactor;
-        finalGeneratorHealthBar.gameObject.SetActive(true);
+        finalWaveUI.gameObject.SetActive(true);
        // currentReactorText = finalGenerator.uiText;
 
        // finalGenerator.uiText.color = Color.cyan;

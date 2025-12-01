@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         HandleShooting();
         HandleRun();
-        Ability();
+        //Ability();
     }
 
     void FixedUpdate()
