@@ -26,10 +26,11 @@ public class BursterState : IEnemyStates
 
     public void UpdateState()
     {
-
+        if (enemySM.chaseTarget != null)
+            enemySM.nMAgent.SetDestination(enemySM.chaseTarget.position);
     }
 
-    // -------------------------------- BURSTER SPECIFIC LOGIC -------------------------------- //
+    // -------------------------------- STATE SPECIFIC LOGIC -------------------------------- //
 
     private void SeekObjective()
     {
@@ -54,7 +55,7 @@ public class BursterState : IEnemyStates
     {
         if (other.CompareTag("Objective") || other.CompareTag("Player"))
         {
-            enemyCS.Die();
+            enemyCS.StartCoroutine(enemyCS.Die());
         }
     }
 }

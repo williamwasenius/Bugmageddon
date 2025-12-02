@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyChargerStatsSO : ScriptableObject
 {
     [Header("Charge Damage")]
-    public float damageMultiplier;
+    public float chargeDamage;
 
     [Header("Charge Distances")]
     public float chargeSpeed;

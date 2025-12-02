@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 currentVelocity;
 
     [Header("Ground Settings")]
-    public LayerMask groundMask;  
+    public LayerMask groundMask;
     public float groundRayDistance = 3f;
     public Transform groundRayOriginPoint;
 
@@ -29,9 +29,12 @@ public class PlayerController : MonoBehaviour
     [Header("Weapons")]
     public GameObject weapon1;
     public GameObject weapon2;
-    public bool armLock = false;
     public float wpnMaxRotation = 20f;
     public float wpnRotationSpeed = 10f;
+    public bool armLock = false;
+
+    private WeaponHandler weapon1Handler;
+    private WeaponHandler weapon2Handler;
 
     [Header("Ability")]
     public float abilityCooldown = 30f;
@@ -46,8 +49,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     private Camera playerCamera;
 
-    private WeaponHandler weapon1Handler;
-    private WeaponHandler weapon2Handler;
     private IInteractable currentInteractable;
 
     void Start()
@@ -58,18 +59,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
             currentInteractable.Activate();
 
         if (animator.GetBool("IsStomping"))
             return;
 
-        if (Input.GetKeyDown(KeyCode.F) && !isAccelerated)
+        if (Input.GetKeyDown(KeyCode.F))
             StartCoroutine(StompRoutine());
 
         HandleShooting();
         HandleRun();
-        //Ability();
     }
 
     void FixedUpdate()
@@ -81,25 +82,7 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleMovement();
-
-        //LockToGround();
     }
-
-    /*private void LockToGround()
-    {
-        Vector3 origin = groundRayOriginPoint.position + Vector3.up * 0.5f;
-        Debug.DrawRay(origin, transform.up * -groundRayDistance, Color.red);
-        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, groundRayDistance, groundMask))
-        {
-            Vector3 pos = rigidBody.position;
-            pos.y = hit.point.y;
-            rigidBody.position = pos;
-        }
-
-        Vector3 v = rigidBody.linearVelocity;
-        v.y = 0;
-        rigidBody.linearVelocity = v;
-    }*/
 
     private IEnumerator StompRoutine()
     {
@@ -107,41 +90,51 @@ public class PlayerController : MonoBehaviour
         currentVelocity = Vector3.zero;
         animator.SetBool("IsStomping", true);
 
-        float stompTime = 1f;
-        yield return new WaitForSeconds(stompTime);
+        yield return new WaitForSeconds(1f);
 
         animator.SetBool("IsStomping", false);
     }
 
-    public void AssignWeapon(WeaponHandler newWeapon) 
-    { 
-        if (weapon1Handler == null) 
-            weapon1Handler = newWeapon; 
-        else if (weapon2Handler == null) 
-            weapon2Handler = newWeapon; }
-
     private void HandleShooting()
     {
+        // LEFT MOUSE – Weapon 1
         if (weapon1Handler != null)
         {
-            if (weapon1Handler.chargedWeapon)
+            var stats = weapon1Handler.weaponStats;
+
+            if (stats.chargedWeapon)
             {
-                if (Input.GetKey(KeyCode.Mouse0)) weapon1Handler.StartCharging();
-                if (Input.GetKeyUp(KeyCode.Mouse0)) weapon1Handler.ReleaseShot();
+                if (Input.GetKey(KeyCode.Mouse0))
+                    weapon1Handler.TryFire();
+
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                    weapon1Handler.ReleaseChargeShot();
             }
             else if (Input.GetKey(KeyCode.Mouse0))
-                weapon1Handler.AutoFire();
+            {
+                Debug.Log("attempting shot weapon1");
+                weapon1Handler.TryFire();
+            }
         }
 
+        // RIGHT MOUSE – Weapon 2
         if (weapon2Handler != null)
         {
-            if (weapon2Handler.chargedWeapon)
+            var stats = weapon2Handler.weaponStats;
+
+            if (stats.chargedWeapon)
             {
-                if (Input.GetKey(KeyCode.Mouse1)) weapon2Handler.StartCharging();
-                if (Input.GetKeyUp(KeyCode.Mouse1)) weapon2Handler.ReleaseShot();
+                if (Input.GetKey(KeyCode.Mouse1))
+                    weapon2Handler.TryFire();
+
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                    weapon2Handler.ReleaseChargeShot();
             }
             else if (Input.GetKey(KeyCode.Mouse1))
-                weapon2Handler.AutoFire();
+            {
+                Debug.Log("attempting shot weapon2");
+                weapon2Handler.TryFire();
+            }
         }
     }
 
@@ -250,5 +243,16 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<IInteractable>() == currentInteractable)
             currentInteractable = null;
+    }
+    public void AssignWeapon(WeaponHandler newWeapon)
+    {
+        if (weapon1Handler == null)
+        {
+            weapon1Handler = newWeapon;
+        }
+        else if (weapon2Handler == null)
+        {
+            weapon2Handler = newWeapon;
+        }
     }
 }

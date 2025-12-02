@@ -18,4 +18,8 @@ public class EnemyCoreStatsSO : ScriptableObject
     [Header("Detection")]
     public float sightRange;
     public float detectionRange;
+
+    [Header("DeathAnimation")]
+    public AnimationClip deathClip;
+    public float deathDuration => deathClip != null ? deathClip.length : 0f;
 }

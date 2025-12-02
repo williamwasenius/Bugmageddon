@@ -3,112 +3,157 @@ using UnityEngine.VFX;
 
 public class WeaponHandler : MonoBehaviour
 {
-    private PlayerController playerController;
-
-    [Header("Related Objects")]
-    public GameObject projectile;
+    [Header("Weapon Information")]
+    public WeaponStatsSO weaponStats;
     public Transform firePoint;
     public Transform barrel;
-    public VisualEffect muzzleFlash;
+    private VisualEffect firePointVFX;
 
-    [Header("Weapon Statistics")]
-    public float weaponFireRate = 0.2f;
-    private float cooldownCounter = 0;
+    private bool isFiring;
 
-    [Header("Weapon properties")]
-    public AudioSource shootSound;
-    public AudioSource chargeSound;
+    private float cooldownTimer = 0f;
+    private AudioSource source;
 
-    public bool rotatingBarrel = false;
-    public int rotationSpeed;
+    [Header("Charge Weapon Specific")]
+    public VisualEffect chargeProgressVFX;
+    private float chargeProgress = 0f;
+    private bool isCharging = false;
+    private bool isCharged = false;
 
-    public bool chargedWeapon = false;
-    public bool isCharging = false;
-    public bool fullyCharged = false;
-    public float totalChargeTime;
-    public float currentCharge;
 
-    void Awake()
+    private void Awake()
     {
-        PlayerController player = GetComponentInParent<PlayerController>();
-        if (player != null)
+        PlayerController player = GetComponentInParent<PlayerController>(); 
+        if (player != null) 
         {
-            player.AssignWeapon(this);
+            Debug.Log("player found");
+            player.AssignWeapon(this); 
         }
     }
 
     private void Start()
     {
-        currentCharge = 0f;
+        source = GetComponent<AudioSource>();
+        firePointVFX = firePoint.GetComponent<VisualEffect>();
     }
-    public void StartCharging()
+
+    private void Update()
     {
-        if (!chargedWeapon || Time.time < cooldownCounter) return;
-
-        isCharging = true;
-        currentCharge += Time.deltaTime;
-
-        if (chargeSound != null && !chargeSound.isPlaying)
-            chargeSound.Play();
-
-        if (currentCharge >= totalChargeTime)
+        if (cooldownTimer > 0)
         {
-            currentCharge = totalChargeTime;
-            fullyCharged = true;
+            cooldownTimer -= Time.deltaTime;
+        }
+        if (isFiring && weaponStats.rotatingBarrel)
+        {
+            barrel.Rotate(Vector3.forward * weaponStats.rotationSpeed * Time.deltaTime);
         }
     }
 
-    public void ReleaseShot()
+    public void TryFire()
     {
-        if (!chargedWeapon) return;
-
-        if (fullyCharged)
+        if (weaponStats.chargedWeapon)
         {
-            ShootBullet();
+            ChargeWeapon();
+            return;
         }
 
-        currentCharge = 0f;
-        fullyCharged = false;
+        if (cooldownTimer <= 0)
+        {
+            Fire();
+        }
+    }
+
+    private void ChargeWeapon()
+    {
+        if (!isCharging)
+        {
+            isCharging = true;
+            chargeProgress = 0f;
+
+            if (weaponStats.chargeSound && source != null)
+                source.PlayOneShot(weaponStats.chargeSound);
+            if (chargeProgressVFX != null)
+                chargeProgressVFX.Play();
+
+        }
+
+        chargeProgress += Time.deltaTime;
+
+        if (chargeProgress >= weaponStats.chargeTime)
+        {
+            isCharged = true;
+        }
+    }
+
+    public void ReleaseChargeShot()
+    {
+        if (!weaponStats.chargedWeapon)
+            return;
+
+        if (isCharged)
+        {
+            Fire();
+            ChargeShootConclusion();
+        }
+        else
+        {
+            ChargeShootConclusion();
+
+        }
+    }
+
+    public void ChargeShootConclusion()
+    {
+
+        chargeProgressVFX.Stop();
+        source.Stop();
+
         isCharging = false;
+        isCharged = false;
+        chargeProgress = 0f;
 
-        cooldownCounter = Time.time + weaponFireRate;
-
+        cooldownTimer = weaponStats.fireRate;
     }
 
-    public void AutoFire()
+    private void Fire()
     {
-        if (Time.time >= cooldownCounter)
+        isFiring = true;
+        ProjectileStatsSO projectileStats = weaponStats.projectileStats;
+
+        GameObject projectile;
+
+        if (ProjectilePoolerScript.Instance != null)
         {
-            ShootBullet();
+            projectile = ProjectilePoolerScript.Instance.Spawn(projectileStats.projectilePrefab, firePoint.position, firePoint.rotation);
+        }
+        else
+        {
+            projectile = Instantiate(projectileStats.projectilePrefab, firePoint.position, firePoint.rotation);
         }
 
-        if (rotatingBarrel && barrel != null)
-        {
-            barrel.Rotate(0, 0, rotationSpeed);
-        }
-    }
+        ProjectileLogic projectileLogic = projectile.GetComponent<ProjectileLogic>();
+        projectileLogic.projectileStats = projectileStats;
 
-    private void ShootBullet()
-    {
-        if (Time.time < cooldownCounter) return;
+        if (firePointVFX != null)
+            firePointVFX.Play();
 
-        if (shootSound) shootSound.Play();
-        if (muzzleFlash) muzzleFlash.Play();
+        if (weaponStats.shootSound != null)
+            source.PlayOneShot(weaponStats.shootSound);
 
-        Instantiate(projectile, firePoint.position, firePoint.rotation);
-        cooldownCounter = Time.time + weaponFireRate;
+        cooldownTimer = weaponStats.fireRate;
     }
 
     public float GetCooldownProgress()
     {
-        if (chargedWeapon)
+        if (weaponStats.chargedWeapon)
         {
-            return Mathf.Clamp01(currentCharge / totalChargeTime);
+            return Mathf.Clamp01(chargeProgress / weaponStats.chargeTime);
         }
         else
         {
-            return 1f - Mathf.Clamp01((cooldownCounter - Time.time) / weaponFireRate);
+            return 1f - Mathf.Clamp01(cooldownTimer / weaponStats.fireRate);
         }
     }
+
 
 }

@@ -43,6 +43,11 @@ public class EnemyStateMachine : MonoBehaviour
         }
         else
         {
+            if (!enemyCS.coreStats.isPreplaced)
+            {
+                chaseTarget = GameObject.FindGameObjectWithTag("Player").transform;
+                ChangeState(chaseState);
+            }
             ChangeState(wanderState);
         }
     }

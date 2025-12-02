@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe4ba60a5e3d8c4c96e24604317aec9, type: 3}
+  m_Name: AutocannonStatsSO
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponStatsSO
+  fireRate: 0.5
+  projectileStats: {fileID: 11400000, guid: 1f88463ae3112f7479e91e08e28f40aa, type: 2}
+  chargedWeapon: 0
+  chargeTime: 1
+  shootSound: {fileID: 8300000, guid: f137bc54385835b488b1575569c64f20, type: 3}
+  chargeSound: {fileID: 0}
+  muzzleFlash: {fileID: 0}

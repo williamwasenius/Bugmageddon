@@ -10,6 +10,9 @@ public class BossArmAttack : IBossStates
         BossSM = bossStateMachine;
         BossCS = bossStateMachine.BossCS;
     }
+
+    // ----------------------------------- ENTER / EXIT ----------------------------------- //
+
     public void EnterState()
     {
         Debug.Log("arm attack state entered");
@@ -22,9 +25,13 @@ public class BossArmAttack : IBossStates
 
     }
 
+    // ----------------------------------- UPDATE ----------------------------------- //
+
     public void UpdateState()
     {
     }
+
+    // -------------------------------- STATE SPECIFIC LOGIC -------------------------------- //
 
     private IEnumerator ArmAttack()
     {

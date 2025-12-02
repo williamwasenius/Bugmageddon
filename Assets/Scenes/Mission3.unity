@@ -32725,7 +32725,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723423253}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -58072,6 +58072,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 544669285}
     m_Modifications:
+    - target: {fileID: 2050925971133085357, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1557183463}
     - target: {fileID: 3493639480678516113, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
       propertyPath: m_Name
       value: Player

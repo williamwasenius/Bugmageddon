@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
     {
         if (IsPlayerWithinRadius() && Time.time >= nextSpawnTime)
         {
-            if (EntityManagerScript.Instance.enemiesInScene.Count < spawnLimit || specializedSpawner)
+            if (EnemyEntitiesManagerScript.Instance.enemiesInScene.Count < spawnLimit || specializedSpawner)
             {
                 StartCoroutine(SpawnEnemy());
                 nextSpawnTime = Time.time + spawningFrequency;
@@ -148,7 +148,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
         if (spawnedEnemy != null)
         {
             spawnedEnemy.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
-            EntityManagerScript.Instance.RegisterEnemy(spawnedEnemy);
+            EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawnedEnemy);
         }
 
         yield return null;

@@ -40,8 +40,6 @@ public class BossSummonGuardsAbility : IBossStates
     private IEnumerator SummonGuards()
     {
         float duration = BossSM.animator.GetCurrentAnimatorStateInfo(0).length;
-        BossEvents.OnQueenRoar?.Invoke();
-        Debug.Log("Help called");
         yield return new WaitForSeconds(duration);
         BossSM.animator.SetBool("IsRoaring", false);
 

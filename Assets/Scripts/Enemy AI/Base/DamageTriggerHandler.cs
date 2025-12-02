@@ -8,12 +8,9 @@ public class DamageTriggerHandler : MonoBehaviour
     public bool singleInstance;
     public bool staticDamage;
 
-    public void OnEnable()
+    private void OnEnable()
     {
-        if (trigger.enabled == false)
-        {
-            trigger.enabled = true;
-        }
+        trigger.enabled = true;
     }
 
     private void Start()

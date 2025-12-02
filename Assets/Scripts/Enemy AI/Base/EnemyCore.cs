@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,21 +21,13 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public float MaxHealth => coreStats.maxHealth;
     public float Armor => coreStats.armor;
 
-    private EntityManagerScript entityManagerScript;
+    private EnemyEntitiesManagerScript entityManagerScript;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
 
-        GameObject managerObj = GameObject.FindGameObjectWithTag("MissionHandler");
-        if (managerObj != null)
-        {
-            entityManagerScript = managerObj.GetComponent<EntityManagerScript>();
-            if (entityManagerScript != null)
-            {
-                entityManagerScript.RegisterEnemy(gameObject);
-            }
-        }
+        entityManagerScript = EnemyEntitiesManagerScript.Instance;
 
         CurrentHealth = coreStats.maxHealth;
 
@@ -42,6 +35,7 @@ public class EnemyCore : MonoBehaviour, IDamageable
         {
             damageTrigger = GetComponentInChildren<DamageTriggerHandler>();
             damageTrigger.triggerDamage = meleeStats.damage;
+            damageTrigger.gameObject.SetActive(false);
         }
     }
 
@@ -57,13 +51,25 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
-        if (CurrentHealth <= 0) Die();
+        if (CurrentHealth <= 0) StartCoroutine(Die());
     }
 
-    public void Die()
+    public IEnumerator Die()
     {
         if (bursterStats != null)
-            Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity);
+        {
+            var explosion = Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity)
+                .GetComponent<ExplosionHandler>();
+
+            explosion.radius = bursterStats.explosionRadius;
+            explosion.damage = bursterStats.explosionDamage;
+            explosion.TriggerExplosion();
+        }
+
+        if (coreStats.deathClip != null)
+        {
+            yield return new WaitForSeconds(coreStats.deathDuration);
+        }
 
         entityManagerScript.DeregisterEnemy(gameObject);
         Destroy(gameObject);

@@ -8,12 +8,12 @@ public class AttackTriggerActivator : MonoBehaviour
     public void EnableTrigger(int index)
     {
         if (index < 0 || index >= attackTriggers.Length) return;
-        attackTriggers[index]?.SetActive(true);
+        attackTriggers[index].SetActive(true);
     }
 
     public void DisableTrigger(int index)
     {
         if (index < 0 || index >= attackTriggers.Length) return;
-        attackTriggers[index]?.SetActive(false);
+        attackTriggers[index].SetActive(false);
     }
 }

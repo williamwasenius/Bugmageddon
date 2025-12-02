@@ -2809,7 +2809,7 @@ GameObject:
   - component: {fileID: 14315905}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9895,9 +9895,9 @@ GameObject:
   - component: {fileID: 60932341}
   - component: {fileID: 60932340}
   - component: {fileID: 60932342}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(1000.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -31796,9 +31796,9 @@ GameObject:
   - component: {fileID: 237376175}
   - component: {fileID: 237376174}
   - component: {fileID: 237376176}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(-1000.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -243334,6 +243334,10 @@ PrefabInstance:
       propertyPath: m_AngularDamping
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2050925971133085357, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 384396040}
     - target: {fileID: 2363585226668598107, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 

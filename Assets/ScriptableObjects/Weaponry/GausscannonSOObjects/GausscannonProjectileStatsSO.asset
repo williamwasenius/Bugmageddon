@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc63f4c8693e1c44abbfde9adaf56aa3, type: 3}
+  m_Name: GausscannonProjectileStatsSO
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
+  speed: 200
+  damage: 500
+  lifeTime: 5
+  pierce: 1
+  explosive: 1
+  explosionRadius: 3
+  explosionDamage: 20
+  projectilePrefab: {fileID: 5858682775981667188, guid: 2fc4b041519266541ac6946d87433ccd, type: 3}
+  explosionPrefab: {fileID: 4439557229569339894, guid: ff350fd20058e0146b5c4239fad5d7cc, type: 3}

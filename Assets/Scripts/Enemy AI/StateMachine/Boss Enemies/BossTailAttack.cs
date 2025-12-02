@@ -41,6 +41,8 @@ public class BossTailAttack : IBossStates
     {
         BossSM.animator.SetBool("IsTailAttacking", true);
 
+        BossSM.navMeshAgent.updateRotation = false;
+
         BossSM.tailAttackContainer.SetActive(true);
 
         BossSM.tailAttackContainer.transform.position = BossSM.chaseTargetPosition.transform.position;
@@ -50,6 +52,8 @@ public class BossTailAttack : IBossStates
         BossSM.tailAttackContainer.SetActive(false);
 
         BossSM.animator.SetBool("IsTailAttacking", false);
+
+        BossSM.navMeshAgent.updateRotation = true;
 
         BossSM.ChangeState(BossSM.phase1);
 

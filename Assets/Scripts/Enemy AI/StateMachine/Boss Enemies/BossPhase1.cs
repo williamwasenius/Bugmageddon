@@ -32,7 +32,7 @@ public class BossPhase1 : IBossStates
 
     public void UpdateState()
     {
-        if (BossSM.animator.GetBool("IsWalking") && !BossSM.animator.GetBool("IsRoaring"))
+        if (!BossSM.animator.GetBool("IsMoving") && BossSM.animator.GetBool("IsRoaring"))
         {
             return;
         }

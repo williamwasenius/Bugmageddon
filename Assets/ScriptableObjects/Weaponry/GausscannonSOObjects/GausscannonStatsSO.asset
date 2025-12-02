@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe4ba60a5e3d8c4c96e24604317aec9, type: 3}
+  m_Name: GausscannonStatsSO
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponStatsSO
+  fireRate: 1.5
+  projectileStats: {fileID: 11400000, guid: fd1f7b9e5665f1d47b774ffaae7bbf2a, type: 2}
+  rotatingBarrel: 0
+  rotationSpeed: 0
+  chargedWeapon: 1
+  chargeTime: 2.5
+  shootSound: {fileID: 8300000, guid: d17baaa173edd6f49b5ce76fb4aed044, type: 3}
+  chargeSound: {fileID: 8300000, guid: dfafb43509bdf704f89e33a103a7796d, type: 3}
+  muzzleFlash: {fileID: 0}

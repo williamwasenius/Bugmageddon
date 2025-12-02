@@ -1,110 +1,76 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileLogic : MonoBehaviour
 {
+    public ProjectileStatsSO projectileStats;
+    private Rigidbody rb;
 
-    public float speed = 100f;
-    public float damage = 20;
-    private float currentDamage;
-    public float amplifiedDamage;
-    public float duration = 5;
-
-    public bool isExplosive = false;
-    public bool isPierce = false;
-
-    public float explosionRadius = 2;
-
-    public GameObject explosionPrefab;
-    private PlayerController playerController;
-
-    void Start()
+    private void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        playerController = player.GetComponent<PlayerController>();
-        Rigidbody rb = GetComponent<Rigidbody>();
-        SetDamage();
-        Destroy(gameObject, duration);
+        rb = GetComponent<Rigidbody>();
+        Destroy(gameObject, projectileStats.lifeTime);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-            transform.position += transform.forward * speed * Time.fixedDeltaTime;
+        transform.position += transform.forward * projectileStats.speed * Time.fixedDeltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("impact");
-        if (!other.gameObject.CompareTag("Enemy") && !other.gameObject.CompareTag("Destructible"))
-        {
-            Destroy(gameObject);
-        }
-
-        if (isExplosive)
-        {
-            Explode();
-        }
-        else
-        {
-            IDamageable targetDamageable = other.gameObject.GetComponentInParent<IDamageable>();
-            if (targetDamageable != null)
-            {
-                targetDamageable.TakeDamage(damage - targetDamageable.Armor);
-            }
-        }
-
-        if (!isPierce)
-        {
-            Destroy(gameObject);
-        }
+        HandleHit(other.gameObject);
     }
 
-    private void Explode()
+    private void OnCollisionEnter(Collision collision)
     {
-        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider hitCollider in hitColliders)
-        {
-            if (hitCollider.isTrigger)
-                continue;
-
-            IDamageable targetDamageable = hitCollider.GetComponent<IDamageable>();
-            if (targetDamageable != null)
-            {
-                targetDamageable.TakeDamage(currentDamage - targetDamageable.Armor);
-            }
-        }
-
+        HandleHit(collision.gameObject);
     }
 
-    private void SetDamage()
+    private void HandleHit(GameObject hitObject)
     {
-        if (playerController != null)
+        IDamageable target = hitObject.GetComponentInParent<IDamageable>();
+
+        if (target != null)
         {
-            if (playerController.abilityActive == true)
+            target.TakeDamage(projectileStats.damage - target.Armor);
+
+            if (projectileStats.explosive)
+                SpawnExplosion();
+
+            if (projectileStats.pierce)
             {
-                Debug.Log("Damage amplified");
-                damage = amplifiedDamage;
+                return;
             }
-            else
-            {
-                currentDamage = damage;
-            }
-        }
-        else
-        {
+
+            RemoveProjectile();
             return;
         }
+
+        if (projectileStats.explosive)
+            SpawnExplosion();
+
+        RemoveProjectile();
     }
 
-    private void OnDrawGizmosSelected()
+    private void SpawnExplosion()
     {
-        if (isExplosive)
+        GameObject obj = Instantiate(projectileStats.explosionPrefab, transform.position, Quaternion.identity);
+
+        ExplosionHandler handler = obj.GetComponent<ExplosionHandler>();
+        handler.radius = projectileStats.explosionRadius;
+        handler.damage = projectileStats.explosionDamage;
+
+        handler.TriggerExplosion();
+    }
+    private void RemoveProjectile()
+    {
+        if (ProjectilePoolerScript.Instance != null)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, explosionRadius);
+            ProjectilePoolerScript.Instance.Despawn(gameObject, projectileStats.projectilePrefab);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
