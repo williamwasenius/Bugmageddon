@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,20 +6,30 @@ public class Mission4Script : MonoBehaviour
 {
     public GameObject player;
 
+    public CanvasGroup winCanvas;
+    public CanvasGroup failCanvas;
+
     public GameObject[] sensorPods;  
     public bool mission4Complete = false;
-
+    public void Start()
+    {
+        if (!player)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+        MissionTracker.Instance.SetCurrentMission("Mission4");
+    }
     public void FixedUpdate()
     {
 
         if (!mission4Complete && CheckAllPylonsCharged())
         {
-            MissionComplete();
+            Win();
         }
 
         if (player == null)
         {
-            Lose();
+            Fail();
         }
 
     }
@@ -37,23 +48,14 @@ public class Mission4Script : MonoBehaviour
         return true;
     }
 
-    private void MissionComplete()
+    private void Win()
     {
-        MissionTracker.Instance.MissionComplete("Mission4");
-
-        if (!SaveManager.Instance.mission4)
-        {
-            SaveManager.Instance.mission4 = true;
-            SaveManager.Instance.SavePlayerData();
-        }
-
-        SceneManager.LoadScene("WeaponSelection");
+        MissionScriptUniversalFunctions.CompleteMission("Mission4",winCanvas,this, false);
     }
 
-    private void Lose()
+    private void Fail()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("GameLoss");
+        MissionScriptUniversalFunctions.FailMission(failCanvas,this, true);
     }
 
 }

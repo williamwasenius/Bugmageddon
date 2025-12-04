@@ -42,8 +42,7 @@ public class BossSummonGuardsAbility : IBossStates
         float duration = BossSM.animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(duration);
         BossSM.animator.SetBool("IsRoaring", false);
-
-        BossSM.ChangeState(BossSM.phase1);
+        BossSM.ChangeState(BossSM.chaseState);
 
     }
 

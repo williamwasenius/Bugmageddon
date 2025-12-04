@@ -4,11 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossPhase1 : IBossStates
+public class BossChaseState : IBossStates
 {
     private BossStateMachine BossSM;
     private EnemyCore BossCS;
-    public BossPhase1(BossStateMachine bossStateMachine)
+    public BossChaseState(BossStateMachine bossStateMachine)
     {
         BossSM = bossStateMachine;
         BossCS = bossStateMachine.BossCS;
@@ -17,7 +17,7 @@ public class BossPhase1 : IBossStates
     public void EnterState()
     {
         Debug.Log("chase state entered");
-        BossSM.navMeshAgent.isStopped = false;
+        BossSM.UnlockMovement();
     }
 
     public void ExitState()
@@ -32,7 +32,7 @@ public class BossPhase1 : IBossStates
 
     public void UpdateState()
     {
-        if (!BossSM.animator.GetBool("IsMoving") && BossSM.animator.GetBool("IsRoaring"))
+        if (BossSM.animator.GetBool("IsRoaring"))
         {
             return;
         }

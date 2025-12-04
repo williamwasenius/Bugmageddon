@@ -55,7 +55,7 @@ public class BossTailAttack : IBossStates
 
         BossSM.navMeshAgent.updateRotation = true;
 
-        BossSM.ChangeState(BossSM.phase1);
+        BossSM.ChangeState(BossSM.chaseState);
 
     }
 

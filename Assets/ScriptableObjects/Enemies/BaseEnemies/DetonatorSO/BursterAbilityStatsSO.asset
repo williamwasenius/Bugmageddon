@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1492b007545cbc7428b19601fb5ad602, type: 3}
-  m_Name: DetonatorAbilityStatsSO
+  m_Name: BursterAbilityStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDetonatorStatsSO
-  explosionDamage: 100
-  explosionRadius: 5
-  explosionPrefab: {fileID: 4439557229569339894, guid: 42fabf2fed2f2d547b167ccf24b4b011, type: 3}
+  explosionDamage: 50
+  explosionRadius: 3
+  explosionPrefab: {fileID: 4439557229569339894, guid: 9f2cdaf646f2d764b90f1b3d670a023d, type: 3}

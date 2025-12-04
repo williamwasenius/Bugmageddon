@@ -16,6 +16,7 @@ public class EggCluster : MonoBehaviour
     private void OnEnable() => BossEvents.OnQueenRoar += ReleaseBugs;
     private void OnDisable() => BossEvents.OnQueenRoar -= ReleaseBugs;
 
+
     public void ReleaseBugs()
     {
         if (Random.value > hatchChance) return;

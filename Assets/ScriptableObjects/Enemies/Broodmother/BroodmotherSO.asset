@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4c387eaf37fbc4c957a453384f2f97, type: 3}
   m_Name: BroodmotherSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCoreStatsSO
+  isBoss: 1
   isPreplaced: 1
   maxHealth: 10000
   armor: 0

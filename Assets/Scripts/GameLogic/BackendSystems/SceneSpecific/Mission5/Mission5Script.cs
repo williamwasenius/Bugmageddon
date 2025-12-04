@@ -1,41 +1,59 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Mission5Script : MonoBehaviour
 {
-    public GameObject boss;
     public GameObject player;
+    public GameObject boss;
+    private BossStateMachine bossState;
 
-    public bool mission5complete = false;
+    public CanvasGroup winCanvas;
+    public CanvasGroup failCanvas;
+
+    public void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+
+        bossState = boss.GetComponent<BossStateMachine>();
+
+        MissionTracker.Instance.SetCurrentMission("Mission5");
+    }
 
     private void Update()
     {
-        if (boss == null)
+        if (bossState.isDefeated)
         {
-            MissionComplete();
+            StartCoroutine(Win());
         }
 
         if (player == null)
         {
-            Lose();
+            Fail();
         }
-
     }
 
-    private void MissionComplete()
+    private IEnumerator Win()
     {
-        MissionTracker.Instance.MissionComplete("Mission5");
-
-        if (!SaveManager.Instance.mission5)
+        MissionScriptUniversalFunctions.CompleteMission("Mission5",null,this, false);
+        
+        foreach (GameObject enemy in EnemyEntitiesManagerScript.Instance.enemiesInScene)
         {
-            SaveManager.Instance.mission5 = true;
-            SaveManager.Instance.SavePlayerData();
+            EnemyCore enemyCore = enemy.GetComponent<EnemyCore>();
+            if (!enemyCore.coreStats.isBoss)
+            {
+                enemyCore.Die();
+            }
         }
+
+        yield return new WaitForSeconds(10);
+
+        SceneManager.LoadScene("GameWin");
+
     }
 
-    private void Lose()
+    private void Fail()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("GameLoss");
+        MissionScriptUniversalFunctions.FailMission(failCanvas,this, true);
     }
 }

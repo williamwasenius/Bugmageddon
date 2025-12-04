@@ -53,7 +53,6 @@ public class MainMenu : MonoBehaviour
     {
         FindGameSystems();
 
-        // default ----- make a new function
         SaveManager.Instance.tutorialMission = false;
         SaveManager.Instance.mission1 = false;
 

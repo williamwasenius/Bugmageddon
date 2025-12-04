@@ -15,6 +15,7 @@ TagManager:
   - TargetPoint
   - Structure
   - MissionHandler
+  - DestructibleRock
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Trigger
   - Player
   - TrackingSphere
-  - 
+  - Destructible
   - 
   - 
   - 

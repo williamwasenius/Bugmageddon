@@ -44,7 +44,7 @@ public class MouseFollowTarget : MonoBehaviour
 
     private void Update()
     {
-        if (playerCamera == null)
+        if (playerCamera == null || player == null)
             return;
 
         UpdateTargetPosition();

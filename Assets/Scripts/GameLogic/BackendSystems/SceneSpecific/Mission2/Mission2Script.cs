@@ -1,44 +1,39 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Mission2Script  : MonoBehaviour
+public class Mission2Script : MonoBehaviour
 {
     public GameObject player;
-
-    public bool mission2Complete = false;
     public Mission2EndTrigger MissionFinished;
+
+    public CanvasGroup winCanvas;
+    public CanvasGroup failCanvas;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        MissionTracker.Instance.SetCurrentMission("Mission2");
+    }
 
     private void FixedUpdate()
     {
-        if (MissionFinished.EndTrigger == true)
-        {
-            MissionComplete();
-        }
-
         if (player == null)
         {
-            Lose();
-        }
-    }
-
-    private void MissionComplete()
-    {
-        MissionTracker.Instance.MissionComplete("Mission2");
-
-        if (!SaveManager.Instance.mission2)
-        {
-            SaveManager.Instance.mission2 = true;
-            SaveManager.Instance.SavePlayerData();
+            Fail();
+            return;
         }
 
-        SceneManager.LoadScene("WeaponSelection");
+        if (MissionFinished.EndTrigger)
+            Win();
     }
 
-    private void Lose()
+    private void Win()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("GameLoss");
+        MissionScriptUniversalFunctions.CompleteMission("Mission2",winCanvas,this,true);
     }
 
-
+    private void Fail()
+    {
+        MissionScriptUniversalFunctions.FailMission(failCanvas,this,true);
+    }
 }

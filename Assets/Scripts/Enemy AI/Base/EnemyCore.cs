@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class EnemyCore : MonoBehaviour, IDamageable
 {
+
     [Header("Stats")]
     public EnemyCoreStatsSO coreStats;
     public EnemyMeleeStatsSO meleeStats;
@@ -16,6 +18,8 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public Image filler;
     public Animator animator;
     private DamageTriggerHandler damageTrigger;
+
+    private bool hasExploded = false;
 
     public float CurrentHealth { get; set; }
     public float MaxHealth => coreStats.maxHealth;
@@ -51,26 +55,28 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
-        if (CurrentHealth <= 0) StartCoroutine(Die());
+        if (CurrentHealth <= 0 && !coreStats.isBoss) StartCoroutine(Die());
     }
 
     public IEnumerator Die()
     {
-        if (bursterStats != null)
+        if (!hasExploded && bursterStats != null)
         {
-            var explosion = Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity)
-                .GetComponent<ExplosionHandler>();
+            hasExploded = true;
+
+            var explosion = Instantiate(bursterStats.explosionPrefab, transform.position, Quaternion.identity).GetComponent<ExplosionHandler>();
 
             explosion.radius = bursterStats.explosionRadius;
             explosion.damage = bursterStats.explosionDamage;
             explosion.TriggerExplosion();
         }
 
-        if (coreStats.deathClip != null)
+        /*if (coreStats.deathClip != null)
         {
             yield return new WaitForSeconds(coreStats.deathDuration);
-        }
+        }*/
 
+        yield return new WaitForSeconds(0);
         entityManagerScript.DeregisterEnemy(gameObject);
         Destroy(gameObject);
     }

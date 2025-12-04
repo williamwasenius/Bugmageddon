@@ -1,14 +1,15 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
 
 public class Mission1Script : MonoBehaviour
 {
     public GameObject player;
     public int enemiesRemaining;
     public TextMeshProUGUI enemyCounter;
+
+    public CanvasGroup winCanvas;
+    public CanvasGroup failCanvas;
 
     private void Awake()
     {
@@ -18,9 +19,10 @@ public class Mission1Script : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        MissionTracker.Instance.SetCurrentMission("Mission1");
     }
 
-    public void Update()
+    private void Update()
     {
         enemyCounter.text = enemiesRemaining.ToString();
     }
@@ -29,16 +31,14 @@ public class Mission1Script : MonoBehaviour
     {
         if (player == null)
         {
-            Lose();
+            Fail();
+            return;
         }
 
         UpdateEnemyCount();
 
         if (enemiesRemaining <= 0)
-        {
-            Debug.Log("Mission Complete! All enemies are defeated.");
-            MissionComplete();
-        }
+            Win();
     }
 
     private void UpdateEnemyCount()
@@ -47,23 +47,13 @@ public class Mission1Script : MonoBehaviour
         enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
-    private void MissionComplete()
+    private void Win()
     {
-           MissionTracker.Instance.MissionComplete("Mission1");
-
-           if (!SaveManager.Instance.mission1)
-           {
-               SaveManager.Instance.mission1 = true;
-               SaveManager.Instance.SavePlayerData();
-           }
-
-           SceneManager.LoadScene("WeaponSelection");
+        MissionScriptUniversalFunctions.CompleteMission("Mission1",winCanvas,this, true);
     }
 
-    private void Lose()
+    private void Fail()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("GameLoss");
+        MissionScriptUniversalFunctions.FailMission(failCanvas,this, true);
     }
-
 }

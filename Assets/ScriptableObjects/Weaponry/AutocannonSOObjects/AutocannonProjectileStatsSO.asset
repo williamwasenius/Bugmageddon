@@ -17,7 +17,7 @@ MonoBehaviour:
   lifeTime: 5
   pierce: 0
   explosive: 1
-  explosionRadius: 3
+  explosionRadius: 2
   explosionDamage: 30
   projectilePrefab: {fileID: 5858682775981667188, guid: 6160891c05ccc58468328e1f6420e2f1, type: 3}
   explosionPrefab: {fileID: 4439557229569339894, guid: ff350fd20058e0146b5c4239fad5d7cc, type: 3}

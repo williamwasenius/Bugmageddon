@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class InGameMenu : MonoBehaviour
 {
+    private MissionTracker missionTracker;
     public GameObject combatCanvas;
     public GameObject menuCanvas;
     public GameObject menu;
     public GameObject options;
+
+    private void Start()
+    {
+        missionTracker = MissionTracker.Instance;
+    }
 
     private void Update()
     {
@@ -19,7 +25,7 @@ public class InGameMenu : MonoBehaviour
                 Cursor.visible = false;
                 Time.timeScale = 1f;
             }
-            else
+            else if (Time.timeScale != 0)
             {
                 combatCanvas.SetActive(false);
                 menuCanvas.SetActive(true);
@@ -28,6 +34,17 @@ public class InGameMenu : MonoBehaviour
             }
         }
     }
+
+    public void NextMission()
+    {
+        SceneManager.LoadScene("WeaponSelection");
+    }
+
+    public void RetryMission()
+    {
+        SceneManager.LoadScene("WeaponSelection");
+    }
+
     public void MainMenu()
     {
         Time.timeScale = 1f;

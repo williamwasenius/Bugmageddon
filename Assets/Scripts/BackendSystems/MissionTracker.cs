@@ -1,13 +1,17 @@
 using UnityEngine;
+using System;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MissionTracker : MonoBehaviour
 {
+
     public static MissionTracker Instance;
 
     [Header("Mission state")]
-    public string nextMission = "Mission1";   
-    public string lastCompletedMission = "";    
+    public string nextMission = "Mission1";
+    public string currentMission = "";
+    public string lastCompletedMission = "";
 
     public bool lastMissionComplete;
     public bool lastMissionFailed;
@@ -24,14 +28,22 @@ public class MissionTracker : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         nextMission = "Mission1";
+        currentMission = nextMission;
+    }
+
+    public void SetCurrentMission(string missionName)
+    {
+        currentMission = missionName;
     }
 
     public void MissionComplete(string beatenMission)
     {
+
         lastMissionComplete = true;
         lastMissionFailed = false;
 
         lastCompletedMission = beatenMission;
+        currentMission = beatenMission;
 
         switch (beatenMission)
         {
@@ -41,7 +53,6 @@ public class MissionTracker : MonoBehaviour
             case "Mission4": nextMission = "Mission5"; break;
             case "Mission5":
                 nextMission = "Mission1";
-                SceneManager.LoadScene("GameWin"); 
                 return;
         }
     }
@@ -50,7 +61,6 @@ public class MissionTracker : MonoBehaviour
     {
         lastMissionFailed = true;
         lastMissionComplete = false;
-        ResetProgress();
     }
 
     public string GetNextMissionScene()
@@ -61,5 +71,6 @@ public class MissionTracker : MonoBehaviour
     public void ResetProgress()
     {
         nextMission = "Mission1";
+        currentMission = "";
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class CombatUIManager : MonoBehaviour
 {
+    public static CombatUIManager Instance { get; set; }
 
     public Image weapon1CooldownImage;
     public Image weapon2CooldownImage;
@@ -14,6 +15,11 @@ public class CombatUIManager : MonoBehaviour
 
     public GameObject weapon1Parent; 
     public GameObject weapon2Parent;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

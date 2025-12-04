@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -39,7 +40,10 @@ public class Mission3Script : MonoBehaviour
 
     private float currentTimer = 0f;
     private bool timerRunning = false;
-    private int currentGeneratorIndex = -1; 
+    private int currentGeneratorIndex = -1;
+
+    public CanvasGroup winCanvas;
+    public CanvasGroup failCanvas;
 
     private enum MissionState { Idle, Defending, FinalDefense, Complete }
     private MissionState currentState = MissionState.Idle;
@@ -50,6 +54,7 @@ public class Mission3Script : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        MissionTracker.Instance.SetCurrentMission("Mission3");
         objectiveText.text = "Activate and Defend the Generators!";
         foreach (var gen in generators)
         {
@@ -64,7 +69,7 @@ public class Mission3Script : MonoBehaviour
     {
         if (player == null || finalGenerator.reactor == null)
         {
-            Lose();
+            Fail();
             return;
         }
 
@@ -145,7 +150,7 @@ public class Mission3Script : MonoBehaviour
         if (currentState == MissionState.FinalDefense)
         {
             waveManager.EndWave(4);
-            MissionComplete();
+            Win();
             return;
         }
 
@@ -194,25 +199,13 @@ public class Mission3Script : MonoBehaviour
 
     // ---------------------- MISSION END ----------------------
 
-    private void MissionComplete()
+    private void Win()
     {
-        currentState = MissionState.Complete;
-        objectiveText.text = "Mission Complete!";
-
-        MissionTracker.Instance.MissionComplete("Mission3");
-
-        if (!SaveManager.Instance.mission3)
-        {
-            SaveManager.Instance.mission3 = true;
-            SaveManager.Instance.SavePlayerData();
-        }
-
-        SceneManager.LoadScene("WeaponSelection");
+        MissionScriptUniversalFunctions.CompleteMission("Mission3",winCanvas,this, true);
     }
 
-    private void Lose()
+    private void Fail()
     {
-        MissionTracker.Instance.MissionFailed();
-        SceneManager.LoadScene("GameLoss");
+        MissionScriptUniversalFunctions.FailMission(failCanvas,this, true);
     }
 }

@@ -50685,6 +50685,8 @@ MonoBehaviour:
   player: {fileID: 973860681583584886}
   enemiesRemaining: 0
   enemyCounter: {fileID: 1070961231}
+  winCanvas: {fileID: 1901712238}
+  failCanvas: {fileID: 1901712237}
 --- !u!224 &1829650020 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6894463707297451142, guid: 30ad03145b9be5048be382c05049a948, type: 3}
@@ -52244,6 +52246,16 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5293403566140825621, guid: 34ee97fc96e303546adb97ad7dce9907, type: 3}
   m_PrefabInstance: {fileID: 1900802806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1901712237 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 3963804292861714861, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+  m_PrefabInstance: {fileID: 1829650016}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1901712238 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 2209282955739347887, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+  m_PrefabInstance: {fileID: 1829650016}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1905476043
 PrefabInstance:

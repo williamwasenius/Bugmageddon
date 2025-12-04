@@ -43,7 +43,7 @@ public class BossArmAttack : IBossStates
         BossSM.animator.SetBool("IsArmAttacking", false);
         Debug.Log("Attack end");
 
-        BossSM.ChangeState(BossSM.phase1);
+        BossSM.ChangeState(BossSM.chaseState);
     }
 
 }

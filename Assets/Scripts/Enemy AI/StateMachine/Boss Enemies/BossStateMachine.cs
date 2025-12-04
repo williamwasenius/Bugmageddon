@@ -44,9 +44,23 @@ public class BossStateMachine : MonoBehaviour
 
     // ======== BOSS PHASE STATES ======== //
 
-    [HideInInspector] public BossPhase1 phase1;
-    [HideInInspector] public BossPhase2 phase2;
-    [HideInInspector] public BossPhase3 phase3;
+    [HideInInspector] public BossChaseState chaseState;
+    [HideInInspector] public BossDeathState deathState;
+    public enum BossPhase
+    {
+        Phase1,
+        Phase2,
+        Phase3
+    }
+
+    // ======== BOSS PHASE STATE SPECIFIC BOOLS ======== //
+
+    public BossPhase currentPhase = BossPhase.Phase1;
+    private bool phase2Triggered = false;
+    private bool phase3Triggered = false;
+
+    public bool movementLocked = false;
+    [HideInInspector] public bool isDefeated = false;
 
     // ======== BOSS ABILITY STATES ======== //
 
@@ -73,15 +87,14 @@ public class BossStateMachine : MonoBehaviour
         chaseTargetPosition = chaseTarget.transform;
         currentPosition = BossCS.transform;
 
-        phase1 = new BossPhase1(this);
-        phase2 = new BossPhase2(this);
-        phase3 = new BossPhase3(this);
+        chaseState = new BossChaseState(this);
+        deathState = new BossDeathState(this);
 
         bossSummonGuardsAbility = new BossSummonGuardsAbility(this);
         bossArmAttack = new BossArmAttack(this);
         bossTailAttack = new BossTailAttack(this);
 
-        currentState = phase1;
+        currentState = chaseState;
         currentPhaseINT = 1;
 
         DamageTriggerHandler tailDamageTrigger = tailAttackTails.GetComponent<DamageTriggerHandler>();
@@ -94,17 +107,12 @@ public class BossStateMachine : MonoBehaviour
 
     private void Update()
     {
-        currentState.UpdateState();
-        velocity = navMeshAgent.velocity;
-        AbilityCooldown();
-
-        if (BossCS.CurrentHealth <= (BossCSSO.maxHealth / 3) * 2)
+        if (!isDefeated)
         {
-            Phase2();
-        }
-        else if (BossCS.CurrentHealth <= BossCSSO.maxHealth / 3)
-        {
-            Phase3();
+            currentState.UpdateState();
+            velocity = navMeshAgent.velocity;
+            AbilityCooldown();
+            UpdatePhase();
         }
 
     }
@@ -112,16 +120,62 @@ public class BossStateMachine : MonoBehaviour
     public void ChangeState(IBossStates newState)
     {
         currentState.ExitState();
+        foreach (AnimatorControllerParameter parameter in animator.parameters)
+        {
+            animator.SetBool(parameter.name, false);
+        }
         currentState = newState;
         currentState.EnterState();
     }
 
     public void StopMoving()
     {
+        movementLocked = true;
         animator.SetBool("IsMoving", false);
         navMeshAgent.isStopped = true;
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.velocity = Vector3.zero; 
+        navMeshAgent.ResetPath();           
         navMeshAgent.destination = currentPosition.position;
     }
+
+    public void UnlockMovement()
+    {
+        movementLocked = false;
+        navMeshAgent.isStopped = false;
+        navMeshAgent.updateRotation = true;
+        navMeshAgent.velocity = Vector3.zero;
+    }
+
+    private void UpdatePhase()
+    {
+        float hp = BossCS.CurrentHealth;
+        float max = BossCSSO.maxHealth;
+
+        if (!isDefeated && hp <= 0)
+        {
+            isDefeated = true;
+            ChangeState(deathState);
+            return;
+        }
+
+        if (!phase2Triggered && hp <= max * 0.66f)
+        {
+            Debug.Log("Phase 2 started");
+            phase2Triggered = true;
+            currentPhase = BossPhase.Phase2;
+            ChangeState(bossSummonGuardsAbility);
+        }
+
+        if (!phase3Triggered && hp <= max * 0.33f)
+        {
+            Debug.Log("Phase 3 started");
+            phase3Triggered = true;
+            currentPhase = BossPhase.Phase3;
+            ChangeState(bossSummonGuardsAbility);
+        }
+    }
+
 
     public void AbilityCooldown()
     {
@@ -154,15 +208,22 @@ public class BossStateMachine : MonoBehaviour
     {
         navMeshAgent.destination = chaseTargetPosition.position;
     }
-
-    public void Phase2()
+    public IEnumerator DeathThroes()
     {
-        currentPhaseINT = 2;
+        animator.SetBool("DeathThroes", true);
+        navMeshAgent.enabled = false;
+        yield return new WaitForSeconds(BossCSSO.deathDuration);
+        animator.SetBool("IsDefeated", true);
     }
 
-    public void Phase3()
+
+    void OnCollisionEnter(Collision collision)
     {
-        currentPhaseINT = 3;
+        if (collision.gameObject.CompareTag("DestructibleRock"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
+
 
 }
