@@ -10,6 +10,8 @@ public class SettingsScript : MonoBehaviour
     private int selectedResolution;
 
     public TMP_Text resolutionText;
+
+    public Slider audioSlider;
     void Start()
     {
         fullScreenToggle.isOn = Screen.fullScreen;
@@ -45,6 +47,8 @@ public class SettingsScript : MonoBehaviour
             selectedResolution = resolutions.Count - 1;
             UpdateResolutionText();
         }
+
+        SetAudioLevel();
     }
 
     void Update()
@@ -90,6 +94,10 @@ public class SettingsScript : MonoBehaviour
         }
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullScreenToggle.isOn);
+    }
+    public void SetAudioLevel()
+    {
+        audioSlider.value = SaveManager.Instance.audioSliderAmount;
     }
 }
 
