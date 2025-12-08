@@ -26,6 +26,8 @@ public class SaveManager : MonoBehaviour
 
     // Audio settings
     public float audioSliderAmount;
+
+
     private void Awake()
     {
         if (Instance != null)

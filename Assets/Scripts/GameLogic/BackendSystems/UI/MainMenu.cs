@@ -1,14 +1,18 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject tutorialPopup;
     public GameObject[] panel;
+    public GameObject newGameWarningPanel;
 
     private GameManager gameManager;
     private MissionTracker missionTracker;
+
+    public AudioMixer mixer;
 
     private void Start()
     {
@@ -20,6 +24,10 @@ public class MainMenu : MonoBehaviour
         SaveManager.Instance.LoadPlayerData();
 
         FindGameSystems();
+
+        SaveManager.Instance.LoadPlayerData();
+        AchievementManager.Instance.LoadAchievementData();
+        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Instance.audioSliderAmount) * 20);
     }
 
     private void FindGameSystems()
@@ -59,23 +67,8 @@ public class MainMenu : MonoBehaviour
     {
         FindGameSystems();
 
-        SaveManager.Instance.tutorialMission = false;
-        SaveManager.Instance.mission1 = false;
-
-        if (!SaveManager.Instance.tutorialMission)
-        {
-            Options(tutorialPopup);
-        }
-        else
-        {
-            if (missionTracker != null)
-            {
-                missionTracker.ResetProgress(); 
-                missionTracker.nextMission = "Mission1";
-            }
-
-            SceneManager.LoadScene("WeaponSelection");
-        }
+        //open warning panel
+        Options(newGameWarningPanel);
     }
 
     public void ContinueGame()
@@ -112,5 +105,32 @@ public class MainMenu : MonoBehaviour
         }
 
         SceneManager.LoadScene("WeaponSelection");
+    }
+
+    public void NewGameWarningYes()
+    {
+        SaveManager.Instance.DefaultPlayerData();
+        SaveManager.Instance.SavePlayerData();
+
+
+        if (!SaveManager.Instance.tutorialMission)
+        {
+            Options(tutorialPopup);
+        }
+        else
+        {
+            if (missionTracker != null)
+            {
+                missionTracker.ResetProgress();
+                missionTracker.nextMission = "Mission1";
+            }
+
+            SceneManager.LoadScene("WeaponSelection");
+        }
+        Options(newGameWarningPanel);
+    }
+    public void NewGameWarningNo()
+    {
+        Options(newGameWarningPanel);
     }
 }
