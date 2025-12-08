@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class EnemyIndicatorManager : MonoBehaviour
-{
-    /*public float correctionAngle;
+{/*
+    public float correctionAngle;
     public Transform player;  
     public Transform indicatorImagePivot; 
     public Transform targetObject;
