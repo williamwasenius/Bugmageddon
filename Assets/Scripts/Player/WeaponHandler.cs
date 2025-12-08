@@ -20,6 +20,8 @@ public class WeaponHandler : MonoBehaviour
     private bool isCharging = false;
     private bool isCharged = false;
 
+    [Header("Shooter")]
+    public GameObject shooter;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Start()
     {
+        shooter = transform.root.gameObject; 
         source = GetComponent<AudioSource>();
         firePointVFX = firePoint.GetComponent<VisualEffect>();
     }
@@ -119,7 +122,6 @@ public class WeaponHandler : MonoBehaviour
     {
         isFiring = true;
         ProjectileStatsSO projectileStats = weaponStats.projectileStats;
-
         GameObject projectile;
 
         if (ProjectilePoolerScript.Instance != null)
@@ -133,6 +135,7 @@ public class WeaponHandler : MonoBehaviour
 
         ProjectileLogic projectileLogic = projectile.GetComponent<ProjectileLogic>();
         projectileLogic.projectileStats = projectileStats;
+        projectileLogic.shooter = shooter;
 
         if (firePointVFX != null)
             firePointVFX.Play();

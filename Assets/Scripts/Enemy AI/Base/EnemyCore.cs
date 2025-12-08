@@ -18,6 +18,7 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public Image filler;
     public Animator animator;
     private DamageTriggerHandler damageTrigger;
+    public DamageTriggerHandler chargeDamageTrigger;
 
     private bool hasExploded = false;
 
@@ -40,6 +41,12 @@ public class EnemyCore : MonoBehaviour, IDamageable
             damageTrigger = GetComponentInChildren<DamageTriggerHandler>();
             damageTrigger.triggerDamage = meleeStats.damage;
             damageTrigger.gameObject.SetActive(false);
+        }
+        if (chargerStats)
+        {
+            chargeDamageTrigger = GetComponent<DamageTriggerHandler>();
+            chargeDamageTrigger.triggerDamage = chargerStats.chargeDamage;
+            chargeDamageTrigger.gameObject.SetActive(false);
         }
     }
 

@@ -67,7 +67,7 @@ public class ChaseState : IEnemyStates
     {
         return distance >= enemyCS.chargerStats.minChargeRange &&
                distance <= enemyCS.chargerStats.chargeRange &&
-               enemyCS.chargerStats.chargeRechargeTimer <= 0;
+               enemySM.chargeRechargeTimer <= 0;
     }
 
     // ----------------------------------- TRANSITIONS ----------------------------------- //

@@ -4,12 +4,14 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour, IDamageable
 {
-    // Public Variables
+    [Header("Defensive Stats")]
     public float CurrentHealth { get; set; }
     public float Armor => armor;
     public float MaxHealth => maxHealth;
     public float maxHealth = 100f;
     public float armor = 0f;
+
+    [Header("Spawner Stats")]
 
     public GameObject[] enemies;
     public Transform spawningLocation;
@@ -23,11 +25,13 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
     public bool specializedSpawner;
 
+    [Header("UI elements")]
     public Canvas HealthbarUI;
     public Image filler;
 
     // Private Variables
     public GameObject player;
+    private EnemyEntitiesManagerScript entityManagerScript;
     private float nextSpawnTime;
 
     // Unity Methods
@@ -35,6 +39,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        entityManagerScript = EnemyEntitiesManagerScript.Instance;
         CurrentHealth = maxHealth;
 
     }
@@ -86,6 +91,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        entityManagerScript.DeregisterEnemy(gameObject);
         Destroy(gameObject);
     }
 
@@ -148,6 +154,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
         if (spawnedEnemy != null)
         {
             spawnedEnemy.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
+            spawnedEnemy.GetComponent<EnemyStateMachine>().chaseTarget = player.transform;
             EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawnedEnemy);
         }
 

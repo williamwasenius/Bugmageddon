@@ -8,6 +8,9 @@ public class EggScript : MonoBehaviour
     [Header("Enemy Spawning")]
     public GameObject[] enemyPool;
 
+    [Header("Player object")]
+    public GameObject player;
+
     private void OnEnable() => BossEvents.OnQueenRoar += ReleaseBugs;
     private void OnDisable() => BossEvents.OnQueenRoar -= ReleaseBugs;
 
@@ -36,6 +39,7 @@ public class EggScript : MonoBehaviour
             if (spawned != null)
             {
                 enemyPrefab.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
+                enemyPrefab.GetComponent<EnemyStateMachine>().chaseTarget = player.transform;
                 EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawned);
             }
 

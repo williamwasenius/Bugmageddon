@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject tutorialPopup;
+    public GameObject[] panel;
 
     private GameManager gameManager;
     private MissionTracker missionTracker;
@@ -47,6 +48,11 @@ public class MainMenu : MonoBehaviour
                 missionTracker = FindAnyObjectByType<MissionTracker>();
             }
         }
+    }
+
+    public void OpenCloseMenu(int panelNR)
+    {
+        panel[panelNR].SetActive(!panel[panelNR].activeInHierarchy);
     }
 
     public void StartNewGame()

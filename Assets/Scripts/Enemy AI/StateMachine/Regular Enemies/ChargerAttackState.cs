@@ -26,7 +26,7 @@ public class ChargerAttackState : IEnemyStates
 
     public void EnterState()
     {
-        if (chargerStatsSO.chargeRechargeTimer <= 0 && !isPreparing)
+        if (enemySM.chargeRechargeTimer <= 0 && !isPreparing)
             TryCharge();
         else
             ToChaseState();
@@ -41,7 +41,7 @@ public class ChargerAttackState : IEnemyStates
 
     public void UpdateState()
     {
-        if (chargerStatsSO.isCharging)
+        if (enemySM.isCharging)
         {
             if (!enemySM.nMAgent.hasPath || enemySM.nMAgent.remainingDistance < 1f)
             {
@@ -72,10 +72,9 @@ public class ChargerAttackState : IEnemyStates
         enemySM.StartCoroutine(PrepareChargeCoroutine());
     }
 
-    private System.Collections.IEnumerator PrepareChargeCoroutine()
+    private IEnumerator PrepareChargeCoroutine()
     {
-        float duration = enemySM.animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(enemyCS.chargerStats.windUpDuration);
 
         StartCharge();
     }
@@ -83,7 +82,7 @@ public class ChargerAttackState : IEnemyStates
     private void StartCharge()
     {
         isPreparing = false;
-        chargerStatsSO.isCharging = true;
+        enemySM.isCharging = true;
 
         enemySM.animator.SetBool("IsPreparing", false);
         enemySM.animator.SetBool("IsCharging", true);
@@ -96,8 +95,8 @@ public class ChargerAttackState : IEnemyStates
 
     private void EndCharge()
     {
-        chargerStatsSO.isCharging = false;
-        chargerStatsSO.chargeRechargeTimer = chargerStatsSO.chargeCooldown;
+        enemySM.isCharging = false;
+        enemySM.chargeRechargeTimer = chargerStatsSO.chargeCooldown;
 
         StopAllActions();
         ToChaseState();
@@ -123,7 +122,7 @@ public class ChargerAttackState : IEnemyStates
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (chargerStatsSO.isCharging && collision.gameObject.CompareTag("Player"))
+        if (enemySM.isCharging && collision.gameObject.CompareTag("Player"))
             EndCharge();
     }
 

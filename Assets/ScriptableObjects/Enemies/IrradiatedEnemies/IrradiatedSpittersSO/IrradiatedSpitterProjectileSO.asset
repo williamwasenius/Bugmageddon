@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc63f4c8693e1c44abbfde9adaf56aa3, type: 3}
   m_Name: IrradiatedSpitterProjectileSO
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
-  speed: 50
+  speed: 200
   damage: 25
   lifeTime: 5
   pierce: 0

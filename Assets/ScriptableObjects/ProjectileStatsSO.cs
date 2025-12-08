@@ -6,6 +6,7 @@ public class ProjectileStatsSO : ScriptableObject
     [Header("Projectile Core")]
     public float speed;
     public float damage;
+    public float armorPierce;
     public float lifeTime;
 
     [Header("Piercing & Explosive")]

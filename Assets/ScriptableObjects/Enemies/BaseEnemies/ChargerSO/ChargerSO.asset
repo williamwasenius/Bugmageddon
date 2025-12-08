@@ -12,18 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedae5dd2af5a7c4e93f8c7abff15271, type: 3}
   m_Name: ChargerSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyChargerStatsSO
-  maxHealth: 1000
-  armor: 5
-  wanderSpeed: 3
-  chaseSpeed: 5
-  wanderRadius: 10
-  wanderIntervals: 10
-  sightRange: 50
-  detectionRange: 50
-  meleeStats: {fileID: 11400000, guid: 67fa5b1c7016e794799fa4b2dae5634e, type: 2}
-  chargerDamageMultiplier: 2.5
+  chargeDamage: 150
   chargeSpeed: 15
   minChargeRange: 30
   chargeRange: 50
   chargeDuration: 5
+  isCharging: 1
   chargeCooldown: 15
+  chargeRechargeTimer: 11.743316
+  windUp: {fileID: 7400000, guid: 49b3913ca100bfe4791fba66ee9a981b, type: 2}

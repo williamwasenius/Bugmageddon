@@ -67,7 +67,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 11
+    m_EventTreshold: 16
   - m_ConditionMode: 1
     m_ConditionEvent: IsWalking
     m_EventTreshold: 0
@@ -98,7 +98,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: MoveSpeed
-    m_EventTreshold: 11
+    m_EventTreshold: 16
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7494899879256576445}
   m_Solo: 0

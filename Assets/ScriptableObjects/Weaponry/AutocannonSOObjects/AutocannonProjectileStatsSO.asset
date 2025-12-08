@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AutocannonProjectileStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
   speed: 70
-  damage: 30
+  damage: 50
   lifeTime: 5
   pierce: 0
   explosive: 1

@@ -12,6 +12,10 @@ public class TurretScript : MonoBehaviour
     [Header("Turret stats")]
     public float rotationSpeed = 5f;
 
+    [Header("Weapon rotation stats")]
+    public float wpnMaxRotation = 45;
+    public float wpnRotationSpeed = 5;
+
     [SerializeField] private GameObject target;
     [SerializeField] private List<GameObject> enemiesInRange = new List<GameObject>();
     public Collider detectionTrigger;
@@ -37,6 +41,7 @@ public class TurretScript : MonoBehaviour
             if (target != null)
             {
                 TrackTarget();
+                RotateWeapons();
                 FireWeapons();
             }
             else
@@ -78,6 +83,43 @@ public class TurretScript : MonoBehaviour
             turretCore.transform.rotation = Quaternion.Slerp(turretCore.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
     }
+
+    private void RotateWeapons()
+    {
+        if (target == null)
+            return;
+
+        Vector3 aimTarget = target.transform.position;
+
+        Vector3 forward = turretCore.transform.forward;
+
+        foreach (WeaponHandler weapon in weapons)
+        {
+            if (weapon == null) continue;
+
+            Transform w = weapon.transform;
+
+            Vector3 aimDir = (aimTarget - w.position).normalized;
+
+            float angle = Vector3.Angle(forward, aimDir);
+            if (angle > wpnMaxRotation)
+            {
+                aimDir = Vector3.RotateTowards(
+                    forward,
+                    aimDir,
+                    Mathf.Deg2Rad * wpnMaxRotation,
+                    0f
+                );
+            }
+            Quaternion targetRot = Quaternion.LookRotation(aimDir, Vector3.up);
+            w.rotation = Quaternion.Slerp(
+                w.rotation,
+                targetRot,
+                wpnRotationSpeed * Time.deltaTime
+            );
+        }
+    }
+
 
     void FireWeapons()
     {

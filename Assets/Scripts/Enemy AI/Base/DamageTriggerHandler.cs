@@ -43,7 +43,7 @@ public class DamageTriggerHandler : MonoBehaviour
                 return;
         }
 
-        float damage = Mathf.Max(0f, triggerDamage - target.Armor);
+        float damage = Mathf.Max(0f, triggerDamage * (1 -((target.Armor * 5) / 100)));
         target.TakeDamage(damage);
 
         if (singleInstance)

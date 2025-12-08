@@ -116096,6 +116096,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6577909102006599730, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 804209c87aa5e364c85ed364273ce0e2, type: 3}
     - target: {fileID: 6919061398668914168, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -141678,7 +141682,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.6666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 94614c520f22df447989a751e55d18ce, type: 2}
   m_BuildHeightMesh: 0
@@ -160245,11 +160249,11 @@ MeshRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 951281724}
   - {fileID: 1157160463}
   - {fileID: 1919742680}
   - {fileID: 1590530571}
   - {fileID: 1922546411}
-  - {fileID: 951281724}
   - {fileID: 1177514724}
   - {fileID: 45521719}
   - {fileID: 4237612134674927066}

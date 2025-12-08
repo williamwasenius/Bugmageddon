@@ -1,14 +1,24 @@
 using UnityEngine;
+using System.Collections;
 
 public class ProjectileLogic : MonoBehaviour
 {
+    public GameObject shooter;
     public ProjectileStatsSO projectileStats;
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, projectileStats.lifeTime);
+
+        if (ProjectilePoolerScript.Instance != null)
+        {
+            StartCoroutine(DespawnAfterLifetime());
+        }
+        else
+        {
+            Destroy(gameObject, projectileStats.lifeTime);
+        }
     }
 
     private void FixedUpdate()
@@ -32,7 +42,13 @@ public class ProjectileLogic : MonoBehaviour
 
         if (target != null)
         {
-            target.TakeDamage(projectileStats.damage - target.Armor);
+            if (hitObject.GetComponent<EnemyStateMachine>() != null)
+            {
+                EnemyStateMachine enemyStateMachine = hitObject.GetComponent<EnemyStateMachine>();
+                enemyStateMachine.OnHit(shooter);
+            }
+
+            target.TakeDamage(projectileStats.damage * (1 - ((target.Armor - projectileStats.armorPierce) * 5) / 100));
 
             if (projectileStats.explosive)
                 SpawnExplosion();
@@ -72,5 +88,11 @@ public class ProjectileLogic : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator DespawnAfterLifetime()
+    {
+        yield return new WaitForSeconds(projectileStats.lifeTime);
+        RemoveProjectile();
     }
 }

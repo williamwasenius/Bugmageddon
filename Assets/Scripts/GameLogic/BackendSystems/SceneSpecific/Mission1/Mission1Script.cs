@@ -14,6 +14,7 @@ public class Mission1Script : MonoBehaviour
     private void Awake()
     {
         UpdateEnemyCount();
+        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
     private void Start()
@@ -44,7 +45,6 @@ public class Mission1Script : MonoBehaviour
     private void UpdateEnemyCount()
     {
         enemiesRemaining = EnemyEntitiesManagerScript.Instance.enemiesInScene.Count;
-        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
     private void Win()

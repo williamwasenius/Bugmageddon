@@ -23,6 +23,7 @@ public class ExplosionHandler : MonoBehaviour
         {
             if (hit.isTrigger && hit.gameObject.layer == ignoredTrigger) continue;
 
+
             IDamageable dmg = hit.GetComponentInParent<IDamageable>();
             if (dmg != null)
             {

@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +20,9 @@ public class EnemyStateMachine : MonoBehaviour
     public RangedAttackState rangedState;
     public ChargerAttackState chargerState;
     public BursterState bursterState;
+
+    public bool isCharging;
+    public float chargeRechargeTimer;
 
     private void Awake()
     {
@@ -43,12 +48,15 @@ public class EnemyStateMachine : MonoBehaviour
         }
         else
         {
-            if (!enemyCS.coreStats.isPreplaced)
+            if (!enemyCS.coreStats.isPreplaced && chaseTarget == null)
             {
                 chaseTarget = GameObject.FindGameObjectWithTag("Player").transform;
                 ChangeState(chaseState);
             }
-            ChangeState(wanderState);
+            else
+            {
+                ChangeState(wanderState);
+            }
         }
     }
 
@@ -66,12 +74,47 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (enemyCS.chargerStats != null)
         {
-            if (enemyCS.chargerStats.chargeRechargeTimer < 0 && !enemyCS.chargerStats.isCharging)
+            if (chargeRechargeTimer >= 0 && !isCharging)
             {
-                enemyCS.chargerStats.chargeRechargeTimer -= Time.deltaTime;
+                chargeRechargeTimer -= Time.deltaTime;
             }
         }
     }
+
+    public void OnHit(GameObject attacker)
+    {
+        if (!attacker.CompareTag("Enemy") && chaseTarget == null)
+        {
+            chaseTarget = attacker.transform;
+            ChangeState(chaseState);
+            AlertNearbyAllies(attacker);
+        }
+        else
+        {
+            
+        }
+    }
+
+   private void AlertNearbyAllies(GameObject attacker)
+    {
+        int enemyMask = LayerMask.GetMask("Enemy");
+        Collider[] allies = Physics.OverlapSphere(gameObject.transform.position, 30, enemyMask);
+
+        foreach (var ally in allies)
+        {
+            if (ally.TryGetComponent(out EnemyStateMachine sm))
+            {
+                sm.OnAllyAlert(attacker);
+            }
+        }
+    }
+
+    private void OnAllyAlert(GameObject newTarget)
+    {
+        chaseTarget = newTarget.transform;
+        ChangeState(chaseState);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(other);

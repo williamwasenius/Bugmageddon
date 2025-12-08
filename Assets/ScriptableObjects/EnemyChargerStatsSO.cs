@@ -13,7 +13,9 @@ public class EnemyChargerStatsSO : ScriptableObject
     public float chargeDuration;
 
     [Header("Charge Cooldown")]
-    public bool isCharging = false;
     public float chargeCooldown;
-    public float chargeRechargeTimer;
+
+    [Header("ChargeAnimation")]
+    public AnimationClip windUp;
+    public float windUpDuration => windUp != null ? windUp.length : 0f;
 }
