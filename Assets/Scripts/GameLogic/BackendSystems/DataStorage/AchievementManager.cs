@@ -90,8 +90,39 @@ public class AchievementManager : MonoBehaviour
         field.SetValue(this, true);
         Debug.Log("Unlocked achievement: " + achievementName);
 
+        /*
+        //accornding to one tutorial
+        if(steam_stats_ready())
+        {
+            if (!steam_set_achievement(achievementName))
+            {
+                steam_set_achievement(achievementName);
+                steam_store_stats();
+            }
+        }
+
+        //according to another
+        if (SteamManager.Initialized)
+        {
+            bool alreadyUnlocked = false;
+            SteamUserStats.GetAchievement(achievementName, out alreadyUnlocked);
+
+            if (!alreadyUnlocked)
+            {
+                SteamUserStats.SetAchievement(achievementName);
+                SteamUserStats.StoreStats();
+
+                Debug.Log("Steam Achievement unlocked: " + achievementName);
+            }
+            else
+            {
+                Debug.Log("Steam Achievement already unlocked: " + achievementName);
+            }
+        }
+        */
         SaveAchievementData();
     }
+
 
 }
 
