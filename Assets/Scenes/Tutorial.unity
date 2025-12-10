@@ -9617,6 +9617,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2050925971133085357, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1206505261}
+    - target: {fileID: 2050925971133085357, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: hpContainer
+      value: 
+      objectReference: {fileID: 424035822}
     - target: {fileID: 3493639480678516113, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9687,6 +9695,16 @@ Transform:
 --- !u!4 &254692932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8948078234049651765, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+  m_PrefabInstance: {fileID: 254692929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254692933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 401396358258298626, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+  m_PrefabInstance: {fileID: 254692929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254692934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2540069236747428527, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
   m_PrefabInstance: {fileID: 254692929}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &256485697
@@ -13875,6 +13893,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422443803}
   m_CullTransparentMesh: 1
+--- !u!1 &424035822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5617050464481912959, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+  m_PrefabInstance: {fileID: 1206505257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &424912315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35720,6 +35743,14 @@ PrefabInstance:
       propertyPath: spawnPointWPN2
       value: 
       objectReference: {fileID: 254692931}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weapon1Parent
+      value: 
+      objectReference: {fileID: 254692934}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weapon2Parent
+      value: 
+      objectReference: {fileID: 254692933}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

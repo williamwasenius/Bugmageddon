@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Mission4Script : MonoBehaviour
 {
+    public static Mission4Script Instance { get; set; }
+
     public GameObject player;
 
     public CanvasGroup winCanvas;
@@ -17,6 +19,7 @@ public class Mission4Script : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
         }
+        Instance = this;
         MissionTracker.Instance.SetCurrentMission("Mission4");
     }
     public void FixedUpdate()

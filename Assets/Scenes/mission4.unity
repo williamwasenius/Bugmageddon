@@ -7493,7 +7493,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -461.6906
+      value: -422.6
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7501,7 +7501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 164.3674
+      value: -238.3
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12063,7 +12063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pod Gamma
+  m_text: Pod Foxtrot
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
   m_sharedMaterial: {fileID: 2118036077212545858, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
@@ -39694,7 +39694,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -426.01086
+      value: -459.8
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39702,7 +39702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -239.89255
+      value: 163.9
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51593,6 +51593,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2588878227367992150, guid: cf8bb3e07ff14674ca00d2bf70d442d3, type: 3}
   m_PrefabInstance: {fileID: 704397295}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &707799742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 707799743}
+  - component: {fileID: 707799745}
+  - component: {fileID: 707799744}
+  m_Layer: 0
+  m_Name: DirectinIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &707799743
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707799742}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1982954667}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &707799744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707799742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1307622616, guid: 01ad6c5981875cd4ea25952f41f81fe0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &707799745
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707799742}
+  m_CullTransparentMesh: 1
 --- !u!1001 &708804366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67250,7 +67325,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -192.69061
+      value: -212
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -67258,7 +67333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 357.3674
+      value: 90.2
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -92937,7 +93012,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -211.69061
+      value: 82
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -92945,7 +93020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 90.3674
+      value: 58.8
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -104325,7 +104400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.989136
+      value: -194
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -104333,7 +104408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.107452
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 233211546068187026, guid: 3f4a7825f31ab014687f541d5b37e7d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -117382,7 +117457,7 @@ PrefabInstance:
     - target: {fileID: 3604634499258332226, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_text
       value: "We must locate the center of the nest. \n\nFind and activate all 6
-        sonar pylons by standing within the circle."
+        sonar pylons by standing within their circle to activate them."
       objectReference: {fileID: 0}
     - target: {fileID: 4160952331154375002, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: player
@@ -117453,6 +117528,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6894463707297451142, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       insertIndex: -1
       addedObject: {fileID: 917008633}
+    - targetCorrespondingSourceObject: {fileID: 6894463707297451142, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1982954667}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2161710051279188157, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       insertIndex: -1
@@ -141016,8 +141094,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1899479470
 MonoBehaviour:
@@ -141039,14 +141117,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mission 4 - \u201Cdigging deeper\u201D\n\nwe have located the rough location
-    of the enemy central hive, but the underground tunnels span for hundreds of kilometers
-    in all directions. to find the core, we will need to scan the tunnel network.\n\nwe
-    set up a series of sonars that will help us achieve this. but as soon as we activated
-    them, their seismic disturbance called in endless swarms of bugs, destroying
-    the defending forces.\n\nmove into the area, secure each sonar pod by keeping
-    your sonar pack in a close enough radius around each pod.\n\nonce we have triangulated
-    the hives core, we will hopefully be able to eliminate the bugs for good."
+  m_text: "Mission 4 - \u201Cdigging deeper\u201D\n\nWE HAVE LOCATED THE ROUGH LOCATION
+    OF THE CENTRAL ENEMY HIVE.\n\nTO CONFIRM ITS PRECISE LOCATION, WE NEED YOU TO
+    ACTIVATE THE SONAR PYLONS IN THE AREA TO SCAN THE UNDERGROUND TUNNEL NETWORK.\n\nWORK
+    QUICKLY. THE BUGS IN THIS AREA ARE NOTHING LIKE WE'VE SEEN  BEFORE."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
   m_sharedMaterial: {fileID: 2118036077212545858, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
@@ -141073,15 +141147,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 17
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -147705,6 +147779,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b4a8e7fccaac9d4aa8506b7290c7143, type: 3}
+--- !u!1 &1982954666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1982954667}
+  - component: {fileID: 1982954668}
+  m_Layer: 0
+  m_Name: DirectionIndicatorPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1982954667
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982954666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 707799743}
+  m_Father: {fileID: 1590530574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1982954668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982954666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4aa706c60f1354fa0aa72cdc191356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyIndicatorManager
+  correctionAngle: 77.5
+  player: {fileID: 951281725}
+  indicatorImagePivot: {fileID: 1982954667}
+  targetObject: {fileID: 0}
+  mainCamera: {fileID: 1157160464}
+  mission: {fileID: 0}
 --- !u!1001 &1983259611
 PrefabInstance:
   m_ObjectHideFlags: 0

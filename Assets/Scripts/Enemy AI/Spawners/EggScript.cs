@@ -25,7 +25,7 @@ public class EggScript : MonoBehaviour
     {
         EnemyEntitiesManagerScript entityManager = EnemyEntitiesManagerScript.Instance;
 
-        if (entityManager.enemiesInScene.Count <= 50)
+        if (entityManager.enemiesInScene.Count <= 100)
         {
             int randomIndex = Random.Range(0, enemyPool.Length);
             GameObject enemyPrefab = enemyPool[randomIndex];
