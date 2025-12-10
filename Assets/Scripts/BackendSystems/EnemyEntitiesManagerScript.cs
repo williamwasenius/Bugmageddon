@@ -87,7 +87,7 @@ public class EnemyEntitiesManagerScript : MonoBehaviour
             {
                 if (obj.activeInHierarchy) obj.SetActive(false);
 
-                if (type == "Enemy" && enemyComponent != null && !enemyComponent.coreStats.isPreplaced)
+                if (type == "Enemy" && enemyComponent != null && !enemyComponent.isPreplaced)
                 {
                     if (enemyInactiveTimers.ContainsKey(obj))
                     {

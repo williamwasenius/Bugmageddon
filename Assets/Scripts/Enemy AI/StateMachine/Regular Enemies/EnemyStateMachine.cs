@@ -1,5 +1,4 @@
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -48,7 +47,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
         else
         {
-            if (!enemyCS.coreStats.isPreplaced && chaseTarget == null)
+            if (!enemyCS.isPreplaced && chaseTarget == null)
             {
                 chaseTarget = GameObject.FindGameObjectWithTag("Player").transform;
                 ChangeState(chaseState);

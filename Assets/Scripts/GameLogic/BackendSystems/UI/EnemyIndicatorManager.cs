@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyIndicatorManager : MonoBehaviour
 {/*
-    public float correctionAngle;
+    public float correctionAngle = -77.5f;
     public Transform player;  
     public Transform indicatorImagePivot; 
     public Transform targetObject;

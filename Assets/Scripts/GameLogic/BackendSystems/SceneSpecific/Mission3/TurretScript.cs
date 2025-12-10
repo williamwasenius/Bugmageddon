@@ -153,7 +153,7 @@ public class TurretScript : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") && !enemiesInRange.Contains(other.gameObject))
         {
@@ -162,7 +162,7 @@ public class TurretScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {

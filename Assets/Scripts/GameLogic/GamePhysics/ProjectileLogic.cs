@@ -38,6 +38,11 @@ public class ProjectileLogic : MonoBehaviour
 
     private void HandleHit(GameObject hitObject)
     {
+        if (shooter.CompareTag(hitObject.tag) || (shooter.CompareTag("Ally") && hitObject.CompareTag("Player")))
+        {
+            RemoveProjectile();
+        }
+
         IDamageable target = hitObject.GetComponentInParent<IDamageable>();
 
         if (target != null)

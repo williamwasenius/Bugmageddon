@@ -35,12 +35,12 @@ public class EggCluster : MonoBehaviour
             Vector3 offset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
             GameObject spawned = Instantiate(enemyPrefab, transform.position + offset, Quaternion.identity);
 
-            spawned.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
+            spawned.GetComponent<EnemyCore>().isPreplaced = false;
             EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawned);
 
             if (enemyPrefab != null)
             {
-                enemyPrefab.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
+                enemyPrefab.GetComponent<EnemyCore>().isPreplaced = false;
                 EnemyEntitiesManagerScript.Instance.RegisterEnemy(enemyPrefab);
             }
 

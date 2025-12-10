@@ -69,24 +69,29 @@ public class InGameMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O) && Time.timeScale != 0)
         {
             Cursor.visible = !Cursor.visible;
-
-            if (missionInfoUI.activeSelf)
-            {
-                missionInfoUI.SetActive(false);
-                combatCanvas.SetActive(true);
-                if (missionUIOn)
-                {
-                    missionUI.SetActive(true);
-                }
-            }
-            else
-            {
-                missionInfoUI.SetActive(true);
-                combatCanvas.SetActive(false);
-                missionUI.SetActive(false);
-            }
+            MissionInfoPanel();
         }
 
+    }
+
+    public void MissionInfoPanel()
+    {
+
+        if (missionInfoUI.activeSelf)
+        {
+            missionInfoUI.SetActive(false);
+            combatCanvas.SetActive(true);
+            if (missionUIOn)
+            {
+                missionUI.SetActive(true);
+            }
+        }
+        else
+        {
+            missionInfoUI.SetActive(true);
+            combatCanvas.SetActive(false);
+            missionUI.SetActive(false);
+        }
     }
 
     public void NextMission()

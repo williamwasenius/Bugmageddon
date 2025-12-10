@@ -120,7 +120,6 @@ public class WeaponHandler : MonoBehaviour
 
     private void Fire()
     {
-        isFiring = true;
         ProjectileStatsSO projectileStats = weaponStats.projectileStats;
         GameObject projectile;
 

@@ -16,6 +16,7 @@ TagManager:
   - Structure
   - MissionHandler
   - DestructibleRock
+  - Ally
   layers:
   - Default
   - TransparentFX

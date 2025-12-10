@@ -7,6 +7,8 @@ public class PylonCharge : MonoBehaviour
 
     public GameObject circleIndicator;
     private Renderer circleRenderer;
+    public GameObject towerGlow;
+    private Renderer towerGlowRenderer;
 
     public Material ActiveMaterial;
     public Material InactiveMaterial;
@@ -19,17 +21,18 @@ public class PylonCharge : MonoBehaviour
     private float chargeRate = 1f;  
     private float nextChargeTime = 0f;
 
+    private AudioPlayScript audioPlayScript;
+
     private void Start()
     {
+        audioPlayScript = GetComponent<AudioPlayScript>();
         circleRenderer = circleIndicator.GetComponent<Renderer>();
+        towerGlowRenderer = towerGlow.GetComponent<Renderer>();
     }
 
     private void Update()
     {
-        if (charged)
-        {
-            circleRenderer.material = CompletedMaterial;
-        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -48,8 +51,12 @@ public class PylonCharge : MonoBehaviour
         float normalizedCharge = (float)chargeProgress / requiredCharge;
         ChargeMeter.fillAmount = Mathf.Clamp01(normalizedCharge);
 
-        if (chargeProgress >= requiredCharge)
+        if (chargeProgress >= requiredCharge && !charged)
         {
+            audioPlayScript.Play(0);
+            circleRenderer.material = CompletedMaterial;
+            towerGlowRenderer.material = CompletedMaterial;
+            ChargeMeter.color = Color.green;
             charged = true;
             Debug.Log("Pylon fully charged!");
         }
@@ -60,6 +67,8 @@ public class PylonCharge : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             circleRenderer.material = ActiveMaterial;
+            towerGlowRenderer.material = ActiveMaterial;
+            ChargeMeter.color = Color.turquoise;
         }
     }
 
@@ -68,6 +77,9 @@ public class PylonCharge : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !charged)
         {
             circleRenderer.material = InactiveMaterial;
+            towerGlowRenderer.material = InactiveMaterial;
+            ChargeMeter.color = Color.red;
+
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MachinegunProjectileStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
   speed: 85
-  damage: 30
+  damage: 15
   armorPierce: 0
   lifeTime: 5
   pierce: 0

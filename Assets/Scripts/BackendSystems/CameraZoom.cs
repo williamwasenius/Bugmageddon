@@ -29,11 +29,10 @@ public class CameraZoom : MonoBehaviour
                 transitioning = false;
         }
 
-        // Example Trigger (You can replace this)
-        if (Input.GetKeyDown(KeyCode.Z))
+        /*if (Input.GetKeyDown(KeyCode.Z))
         {
             StartTransition();
-        }
+        }*/
     }
 
     public void StartTransition()

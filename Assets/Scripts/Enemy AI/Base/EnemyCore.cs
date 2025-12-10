@@ -20,6 +20,9 @@ public class EnemyCore : MonoBehaviour, IDamageable
     private DamageTriggerHandler damageTrigger;
     public DamageTriggerHandler chargeDamageTrigger;
 
+    [Header("Checks")]
+    public bool isPreplaced = true;
+
     private bool hasExploded = false;
 
     public float CurrentHealth { get; set; }

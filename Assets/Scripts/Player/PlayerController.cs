@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
             currentInteractable.Activate();
 

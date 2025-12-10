@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyCoreStatsSO : ScriptableObject
 {
     public bool isBoss = false;
-    public bool isPreplaced = true;
 
     [Header("Defense")]
     public float maxHealth;

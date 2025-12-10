@@ -153,8 +153,8 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
         if (spawnedEnemy != null)
         {
-            spawnedEnemy.GetComponent<EnemyCore>().coreStats.isPreplaced = false;
-            spawnedEnemy.GetComponent<EnemyStateMachine>().chaseTarget = player.transform;
+            spawnedEnemy.GetComponent<EnemyCore>().isPreplaced = false;
+            //spawnedEnemy.GetComponent<EnemyStateMachine>().chaseTarget = player.transform;
             EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawnedEnemy);
         }
 
