@@ -54,7 +54,7 @@ public class DestructibleScript : MonoBehaviour, IDamageable
         CurrentHealth -= damage;
         if (audioPlayScript != null)
         {
-            audioPlayScript.Play(0, 1);
+            audioPlayScript.Play(0);
         }
         if (CurrentHealth <= 0)
         {

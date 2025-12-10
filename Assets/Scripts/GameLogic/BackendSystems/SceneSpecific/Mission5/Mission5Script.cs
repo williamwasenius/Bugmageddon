@@ -27,7 +27,7 @@ public class Mission5Script : MonoBehaviour
             StartCoroutine(Win());
         }
 
-        if (player == null)
+        if (player == null && !bossState.isDefeated)
         {
             Fail();
         }

@@ -54,7 +54,7 @@ public class ProjectileLogic : MonoBehaviour
                 enemyStateMachine.OnHit(shooter);
                 if (audioPlayScript != null && shooter.CompareTag("Player"))
                 { 
-                    audioPlayScript.Play(0, 0.5f); 
+                    audioPlayScript.Play(0); 
                 }
             }
 

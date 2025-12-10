@@ -53,7 +53,7 @@ public class PylonCharge : MonoBehaviour
 
         if (chargeProgress >= requiredCharge && !charged)
         {
-            audioPlayScript.Play(0, 1);
+            audioPlayScript.Play(0);
             circleRenderer.material = CompletedMaterial;
             towerGlowRenderer.material = CompletedMaterial;
             ChargeMeter.color = Color.green;
