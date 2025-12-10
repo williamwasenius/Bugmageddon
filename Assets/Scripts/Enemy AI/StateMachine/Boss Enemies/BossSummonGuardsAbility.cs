@@ -13,6 +13,7 @@ public class BossSummonGuardsAbility : IBossStates
     }
     public void EnterState()
     {
+        BossSM.abilityLocked = true;
         BossSM.callGuardsRechargeTime = BossSM.callGuardsCooldown;
         BossSM.StartCoroutine(SummonGuards());
         BossSM.animator.SetBool("IsRoaring", true);
@@ -42,6 +43,9 @@ public class BossSummonGuardsAbility : IBossStates
         float duration = BossSM.animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(duration);
         BossSM.animator.SetBool("IsRoaring", false);
+
+        BossSM.abilityLocked = false;
+
         BossSM.ChangeState(BossSM.chaseState);
 
     }

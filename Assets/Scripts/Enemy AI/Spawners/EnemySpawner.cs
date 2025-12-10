@@ -95,6 +95,16 @@ public class EnemySpawner : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    private void Spawn(GameObject enemyPrefab)
+    {
+        Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+        GameObject spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
+
+        spawnedEnemy.GetComponent<EnemyCore>().isPreplaced = false;
+        EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawnedEnemy);
+    }
+
+
     private IEnumerator SpawnEnemy()
     {
         int randomIndex = Random.Range(0, enemies.Length);
@@ -112,15 +122,14 @@ public class EnemySpawner : MonoBehaviour, IDamageable
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                    spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
+                    Spawn(enemyPrefab);
                     yield return new WaitForSeconds(0.1f);
                 }
                 yield break;
             }
             else if (enemyPrefab.name.Contains("Medium"))
             {
-                spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position, spawningLocation.rotation);
+                Spawn(enemyPrefab);
             }
         }
         else if (large)
@@ -129,8 +138,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                    spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
+                    Spawn(enemyPrefab);
                     yield return new WaitForSeconds(0.1f);
                 }
                 yield break;
@@ -139,26 +147,19 @@ public class EnemySpawner : MonoBehaviour, IDamageable
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-                    spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position + spawnOffset, spawningLocation.rotation);
+                    Spawn(enemyPrefab);
                     yield return new WaitForSeconds(0.1f);
                 }
                 yield break;
             }
             else if (enemyPrefab.name.Contains("Large"))
             {
-                spawnedEnemy = Instantiate(enemyPrefab, spawningLocation.position, spawningLocation.rotation);
+                Spawn(enemyPrefab);
             }
-        }
-
-        if (spawnedEnemy != null)
-        {
-            spawnedEnemy.GetComponent<EnemyCore>().isPreplaced = false;
-            //spawnedEnemy.GetComponent<EnemyStateMachine>().chaseTarget = player.transform;
-            EnemyEntitiesManagerScript.Instance.RegisterEnemy(spawnedEnemy);
         }
 
         yield return null;
 
     }
+
 }

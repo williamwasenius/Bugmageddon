@@ -32,10 +32,10 @@ public class BossChaseState : IBossStates
 
     public void UpdateState()
     {
-        if (BossSM.animator.GetBool("IsRoaring") || (BossSM.animator.GetBool("IsTailAttacking")))
-        {
+
+        if (BossSM.abilityLocked)
             return;
-        }
+
         else
         {
             if (BossSM.tailAttackRechargeTime <= 0)
