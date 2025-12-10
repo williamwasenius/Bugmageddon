@@ -53,7 +53,7 @@ public class PylonCharge : MonoBehaviour
 
         if (chargeProgress >= requiredCharge && !charged)
         {
-            audioPlayScript.Play(0);
+            audioPlayScript.Play(0, 1);
             circleRenderer.material = CompletedMaterial;
             towerGlowRenderer.material = CompletedMaterial;
             ChargeMeter.color = Color.green;
@@ -64,7 +64,7 @@ public class PylonCharge : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !charged)
         {
             circleRenderer.material = ActiveMaterial;
             towerGlowRenderer.material = ActiveMaterial;

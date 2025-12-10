@@ -32,25 +32,27 @@ public class BossChaseState : IBossStates
 
     public void UpdateState()
     {
-        if (BossSM.animator.GetBool("IsRoaring"))
+        if (BossSM.animator.GetBool("IsRoaring") || (BossSM.animator.GetBool("IsTailAttacking")))
         {
             return;
         }
-
-        else if (BossSM.tailAttackRechargeTime <= 0)
-        {
-            BossSM.ChangeState(BossSM.bossTailAttack);
-
-        }
-        else if (BossSM.currentPhaseINT == 2 && BossSM.callGuardsRechargeTime <= 0)
-        {
-            BossSM.ChangeState(BossSM.bossSummonGuardsAbility);
-        }
         else
         {
-            BossSM.CheckAttackRange();
+            if (BossSM.tailAttackRechargeTime <= 0)
+            {
+                BossSM.ChangeState(BossSM.bossTailAttack);
 
-            BossSM.animator.SetBool("IsMoving", BossSM.velocity.magnitude >= 0.1f);
+            }
+            else if (BossSM.currentPhaseINT == 2 && BossSM.callGuardsRechargeTime <= 0)
+            {
+                BossSM.ChangeState(BossSM.bossSummonGuardsAbility);
+            }
+            else
+            {
+                BossSM.CheckAttackRange();
+
+                BossSM.animator.SetBool("IsMoving", BossSM.velocity.magnitude >= 0.1f);
+            }
         }
 
     }

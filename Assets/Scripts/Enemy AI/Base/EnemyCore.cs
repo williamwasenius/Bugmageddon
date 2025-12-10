@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.DebugUI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class EnemyCore : MonoBehaviour, IDamageable
 {
@@ -17,8 +19,10 @@ public class EnemyCore : MonoBehaviour, IDamageable
     public Canvas healthbarUI;
     public Image filler;
     public Animator animator;
+    public GameObject splatVFX;
     private DamageTriggerHandler damageTrigger;
     public DamageTriggerHandler chargeDamageTrigger;
+
 
     [Header("Checks")]
     public bool isPreplaced = true;
@@ -88,6 +92,11 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(0);
         entityManagerScript.DeregisterEnemy(gameObject);
+        if (splatVFX != null)
+        {
+            Instantiate(splatVFX, transform.position, transform.rotation);
+
+        }
         Destroy(gameObject);
     }
 }

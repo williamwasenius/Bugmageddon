@@ -4,6 +4,7 @@ using System.Collections;
 public class ProjectileLogic : MonoBehaviour
 {
     public GameObject shooter;
+    public AudioPlayScript audioPlayScript;
     public ProjectileStatsSO projectileStats;
     private Rigidbody rb;
 
@@ -51,6 +52,10 @@ public class ProjectileLogic : MonoBehaviour
             {
                 EnemyStateMachine enemyStateMachine = hitObject.GetComponent<EnemyStateMachine>();
                 enemyStateMachine.OnHit(shooter);
+                if (audioPlayScript != null)
+                { 
+                    audioPlayScript.Play(0, 0.5f); 
+                }
             }
 
             target.TakeDamage(projectileStats.damage * (1 - ((target.Armor - projectileStats.armorPierce) * 5) / 100));

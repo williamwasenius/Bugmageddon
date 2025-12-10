@@ -30,7 +30,7 @@ public class DamageTriggerHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!enabled || other.isTrigger)
+        if (!enabled || other.isTrigger && !other.CompareTag("Destructible"))
             return;
 
         IDamageable target = other.GetComponent<IDamageable>();

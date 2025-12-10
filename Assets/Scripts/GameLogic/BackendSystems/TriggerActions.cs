@@ -6,8 +6,15 @@ public class TriggerActions : MonoBehaviour
     public GameObject textOne;
     public GameObject textTwo;
 
+    public Collider trigger;
+
     public bool musicTrigger;
     public MusicManagerScript musicManager;
+
+    private void Start()
+    {
+        trigger = GetComponent<Collider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +29,8 @@ public class TriggerActions : MonoBehaviour
             {
                 StartCoroutine(musicManager.PlayMusic());
             }
+
+            trigger.enabled = false;
         }
     }
 }

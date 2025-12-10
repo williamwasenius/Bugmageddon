@@ -3793,13 +3793,13 @@ MonoBehaviour:
   weapons1Display:
   - {fileID: 3187753146683581592}
   - {fileID: 1833761160}
-  - {fileID: 1820702979}
   - {fileID: 1589882655}
+  - {fileID: 1820702979}
   weapons2Display:
   - {fileID: 1109263391}
   - {fileID: 995672778}
-  - {fileID: 1592648858}
   - {fileID: 1628970082}
+  - {fileID: 1592648858}
   selectedWPN1: 0
   selectedWPN2: 0
 --- !u!4 &1509530494
@@ -3976,7 +3976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Name
-      value: GCWeaponInfoCanvas
+      value: RLWeaponInfoCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Layer
@@ -4264,7 +4264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Name
-      value: RLWeaponInfoCanvas
+      value: GCWeaponInfoCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Layer
@@ -4569,7 +4569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Name
-      value: GCWeaponInfoCanvas
+      value: RLWeaponInfoCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Layer
@@ -4948,8 +4948,8 @@ Transform:
   m_Children:
   - {fileID: 1109263390}
   - {fileID: 995672777}
-  - {fileID: 1592648857}
   - {fileID: 1628970081}
+  - {fileID: 1592648857}
   m_Father: {fileID: 1509530494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1820702977
@@ -5038,7 +5038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Name
-      value: RLWeaponInfoCanvas
+      value: GCWeaponInfoCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4384068764286290549, guid: c5d64b78317279c4a951240875a3d18f, type: 3}
       propertyPath: m_Layer
@@ -5651,8 +5651,8 @@ Transform:
   m_Children:
   - {fileID: 7329318721658883182}
   - {fileID: 1833761159}
-  - {fileID: 1820702978}
   - {fileID: 1589882654}
+  - {fileID: 1820702978}
   m_Father: {fileID: 1509530494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1937878959 stripped

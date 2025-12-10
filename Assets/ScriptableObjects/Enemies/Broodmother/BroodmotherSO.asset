@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: BroodmotherSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCoreStatsSO
   isBoss: 1
-  isPreplaced: 1
   maxHealth: 10000
   armor: 0
   wanderSpeed: 0
-  chaseSpeed: 25
+  chaseSpeed: 30
   wanderRadius: 0
   wanderIntervals: 0
   sightRange: 0

@@ -16,7 +16,6 @@ public class Misison5BossFightTrigger : MonoBehaviour
             wall.SetActive(true);
             bossUI.SetActive(true);
             boss.SetActive(true);
-            gameObject.SetActive(false);
             camera.StartTransition();
         }
     }

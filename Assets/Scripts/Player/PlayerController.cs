@@ -32,6 +32,14 @@ public class PlayerController : MonoBehaviour
     public float wpnMaxRotation = 20f;
     public float wpnRotationSpeed = 10f;
     public bool armLock = false;
+    public bool elevatedAim = false;
+    private enum WeaponElevation
+    {
+        groundLevel,
+        eyeLevel,
+        elevatedLevel
+    }
+    private WeaponElevation weaponElevation;
 
     private WeaponHandler weapon1Handler;
     private WeaponHandler weapon2Handler;
@@ -64,6 +72,11 @@ public class PlayerController : MonoBehaviour
 
         if (animator.GetBool("IsStomping"))
             return;
+
+        if (Input.GetKeyUp(KeyCode.Mouse2))
+        {
+            weaponElevation = (WeaponElevation)(((int)weaponElevation + 1) % 3);
+        }
 
         if (Input.GetKeyDown(KeyCode.F))
             StartCoroutine(StompRoutine());
@@ -206,30 +219,67 @@ public class PlayerController : MonoBehaviour
             legs.rotation = Quaternion.Slerp(legs.rotation, targetRotation, legRotationSpeed * Time.deltaTime);
         }
     }
-
     private void RotateTowardsMouse()
     {
         Ray cameraRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
 
-        if (groundPlane.Raycast(cameraRay, out float rayLength))
+        Plane aimPlane;
+
+        switch (weaponElevation)
+        {
+            case WeaponElevation.groundLevel:
+                aimPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+                break;
+
+            case WeaponElevation.eyeLevel:
+                aimPlane = new Plane(Vector3.up, new Vector3(0, aimPivot.position.y, 0));
+                break;
+
+            case WeaponElevation.elevatedLevel:
+                aimPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y + 20, 0));
+                break;
+
+            default:
+                aimPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+                break;
+        }
+
+        if (aimPlane.Raycast(cameraRay, out float rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Vector3 aimTarget = !armLock ? pointToLook : new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z);
+
+            bool lockY = (weaponElevation == WeaponElevation.eyeLevel);
+
+            Vector3 aimTarget = lockY
+                ? new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z)
+                : pointToLook;
 
             float maxAngle = wpnMaxRotation;
             Vector3 forward = aimPivot.transform.forward;
 
+            // Weapon 1
             Vector3 aimDir1 = (aimTarget - weapon1.transform.position).normalized;
             float angle1 = Vector3.Angle(forward, aimDir1);
-            if (angle1 > maxAngle) aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
+            if (angle1 > maxAngle)
+                aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
 
+            // Weapon 2
             Vector3 aimDir2 = (aimTarget - weapon2.transform.position).normalized;
             float angle2 = Vector3.Angle(forward, aimDir2);
-            if (angle2 > maxAngle) aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
+            if (angle2 > maxAngle)
+                aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
 
-            weapon1.transform.rotation = Quaternion.Slerp(weapon1.transform.rotation, Quaternion.LookRotation(aimDir1), wpnRotationSpeed * Time.deltaTime);
-            weapon2.transform.rotation = Quaternion.Slerp(weapon2.transform.rotation, Quaternion.LookRotation(aimDir2), wpnRotationSpeed * Time.deltaTime);
+            weapon1.transform.rotation = Quaternion.Slerp(
+                weapon1.transform.rotation,
+                Quaternion.LookRotation(aimDir1),
+                wpnRotationSpeed * Time.deltaTime
+            );
+
+            weapon2.transform.rotation = Quaternion.Slerp(
+                weapon2.transform.rotation,
+                Quaternion.LookRotation(aimDir2),
+                wpnRotationSpeed * Time.deltaTime
+            );
         }
     }
 

@@ -867,6 +867,10 @@ PrefabInstance:
       propertyPath: tailAttackContainer
       value: 
       objectReference: {fileID: 463998478}
+    - target: {fileID: 2096224677826440632, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2167814454065511010, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 58.425587
@@ -982,6 +986,10 @@ PrefabInstance:
     - target: {fileID: 3248514199582599627, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.7295279
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437240264921384108, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3490008487538541712, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: broodMotherTail
@@ -1111,6 +1119,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.000017880648
       objectReference: {fileID: 0}
+    - target: {fileID: 5004886347945576326, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5560979424520797473, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -37.95398
@@ -1171,6 +1183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.9731517
       objectReference: {fileID: 0}
+    - target: {fileID: 6044254619207058156, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: 'audioClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4250a68d2c719f846b993f80e8312a9b, type: 3}
     - target: {fileID: 6224669348495132182, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -44.282288
@@ -1206,6 +1222,14 @@ PrefabInstance:
     - target: {fileID: 6681786576217170426, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -161.6321
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836052046379799764, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095208591908849376, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7100991930555027027, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1254,6 +1278,10 @@ PrefabInstance:
     - target: {fileID: 7208918783885966856, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.5444436e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260771468790543126, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7445342548691464025, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -46349,6 +46377,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23762751738264960, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: enemyRangeThreshold
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 23762751738264960, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: destructibleRangeThreshold
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 252635509631357794, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_Type
       value: 0
@@ -46357,6 +46393,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7482667652216324306, guid: ed3b7f69f30a451428523134247dd156, type: 3}
+    - target: {fileID: 1053084298014328609, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: autoPlay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576233639047411717, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576233639047411717, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 95572dfef211db3468c95b42d6894979, type: 3}
+    - target: {fileID: 1576233639047411717, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -2723234034293175283, guid: 4030aefbdf54a9547bd29c188176e159, type: 2}
     - target: {fileID: 1908380103740089371, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -46549,6 +46601,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Systems '
       objectReference: {fileID: 0}
+    - target: {fileID: 7415549506864883856, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 61cfadea2c10b3349acbced8637e4840, type: 3}
+    - target: {fileID: 7415549506864883856, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -2723234034293175283, guid: 4030aefbdf54a9547bd29c188176e159, type: 2}
     - target: {fileID: 7479671462493519405, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_FillAmount
       value: 0
@@ -53987,6 +54047,7 @@ MonoBehaviour:
   textTrigger: 0
   textOne: {fileID: 0}
   textTwo: {fileID: 0}
+  trigger: {fileID: 0}
   musicTrigger: 1
   musicManager: {fileID: 1865173708}
 --- !u!1001 &1856410864
@@ -60820,7 +60881,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065965760}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 

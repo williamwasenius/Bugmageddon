@@ -8,7 +8,7 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     public GameObject hpContainer;
     public Image healthBar;
-
+    public AudioPlayScript audioPlayScript;
     public float Armor => armor;
     public float MaxHealth => maxHealth;
     public float maxHealth = 100f;
@@ -52,6 +52,10 @@ public class DestructibleScript : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        if (audioPlayScript != null)
+        {
+            audioPlayScript.Play(0, 1);
+        }
         if (CurrentHealth <= 0)
         {
             Die();

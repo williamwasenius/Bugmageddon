@@ -21,6 +21,6 @@ public class MissionTutorialScript : MonoBehaviour
         tutorialComplete = true;
         SaveManager.Instance.SavePlayerData();
         AchievementManager.Instance.GetAchievement("tutorialAchievement");
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("WeaponSelection");
     }
 }

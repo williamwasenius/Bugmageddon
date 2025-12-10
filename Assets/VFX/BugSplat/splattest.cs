@@ -9,10 +9,9 @@ public class splattest : MonoBehaviour
 
     public void Start()
     {
-        int number = Random.Range(0, 8);
+        int number = Random.Range(0, 3);
         Debug.Log(number);
         vfx.SetTexture("SplatText", splats[number].texture);
-        Instantiate(prefab);
     }
 
 }
