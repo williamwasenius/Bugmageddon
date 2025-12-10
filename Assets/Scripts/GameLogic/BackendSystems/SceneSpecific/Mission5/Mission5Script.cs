@@ -35,6 +35,7 @@ public class Mission5Script : MonoBehaviour
 
     private IEnumerator Win()
     {
+        AchievementManager.Instance.GetAchievement("mission5Achievement");
         MissionScriptUniversalFunctions.CompleteMission("Mission5",null,this, false);
         
         foreach (GameObject enemy in EnemyEntitiesManagerScript.Instance.enemiesInScene)

@@ -19,6 +19,8 @@ public class MissionTutorialScript : MonoBehaviour
     private void MissionComplete()
     {
         tutorialComplete = true;
+        SaveManager.Instance.SavePlayerData();
+        AchievementManager.Instance.GetAchievement("tutorialAchievement");
         SceneManager.LoadScene("MainMenu");
     }
 }

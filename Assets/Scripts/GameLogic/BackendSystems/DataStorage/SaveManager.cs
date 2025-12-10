@@ -7,7 +7,7 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance { get; private set; }
 
-    //missions
+    // Missions
     // === completed ever ===
     public bool tutorialMission;
     public bool mission1;
@@ -17,12 +17,16 @@ public class SaveManager : MonoBehaviour
     public bool mission5;
     // === completed this run ===
     public int currentMission;
-
-    //weapons unlocks
+    
+    // Weapons unlocks
     public bool weapon1;
     public bool weapon2;
     public bool weapon3;
     public bool weapon4;
+
+    // Audio settings
+    public float audioSliderAmount;
+
 
     private void Awake()
     {
@@ -44,7 +48,7 @@ public class SaveManager : MonoBehaviour
     {
         PlayerData data = new PlayerData();
 
-        //Missions
+        // Missions
         data.tutorialMission = tutorialMission;
         data.mission1 = mission1;
         data.mission2 = mission2;
@@ -53,11 +57,14 @@ public class SaveManager : MonoBehaviour
         data.mission5 = mission5;
         data.currentMission = currentMission;
 
-        //Weapons
+        // Weapons
         data.weapon1 = weapon1;
         data.weapon2 = weapon2;
         data.weapon3 = weapon3;
         data.weapon3 = weapon4;
+
+        // Audio 
+        data.audioSliderAmount = audioSliderAmount;
 
         string jason = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/playerInfo.json", jason);
@@ -69,7 +76,7 @@ public class SaveManager : MonoBehaviour
             string jason = File.ReadAllText(Application.persistentDataPath + "/playerInfo.json");
             PlayerData data = JsonUtility.FromJson<PlayerData>(jason);
 
-            //missions
+            // Missions
             tutorialMission = data.tutorialMission;
             mission1 = data.mission1;
             mission2 = data.mission2;
@@ -78,11 +85,14 @@ public class SaveManager : MonoBehaviour
             mission5 = data.mission5;
             currentMission = data.currentMission;
 
-            //weapons
+            // Weapons
             weapon1 = data.weapon1;
             weapon2 = data.weapon2;
             weapon3 = data.weapon3;
             weapon4 = data.weapon4;
+
+            // Audio
+            audioSliderAmount = data.audioSliderAmount;
         }
         else
         {
@@ -117,7 +127,7 @@ public class SaveManager : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    //missions
+    // missions
     public bool tutorialMission;
     public bool mission1;
     public bool mission2;
@@ -126,11 +136,14 @@ class PlayerData
     public bool mission5;
     public int currentMission;
 
-    //weapons unlocks
+    // weapons unlocks
     public bool weapon1;
     public bool weapon2;
     public bool weapon3;
     public bool weapon4;
+
+    // audio settings
+    public float audioSliderAmount;
 }
 
 //if we have different saves.

@@ -49,6 +49,7 @@ public class Mission1Script : MonoBehaviour
 
     private void Win()
     {
+        AchievementManager.Instance.GetAchievement("mission1Achievement");
         MissionScriptUniversalFunctions.CompleteMission("Mission1",winCanvas,this, true);
     }
 
