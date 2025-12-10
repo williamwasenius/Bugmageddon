@@ -53,6 +53,8 @@ public class BossStateMachine : MonoBehaviour
         Phase3
     }
 
+    [HideInInspector] public bool abilityLocked = false;
+
     // ======== BOSS PHASE STATE SPECIFIC BOOLS ======== //
 
     public BossPhase currentPhase = BossPhase.Phase1;
@@ -107,14 +109,17 @@ public class BossStateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (!isDefeated)
+        if (isDefeated)
+            return;
+
+        if (!abilityLocked)
         {
             currentState.UpdateState();
-            velocity = navMeshAgent.velocity;
+            UpdatePhase(); 
             AbilityCooldown();
-            UpdatePhase();
         }
 
+        velocity = navMeshAgent.velocity;
     }
 
     public void ChangeState(IBossStates newState)

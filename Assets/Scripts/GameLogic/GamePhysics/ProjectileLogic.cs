@@ -52,7 +52,7 @@ public class ProjectileLogic : MonoBehaviour
             {
                 EnemyStateMachine enemyStateMachine = hitObject.GetComponent<EnemyStateMachine>();
                 enemyStateMachine.OnHit(shooter);
-                if (audioPlayScript != null)
+                if (audioPlayScript != null && shooter.CompareTag("Player"))
                 { 
                     audioPlayScript.Play(0, 0.5f); 
                 }

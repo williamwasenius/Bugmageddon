@@ -16,6 +16,7 @@ public class BossArmAttack : IBossStates
     public void EnterState()
     {
         Debug.Log("arm attack state entered");
+        BossSM.abilityLocked = true;
         BossSM.StartCoroutine(ArmAttack());
         BossSM.animator.SetBool("IsMoving", false);
     }
@@ -42,6 +43,8 @@ public class BossArmAttack : IBossStates
 
         BossSM.animator.SetBool("IsArmAttacking", false);
         Debug.Log("Attack end");
+
+        BossSM.abilityLocked = false;
 
         BossSM.ChangeState(BossSM.chaseState);
     }

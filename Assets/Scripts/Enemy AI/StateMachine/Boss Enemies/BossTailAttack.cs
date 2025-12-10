@@ -13,6 +13,7 @@ public class BossTailAttack : IBossStates
     public void EnterState()
     {
         Debug.Log("tail attack state entered");
+        BossSM.abilityLocked = true;
         BossSM.tailAttackRechargeTime = BossSM.tailAttackCooldown;
         BossSM.StartCoroutine(PerformTailAttack()); 
     }
@@ -54,6 +55,8 @@ public class BossTailAttack : IBossStates
         BossSM.animator.SetBool("IsTailAttacking", false);
 
         BossSM.navMeshAgent.updateRotation = true;
+
+        BossSM.abilityLocked = false;
 
         BossSM.ChangeState(BossSM.chaseState);
 
