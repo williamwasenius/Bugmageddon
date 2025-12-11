@@ -25,7 +25,9 @@ public class SaveManager : MonoBehaviour
     public bool weapon4;
 
     // Audio settings
-    public float audioSliderAmount;
+    public float volumeSliderAmount;
+    public float musicSliderAmount;
+    public float vFXSliderAmount;
 
 
     private void Awake()
@@ -64,7 +66,9 @@ public class SaveManager : MonoBehaviour
         data.weapon3 = weapon4;
 
         // Audio 
-        data.audioSliderAmount = audioSliderAmount;
+        data.volumeSliderAmount = volumeSliderAmount;
+        data.musicSliderAmount = musicSliderAmount;
+        data.vFXSliderAmount = vFXSliderAmount;
 
         string jason = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/playerInfo.json", jason);
@@ -92,7 +96,9 @@ public class SaveManager : MonoBehaviour
             weapon4 = data.weapon4;
 
             // Audio
-            audioSliderAmount = data.audioSliderAmount;
+            volumeSliderAmount = data.volumeSliderAmount;
+            musicSliderAmount= data.musicSliderAmount;
+            vFXSliderAmount = data.vFXSliderAmount;
         }
         else
         {
@@ -143,7 +149,9 @@ class PlayerData
     public bool weapon4;
 
     // audio settings
-    public float audioSliderAmount;
+    public float volumeSliderAmount;
+    public float musicSliderAmount;
+    public float vFXSliderAmount;
 }
 
 //if we have different saves.

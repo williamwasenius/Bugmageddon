@@ -27,7 +27,9 @@ public class MainMenu : MonoBehaviour
 
         SaveManager.Instance.LoadPlayerData();
         AchievementManager.Instance.LoadAchievementData();
-        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Instance.audioSliderAmount) * 20);
+        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Instance.volumeSliderAmount) * 20);
+        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Instance.musicSliderAmount) * 20);
+        mixer.SetFloat("VFXVol", Mathf.Log10(SaveManager.Instance.vFXSliderAmount) * 20);
     }
 
     private void FindGameSystems()

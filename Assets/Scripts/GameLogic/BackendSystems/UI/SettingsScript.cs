@@ -12,6 +12,8 @@ public class SettingsScript : MonoBehaviour
     public TMP_Text resolutionText;
 
     public Slider audioSlider;
+    public Slider musicSlider;
+    public Slider vFXSlider;
     void Start()
     {
         fullScreenToggle.isOn = Screen.fullScreen;
@@ -97,7 +99,9 @@ public class SettingsScript : MonoBehaviour
     }
     public void SetAudioLevel()
     {
-        audioSlider.value = SaveManager.Instance.audioSliderAmount;
+        audioSlider.value = SaveManager.Instance.volumeSliderAmount;
+        musicSlider.value = SaveManager.Instance.musicSliderAmount;
+        vFXSlider.value = SaveManager.Instance.vFXSliderAmount;
     }
 }
 

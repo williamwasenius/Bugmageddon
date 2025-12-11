@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-interface IInteractable
+public interface IInteractable
 {
     void Activate();
 }
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     private Camera playerCamera;
 
-    private IInteractable currentInteractable;
+    public IInteractable currentInteractable;
 
     void Start()
     {

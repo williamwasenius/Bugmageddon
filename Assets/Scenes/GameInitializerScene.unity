@@ -678,34 +678,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8903351258463244785, guid: 23843725a382c8746848dad42342dcc0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1276129412}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23843725a382c8746848dad42342dcc0, type: 3}
 --- !u!1 &1276129411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8903351258463244785, guid: 23843725a382c8746848dad42342dcc0, type: 3}
   m_PrefabInstance: {fileID: 1276129410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1276129412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276129411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f984a03c4cb78504fbdea8c3bc6e265c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
-  tutorialAchievement: 0
-  mission1Achievement: 0
-  mission2Achievement: 0
-  mission3Achievement: 0
-  mission4Achievement: 0
-  mission5Achievement: 0
 --- !u!1 &1862460508
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,8 +764,8 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1276129410}
   - {fileID: 780323281}
   - {fileID: 280481260}
   - {fileID: 485987398}
   - {fileID: 539089413}
+  - {fileID: 1276129410}

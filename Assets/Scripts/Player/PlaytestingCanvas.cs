@@ -38,11 +38,11 @@ public class PlaytestingCanvas : MonoBehaviour
     }
 
     void Update()
-    {/*
+    {
         if (Input.GetKeyUp(KeyCode.T))
         {
             testingPanel.SetActive(!testingPanel.activeSelf);
-        }*/
+        }
     }
 
     public void LoadMission1()

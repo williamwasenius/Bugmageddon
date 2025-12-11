@@ -22,6 +22,9 @@ public class EnemyOutlineManager : MonoBehaviour
 
     private void Update()
     {
+        if (enemyRenderer == null)
+        return;
+
         if (stateMachine.chaseTarget == null)
             NeutralState();
         else
