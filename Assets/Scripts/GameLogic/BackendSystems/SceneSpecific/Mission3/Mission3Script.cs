@@ -28,6 +28,7 @@ public class Mission3Script : MonoBehaviour
     public GeneratorData finalGenerator;
 
     [Header("UI")]
+    public GameObject timerContainer;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI objectiveText;
     public GameObject finalWaveUI;
@@ -81,6 +82,8 @@ public class Mission3Script : MonoBehaviour
 
         if (timerRunning)
         {
+            timerContainer.SetActive(true);
+
             currentTimer -= Time.deltaTime;
             timerText.text = Mathf.Ceil(currentTimer).ToString();
 
@@ -95,6 +98,10 @@ public class Mission3Script : MonoBehaviour
                 timerRunning = false;
                 OnDefenseComplete();
             }
+        }
+        else if (!timerRunning && timerContainer.activeInHierarchy)
+        {
+            timerContainer.SetActive(false);
         }
     }
 
@@ -145,8 +152,8 @@ public class Mission3Script : MonoBehaviour
         currentTimer = (currentState == MissionState.FinalDefense) ? finalDefenseDuration : defendDuration;
 
         objectiveText.text = currentState == MissionState.FinalDefense
-            ? "Defending Final Generator..."
-            : $"Defending Generator {currentGeneratorIndex + 1}...";
+            ? "Defend the central reactor..."
+            : $"Defend reactor {currentGeneratorIndex + 1}...";
     }
 
     // ---------------------- DEFENSE RESULT ----------------------
