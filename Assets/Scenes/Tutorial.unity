@@ -9617,6 +9617,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1408518693799191981, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 2050925971133085357, guid: 7951e9f35b7c2fd4c8d6ae0a5c720a65, type: 3}
       propertyPath: healthBar
       value: 
@@ -35743,6 +35747,14 @@ PrefabInstance:
       propertyPath: spawnPointWPN2
       value: 
       objectReference: {fileID: 254692931}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNL
+      value: 
+      objectReference: {fileID: 254692931}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNR
+      value: 
+      objectReference: {fileID: 254692932}
     - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: weapon1Parent
       value: 
@@ -35751,6 +35763,14 @@ PrefabInstance:
       propertyPath: weapon2Parent
       value: 
       objectReference: {fileID: 254692933}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponLParent
+      value: 
+      objectReference: {fileID: 254692933}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponRParent
+      value: 
+      objectReference: {fileID: 254692934}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -52335,7 +52355,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753671246}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 

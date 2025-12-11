@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Mission3Script : MonoBehaviour
 {
+    public static Mission3Script instance { get; set; }
     [System.Serializable]
     public class GeneratorData
     {
@@ -50,6 +51,11 @@ public class Mission3Script : MonoBehaviour
 
     private GameObject currentReactor;
     private TextMeshProUGUI currentReactorText;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {

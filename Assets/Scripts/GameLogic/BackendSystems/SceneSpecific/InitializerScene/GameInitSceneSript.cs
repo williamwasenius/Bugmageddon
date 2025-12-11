@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +10,18 @@ public class GameInitSceneSript : MonoBehaviour
     {
         if (gameManager != null)
         {
-            SceneManager.LoadScene("MainMenu");
+            StartCoroutine(startUp());
         }
         else
         {
             Application.Quit();
         }
+    }
+
+    private IEnumerator startUp()
+    {
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("MainMenu");
     }
 }

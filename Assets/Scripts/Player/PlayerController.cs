@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public Transform aimPivot;
 
     [Header("Weapons")]
-    public GameObject weapon1;
-    public GameObject weapon2;
+    public GameObject weaponR;
+    public GameObject weaponL;
     public float wpnMaxRotation = 20f;
     public float wpnRotationSpeed = 10f;
     public bool armLock = false;
@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
     }
     private WeaponElevation weaponElevation;
 
-    private WeaponHandler weapon1Handler;
-    private WeaponHandler weapon2Handler;
+    private WeaponHandler weaponRHandler;
+    private WeaponHandler weaponLHandler;
 
     [Header("Ability")]
     public float abilityCooldown = 30f;
@@ -110,42 +110,56 @@ public class PlayerController : MonoBehaviour
     private void HandleShooting()
     {
         // LEFT MOUSE – Weapon 1
-        if (weapon1Handler != null)
+        if (weaponRHandler != null)
         {
-            var stats = weapon1Handler.weaponStats;
-
-            if (stats.chargedWeapon)
-            {
-                if (Input.GetKey(KeyCode.Mouse0))
-                    weapon1Handler.TryFire();
-
-                if (Input.GetKeyUp(KeyCode.Mouse0))
-                    weapon1Handler.ReleaseChargeShot();
-            }
-            else if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Debug.Log("attempting shot weapon1");
-                weapon1Handler.TryFire();
-            }
-        }
-
-        // RIGHT MOUSE – Weapon 2
-        if (weapon2Handler != null)
-        {
-            var stats = weapon2Handler.weaponStats;
+            var stats = weaponRHandler.weaponStats;
 
             if (stats.chargedWeapon)
             {
                 if (Input.GetKey(KeyCode.Mouse1))
-                    weapon2Handler.TryFire();
+                    weaponRHandler.TryFire();
 
                 if (Input.GetKeyUp(KeyCode.Mouse1))
-                    weapon2Handler.ReleaseChargeShot();
+                { 
+                    weaponRHandler.ReleaseChargeShot();
+                }
             }
             else if (Input.GetKey(KeyCode.Mouse1))
             {
+                Debug.Log("attempting shot weapon1");
+                weaponRHandler.TryFire();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                weaponRHandler.StopFire();
+            }
+        }
+
+        // RIGHT MOUSE – Weapon 2
+        if (weaponLHandler != null)
+        {
+            var stats = weaponLHandler.weaponStats;
+
+            if (stats.chargedWeapon)
+            {
+                if (Input.GetKey(KeyCode.Mouse0))
+                    weaponLHandler.TryFire();
+
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    weaponLHandler.ReleaseChargeShot();
+                }
+            }
+            else if (Input.GetKey(KeyCode.Mouse0))
+            {
                 Debug.Log("attempting shot weapon2");
-                weapon2Handler.TryFire();
+                weaponLHandler.TryFire();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                weaponLHandler.StopFire();
             }
         }
     }
@@ -258,25 +272,25 @@ public class PlayerController : MonoBehaviour
             Vector3 forward = aimPivot.transform.forward;
 
             // Weapon 1
-            Vector3 aimDir1 = (aimTarget - weapon1.transform.position).normalized;
+            Vector3 aimDir1 = (aimTarget - weaponR.transform.position).normalized;
             float angle1 = Vector3.Angle(forward, aimDir1);
             if (angle1 > maxAngle)
                 aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
 
             // Weapon 2
-            Vector3 aimDir2 = (aimTarget - weapon2.transform.position).normalized;
+            Vector3 aimDir2 = (aimTarget - weaponL.transform.position).normalized;
             float angle2 = Vector3.Angle(forward, aimDir2);
             if (angle2 > maxAngle)
                 aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
 
-            weapon1.transform.rotation = Quaternion.Slerp(
-                weapon1.transform.rotation,
+            weaponR.transform.rotation = Quaternion.Slerp(
+                weaponR.transform.rotation,
                 Quaternion.LookRotation(aimDir1),
                 wpnRotationSpeed * Time.deltaTime
             );
 
-            weapon2.transform.rotation = Quaternion.Slerp(
-                weapon2.transform.rotation,
+            weaponL.transform.rotation = Quaternion.Slerp(
+                weaponL.transform.rotation,
                 Quaternion.LookRotation(aimDir2),
                 wpnRotationSpeed * Time.deltaTime
             );
@@ -295,13 +309,13 @@ public class PlayerController : MonoBehaviour
     }
     public void AssignWeapon(WeaponHandler newWeapon)
     {
-        if (weapon1Handler == null)
+        if (weaponRHandler == null)
         {
-            weapon1Handler = newWeapon;
+            weaponRHandler = newWeapon;
         }
-        else if (weapon2Handler == null)
+        else if (weaponLHandler == null)
         {
-            weapon2Handler = newWeapon;
+            weaponLHandler = newWeapon;
         }
     }
 }

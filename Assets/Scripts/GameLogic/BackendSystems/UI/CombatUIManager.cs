@@ -5,16 +5,16 @@ public class CombatUIManager : MonoBehaviour
 {
     public static CombatUIManager Instance { get; set; }
 
-    public Image weapon1CooldownImage;
-    public Image weapon2CooldownImage;
+    public Image weaponRCooldownImage;
+    public Image weaponLCooldownImage;
    // public Image DashCooldownImage;
 
-    private WeaponHandler weapon1Handler;
-    private WeaponHandler weapon2Handler;
+    private WeaponHandler weaponRHandler;
+    private WeaponHandler weaponLHandler;
     private PlayerController player;
 
-    public GameObject weapon1Parent; 
-    public GameObject weapon2Parent;
+    public GameObject weaponRParent; 
+    public GameObject weaponLParent;
 
     private void Awake()
     {
@@ -35,14 +35,14 @@ public class CombatUIManager : MonoBehaviour
 
     private void UpdateCooldownUI()
     {
-        if (weapon1Handler != null)
+        if (weaponRHandler != null)
         {
-            weapon1CooldownImage.fillAmount = weapon1Handler.GetCooldownProgress();
+            weaponRCooldownImage.fillAmount = weaponRHandler.GetCooldownProgress();
         }
 
-        if (weapon2Handler != null)
+        if (weaponLHandler != null)
         {
-            weapon2CooldownImage.fillAmount = weapon2Handler.GetCooldownProgress();
+            weaponLCooldownImage.fillAmount = weaponLHandler.GetCooldownProgress();
         }
 
         if (player != null)
@@ -64,13 +64,13 @@ public class CombatUIManager : MonoBehaviour
 
     private void AcquireWeapons()
     {
-        if (weapon1Handler == null)
+        if (weaponRHandler == null)
         {
-            weapon1Handler = FindWeaponHandler(weapon1Parent);
+            weaponRHandler = FindWeaponHandler(weaponRParent);
         }
-        if (weapon2Handler == null)
+        if (weaponLHandler == null)
         {
-            weapon2Handler = FindWeaponHandler(weapon2Parent);
+            weaponLHandler = FindWeaponHandler(weaponLParent);
         }
     }
 

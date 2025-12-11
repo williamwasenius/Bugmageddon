@@ -4,6 +4,7 @@ using UnityEngine;
 public class TurretScript : MonoBehaviour
 {
     public bool powered = false;
+    private bool idle = true;
 
     [Header("Turret Components")]
     public WeaponHandler[] weapons;
@@ -43,6 +44,12 @@ public class TurretScript : MonoBehaviour
                 TrackTarget();
                 RotateWeapons();
                 FireWeapons();
+                idle = false;
+            }
+            else if (target == null && !idle)
+            {
+                HaltWeapons();
+                idle = true;
             }
             else
             {
@@ -129,6 +136,14 @@ public class TurretScript : MonoBehaviour
             {
                 weapon?.TryFire();
             }
+        }
+    }
+
+    void HaltWeapons()
+    {
+        foreach (WeaponHandler weapon in weapons)
+        {
+            weapon?.StopFire();
         }
     }
 

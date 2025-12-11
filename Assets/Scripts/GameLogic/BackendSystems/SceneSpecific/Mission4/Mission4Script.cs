@@ -13,13 +13,17 @@ public class Mission4Script : MonoBehaviour
 
     public GameObject[] sensorPods;  
     public bool mission4Complete = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void Start()
     {
         if (!player)
         {
             player = GameObject.FindWithTag("Player");
         }
-        Instance = this;
         MissionTracker.Instance.SetCurrentMission("Mission4");
     }
     public void FixedUpdate()

@@ -51371,6 +51371,14 @@ PrefabInstance:
       propertyPath: spawnPointWPN2
       value: 
       objectReference: {fileID: 7465930376007912417}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNL
+      value: 
+      objectReference: {fileID: 7465930376007912417}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNR
+      value: 
+      objectReference: {fileID: 7465930376007912418}
     - target: {fileID: 7971299922502699562, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -51391,6 +51399,14 @@ PrefabInstance:
       propertyPath: weapon2Parent
       value: 
       objectReference: {fileID: 7465930376007912419}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponLParent
+      value: 
+      objectReference: {fileID: 7465930376007912419}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponRParent
+      value: 
+      objectReference: {fileID: 7465930376007912420}
     - target: {fileID: 8257918043235807184, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: loopSource
       value: 

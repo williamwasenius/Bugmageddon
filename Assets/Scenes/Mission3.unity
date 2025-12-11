@@ -2729,7 +2729,7 @@ GameObject:
   - component: {fileID: 16782802}
   - component: {fileID: 16782801}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2763,7 +2763,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -46209,7 +46209,7 @@ GameObject:
   - component: {fileID: 316275373}
   - component: {fileID: 316275372}
   m_Layer: 0
-  m_Name: Cube (22)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46243,7 +46243,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -57550,7 +57550,7 @@ GameObject:
   - component: {fileID: 401013898}
   - component: {fileID: 401013897}
   m_Layer: 0
-  m_Name: Cube (25)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57584,7 +57584,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -60406,7 +60406,7 @@ GameObject:
   - component: {fileID: 415604467}
   - component: {fileID: 415604466}
   m_Layer: 0
-  m_Name: Cube (13)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60440,7 +60440,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -60579,7 +60579,7 @@ GameObject:
   - component: {fileID: 415886384}
   - component: {fileID: 415886383}
   m_Layer: 0
-  m_Name: Cube (35)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60613,7 +60613,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -66636,7 +66636,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -66645,6 +66645,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -67176,7 +67180,7 @@ GameObject:
   - component: {fileID: 461134716}
   - component: {fileID: 461134715}
   m_Layer: 0
-  m_Name: Cube (5)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67210,7 +67214,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -68041,7 +68045,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -68050,6 +68054,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -69095,7 +69103,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -69104,6 +69112,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -75925,7 +75937,7 @@ GameObject:
   - component: {fileID: 509338091}
   - component: {fileID: 509338090}
   m_Layer: 0
-  m_Name: Cube (7)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75959,7 +75971,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -82109,7 +82121,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -82118,6 +82130,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -86550,7 +86566,7 @@ GameObject:
   - component: {fileID: 578595214}
   - component: {fileID: 578595213}
   m_Layer: 0
-  m_Name: Cube (11)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86584,7 +86600,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -89246,7 +89262,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -89255,6 +89271,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -89533,7 +89553,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -89542,6 +89562,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -90595,7 +90619,7 @@ GameObject:
   - component: {fileID: 599108261}
   - component: {fileID: 599108260}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90629,7 +90653,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -94196,7 +94220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &616625126
 Transform:
   m_ObjectHideFlags: 0
@@ -98570,7 +98594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &651899935
 Transform:
   m_ObjectHideFlags: 0
@@ -101386,7 +101410,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -101395,6 +101419,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -105899,7 +105927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &705403180
 Transform:
   m_ObjectHideFlags: 0
@@ -107553,7 +107581,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723423253}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -110993,7 +111021,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -111002,6 +111030,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -116890,7 +116922,7 @@ GameObject:
   - component: {fileID: 784584547}
   - component: {fileID: 784584546}
   m_Layer: 0
-  m_Name: Cube (33)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116924,7 +116956,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -117918,7 +117950,7 @@ GameObject:
   - component: {fileID: 794323288}
   - component: {fileID: 794323287}
   m_Layer: 0
-  m_Name: Cube (16)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117952,7 +117984,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -120146,7 +120178,7 @@ GameObject:
   - component: {fileID: 808101095}
   - component: {fileID: 808101094}
   m_Layer: 0
-  m_Name: Cube (20)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120180,7 +120212,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -124726,7 +124758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReactorTrigger
   mission: {fileID: 1557183465}
   interractiblePrompt: {fileID: 974650816}
-  trigger: {fileID: 67114240}
+  trigger: {fileID: 845283160}
   generatorIndex: 1
 --- !u!114 &845283159
 MonoBehaviour:
@@ -126452,7 +126484,7 @@ GameObject:
   - component: {fileID: 855322293}
   - component: {fileID: 855322292}
   m_Layer: 0
-  m_Name: Cube (21)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126486,7 +126518,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -135151,7 +135183,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -135160,6 +135192,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -136520,7 +136556,7 @@ GameObject:
   - component: {fileID: 921605473}
   - component: {fileID: 921605472}
   m_Layer: 0
-  m_Name: Cube (37)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136554,7 +136590,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -138394,7 +138430,7 @@ GameObject:
   - component: {fileID: 932736022}
   - component: {fileID: 932736021}
   m_Layer: 0
-  m_Name: Cube (38)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138428,7 +138464,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -143294,7 +143330,7 @@ GameObject:
   - component: {fileID: 965743730}
   - component: {fileID: 965743729}
   m_Layer: 0
-  m_Name: Cube (31)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143328,7 +143364,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -146133,7 +146169,7 @@ GameObject:
   - component: {fileID: 982202634}
   - component: {fileID: 982202633}
   m_Layer: 0
-  m_Name: Cube (6)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146167,7 +146203,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -149213,7 +149249,7 @@ GameObject:
   - component: {fileID: 1007401799}
   - component: {fileID: 1007401798}
   m_Layer: 0
-  m_Name: Cube (14)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149247,7 +149283,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -155441,7 +155477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1061291347
 Transform:
   m_ObjectHideFlags: 0
@@ -166001,7 +166037,7 @@ GameObject:
   - component: {fileID: 1137501982}
   - component: {fileID: 1137501981}
   m_Layer: 0
-  m_Name: Cube (9)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166035,7 +166071,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -177477,7 +177513,7 @@ GameObject:
   - component: {fileID: 1215370147}
   - component: {fileID: 1215370146}
   m_Layer: 0
-  m_Name: Cube (36)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177511,7 +177547,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -178578,7 +178614,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -178587,6 +178623,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -179780,7 +179820,7 @@ GameObject:
   - component: {fileID: 1227456329}
   - component: {fileID: 1227456328}
   m_Layer: 0
-  m_Name: Cube (24)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179814,7 +179854,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -182816,7 +182856,7 @@ GameObject:
   - component: {fileID: 1249921806}
   - component: {fileID: 1249921805}
   m_Layer: 0
-  m_Name: Cube (29)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182850,7 +182890,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -188874,7 +188914,7 @@ GameObject:
   - component: {fileID: 1307386112}
   - component: {fileID: 1307386111}
   m_Layer: 0
-  m_Name: Cube (17)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188908,7 +188948,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -212533,7 +212573,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -212542,6 +212582,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -216640,7 +216684,7 @@ GameObject:
   - component: {fileID: 1504455594}
   - component: {fileID: 1504455593}
   m_Layer: 0
-  m_Name: Cube (8)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216674,7 +216718,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -217612,7 +217656,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -217621,6 +217665,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -221827,7 +221875,7 @@ GameObject:
   - component: {fileID: 1540466715}
   - component: {fileID: 1540466714}
   m_Layer: 0
-  m_Name: Cube (15)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221861,7 +221909,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -224588,6 +224636,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 308192818}
     m_Modifications:
+    - target: {fileID: 23762751738264960, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: enemyRangeThreshold
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 796865933997613442, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -224748,6 +224800,14 @@ PrefabInstance:
       propertyPath: spawnPointWPN2
       value: 
       objectReference: {fileID: 1285130643}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNL
+      value: 
+      objectReference: {fileID: 1285130643}
+    - target: {fileID: 7793180185103775349, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: spawnPointWPNR
+      value: 
+      objectReference: {fileID: 1285130644}
     - target: {fileID: 7971299922502699562, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -224760,6 +224820,14 @@ PrefabInstance:
       propertyPath: weapon2Parent
       value: 
       objectReference: {fileID: 1285130645}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponLParent
+      value: 
+      objectReference: {fileID: 1285130645}
+    - target: {fileID: 8171917380416324778, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: weaponRParent
+      value: 
+      objectReference: {fileID: 1285130646}
     - target: {fileID: 8704259013870672433, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_RenderMode
       value: 0
@@ -226281,7 +226349,7 @@ GameObject:
   - component: {fileID: 1565554736}
   - component: {fileID: 1565554735}
   m_Layer: 0
-  m_Name: Cube (28)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226315,7 +226383,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -231517,7 +231585,7 @@ GameObject:
   - component: {fileID: 1601584244}
   - component: {fileID: 1601584243}
   m_Layer: 0
-  m_Name: Cube (26)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231551,7 +231619,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -238498,7 +238566,7 @@ GameObject:
   - component: {fileID: 1654672288}
   - component: {fileID: 1654672287}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238532,7 +238600,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -242955,7 +243023,7 @@ GameObject:
   - component: {fileID: 1683635335}
   - component: {fileID: 1683635334}
   m_Layer: 0
-  m_Name: Cube (27)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242989,7 +243057,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -253027,7 +253095,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -253036,6 +253104,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -256787,7 +256859,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -256796,6 +256868,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -257815,7 +257891,7 @@ GameObject:
   - component: {fileID: 1783741830}
   - component: {fileID: 1783741829}
   m_Layer: 0
-  m_Name: Cube (18)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257849,7 +257925,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -262383,7 +262459,7 @@ GameObject:
   - component: {fileID: 1816519638}
   - component: {fileID: 1816519637}
   m_Layer: 0
-  m_Name: Cube (34)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262417,7 +262493,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -266564,7 +266640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReactorTrigger
   mission: {fileID: 1557183465}
   interractiblePrompt: {fileID: 974650816}
-  trigger: {fileID: 67114240}
+  trigger: {fileID: 1844793945}
   generatorIndex: 2
 --- !u!114 &1844793944
 MonoBehaviour:
@@ -267906,7 +267982,7 @@ GameObject:
   - component: {fileID: 1852777742}
   - component: {fileID: 1852777741}
   m_Layer: 0
-  m_Name: Cube (32)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267940,7 +268016,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -268150,7 +268226,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -268159,6 +268235,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -279138,7 +279218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1931811650
 Transform:
   m_ObjectHideFlags: 0
@@ -281962,7 +282042,7 @@ GameObject:
   - component: {fileID: 1950043775}
   - component: {fileID: 1950043774}
   m_Layer: 0
-  m_Name: Cube (12)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281996,7 +282076,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -283053,7 +283133,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -283062,6 +283142,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -286741,7 +286825,7 @@ GameObject:
   - component: {fileID: 1982886921}
   - component: {fileID: 1982886920}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286775,7 +286859,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -290653,7 +290737,7 @@ GameObject:
   - component: {fileID: 2009777039}
   - component: {fileID: 2009777038}
   m_Layer: 0
-  m_Name: Cube (10)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290687,7 +290771,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -293790,7 +293874,7 @@ GameObject:
   - component: {fileID: 2027823368}
   - component: {fileID: 2027823367}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293824,7 +293908,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -297401,7 +297485,7 @@ GameObject:
   - component: {fileID: 2055742456}
   - component: {fileID: 2055742455}
   m_Layer: 0
-  m_Name: Cube (30)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297435,7 +297519,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -297758,7 +297842,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -297767,6 +297851,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'
@@ -298512,7 +298600,7 @@ GameObject:
   - component: {fileID: 2062664098}
   - component: {fileID: 2062664097}
   m_Layer: 0
-  m_Name: Cube (19)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298546,7 +298634,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -302204,7 +302292,7 @@ GameObject:
   - component: {fileID: 2091046142}
   - component: {fileID: 2091046141}
   m_Layer: 0
-  m_Name: Cube (23)
+  m_Name: InvisBarrierSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302238,7 +302326,7 @@ BoxCollider:
     m_Bits: 32511
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -304250,7 +304338,7 @@ PrefabInstance:
       objectReference: {fileID: 1285130642}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawnLimit
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: spawningFrequency
@@ -304259,6 +304347,10 @@ PrefabInstance:
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: enemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
+      propertyPath: specializedSpawner
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8098614845420106807, guid: c6d8ca9ece0925c49b508ca2fa94a332, type: 3}
       propertyPath: 'enemies.Array.data[0]'

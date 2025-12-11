@@ -20,8 +20,12 @@ public class InGameMenu : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (menuCanvas == null)
+            { return; }
+
             if (missionInfoUI.activeSelf)
             {
                 missionInfoUI.SetActive(false);
@@ -33,27 +37,19 @@ public class InGameMenu : MonoBehaviour
 
             else if (menuCanvas.activeSelf)
             {
-                menuCanvas.SetActive(false);
-                combatCanvas.SetActive(true);
-                if (missionUIOn)
-                {
-                    missionUI.SetActive(true);
-                }
-                Cursor.visible = false;
-                Time.timeScale = 1f;
+                CloseMenu();
             }
             else if (Time.timeScale != 0)
             {
-                missionUI.SetActive(false);
-                combatCanvas.SetActive(false);
-                menuCanvas.SetActive(true);
-                Cursor.visible = true;
-                Time.timeScale = 0f;
+                OpenMenu();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.P) && Time.timeScale != 0 && !missionInfoUI.activeInHierarchy)
         {
+            if (menuCanvas == null)
+            { return; }
+
             if (missionUI.activeSelf)
             {
                 missionUIOn = false;
@@ -68,6 +64,9 @@ public class InGameMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O) && Time.timeScale != 0)
         {
+            if (missionInfoUI == null)
+            { return; }
+
             Cursor.visible = !Cursor.visible;
             MissionInfoPanel();
         }
@@ -94,6 +93,25 @@ public class InGameMenu : MonoBehaviour
         }
     }
 
+    public void OpenMenu()
+    {
+        missionUI.SetActive(false);
+        combatCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+    }
+    public void CloseMenu()
+    {
+        menuCanvas.SetActive(false);
+        combatCanvas.SetActive(true);
+        if (missionUIOn)
+        {
+            missionUI.SetActive(true);
+        }
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+    }
     public void NextMission()
     {
         SceneManager.LoadScene("WeaponSelection");

@@ -15,7 +15,7 @@ MonoBehaviour:
   fireRate: 0.1
   projectileStats: {fileID: 11400000, guid: e9a1c759ed9342b449e0b9f4923485d2, type: 2}
   rotatingBarrel: 1
-  rotationSpeed: 240
+  rotationSpeed: 1500
   chargedWeapon: 0
   chargeTime: 1
   shootSound: {fileID: 8300000, guid: 0ac9df0a1667d4b448cdb7152c5652b3, type: 3}

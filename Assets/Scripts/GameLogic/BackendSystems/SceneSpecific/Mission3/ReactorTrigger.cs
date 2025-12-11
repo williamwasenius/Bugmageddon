@@ -9,24 +9,29 @@ public class ReactorTrigger : MonoBehaviour, IInteractable
 
     void Start()
     {
+        mission = Mission3Script.instance;
         trigger = GetComponent<Collider>();
     }
 
     public void Activate()
     {
         interractiblePrompt.SetActive(false);
-        trigger.enabled = false;
         mission.StartGeneratorDefense(generatorIndex);
+        trigger.enabled = false;
+
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        interractiblePrompt.SetActive(true);
+        if (other.CompareTag("Player"))
+            interractiblePrompt.SetActive(true);
     }
 
     public void OnTriggerExit(Collider other)
     {
-        interractiblePrompt.SetActive(false);
+        if (other.CompareTag("Player"))
+            interractiblePrompt.SetActive(false);
     }
+
 
 }

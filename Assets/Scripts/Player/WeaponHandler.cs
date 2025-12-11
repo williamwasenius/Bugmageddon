@@ -46,9 +46,10 @@ public class WeaponHandler : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
         }
+
         if (isFiring && weaponStats.rotatingBarrel)
         {
-            barrel.Rotate(Vector3.forward * weaponStats.rotationSpeed * Time.deltaTime);
+            rotateWeapons();
         }
     }
 
@@ -64,6 +65,10 @@ public class WeaponHandler : MonoBehaviour
         {
             Fire();
         }
+    }
+    public void StopFire()
+    {
+        isFiring = false;
     }
 
     private void ChargeWeapon()
@@ -118,8 +123,15 @@ public class WeaponHandler : MonoBehaviour
         cooldownTimer = weaponStats.fireRate;
     }
 
+    public void rotateWeapons()
+    {
+        barrel.Rotate(Vector3.forward * weaponStats.rotationSpeed * Time.deltaTime);
+    }
+
     private void Fire()
     {
+        isFiring = true;
+
         ProjectileStatsSO projectileStats = weaponStats.projectileStats;
         GameObject projectile;
 
@@ -143,6 +155,7 @@ public class WeaponHandler : MonoBehaviour
             source.PlayOneShot(weaponStats.shootSound);
 
         cooldownTimer = weaponStats.fireRate;
+
     }
 
     public float GetCooldownProgress()
