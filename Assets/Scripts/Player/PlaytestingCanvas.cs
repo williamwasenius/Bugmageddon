@@ -6,6 +6,8 @@ public class PlaytestingCanvas : MonoBehaviour
     public GameObject testingPanel;
     private MissionTracker missionTracker;
 
+    public bool testingBuild = false;
+
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -18,13 +20,19 @@ public class PlaytestingCanvas : MonoBehaviour
 
     private void Start()
     {
-        FindTracker();
-        testingPanel.SetActive(false);
+        if (testingBuild)
+        {
+            FindTracker();
+            testingPanel.SetActive(false);
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindTracker();
+        if (testingBuild)
+        {
+            FindTracker();
+        }
     }
 
     private void FindTracker()
@@ -39,9 +47,12 @@ public class PlaytestingCanvas : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.T))
+        if (testingBuild)
         {
-            testingPanel.SetActive(!testingPanel.activeSelf);
+            if (Input.GetKeyUp(KeyCode.T))
+            {
+                testingPanel.SetActive(!testingPanel.activeSelf);
+            }
         }
     }
 

@@ -13,14 +13,15 @@ public class Mission1Script : MonoBehaviour
 
     private void Awake()
     {
-        UpdateEnemyCount();
-        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
+
     }
 
     private void Start()
     {
+        UpdateEnemyCount();
         player = GameObject.FindWithTag("Player");
         MissionTracker.Instance.SetCurrentMission("Mission1");
+        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
     private void Update()
