@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -12,13 +13,13 @@ public class WeaponHandler : MonoBehaviour
     private bool isFiring;
 
     private float cooldownTimer = 0f;
-    private AudioSource source;
 
     [Header("Charge Weapon Specific")]
     public VisualEffect chargeProgressVFX;
     private float chargeProgress = 0f;
     private bool isCharging = false;
     private bool isCharged = false;
+    private AudioSource chargeAudioSource;
 
     [Header("Shooter")]
     public GameObject shooter;
@@ -36,7 +37,6 @@ public class WeaponHandler : MonoBehaviour
     private void Start()
     {
         shooter = transform.root.gameObject; 
-        source = GetComponent<AudioSource>();
         firePointVFX = firePoint.GetComponent<VisualEffect>();
     }
 
@@ -78,8 +78,10 @@ public class WeaponHandler : MonoBehaviour
             isCharging = true;
             chargeProgress = 0f;
 
-            if (weaponStats.chargeSound && source != null)
-                source.PlayOneShot(weaponStats.chargeSound);
+            if (weaponStats.chargeSound != null)
+            {
+                chargeAudioSource = AudioManager.Instance.Play(weaponStats.chargeSound.id, transform.position);
+            }
             if (chargeProgressVFX != null)
                 chargeProgressVFX.Play();
 
@@ -112,9 +114,15 @@ public class WeaponHandler : MonoBehaviour
 
     public void ChargeShootConclusion()
     {
+        if (chargeAudioSource != null)
+        {
+            chargeAudioSource.Stop();
+            Destroy(chargeAudioSource.gameObject);
+            chargeAudioSource = null;
+        }
 
-        chargeProgressVFX.Stop();
-        source.Stop();
+        if (chargeProgressVFX != null)
+            chargeProgressVFX.Stop();
 
         isCharging = false;
         isCharged = false;
@@ -152,7 +160,7 @@ public class WeaponHandler : MonoBehaviour
             firePointVFX.Play();
 
         if (weaponStats.shootSound != null)
-            source.PlayOneShot(weaponStats.shootSound);
+            AudioManager.Instance.Play(weaponStats.shootSound.id, transform.position);
 
         cooldownTimer = weaponStats.fireRate;
 

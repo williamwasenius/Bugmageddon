@@ -27,7 +27,7 @@ public class TriggerActions : MonoBehaviour
             }
             if (musicTrigger)
             {
-                StartCoroutine(musicManager.PlayMusic());
+                musicManager.PlayMusic();
             }
 
             trigger.enabled = false;

@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -19,8 +20,9 @@ public class WeaponStatsSO : ScriptableObject
     public float chargeTime = 1f;
 
     [Header("VFX & SFX")]
-    public AudioClip shootSound;
-    public AudioClip chargeSound;
+    public AudioData shootSound;
+    public string audioDataID = nameof(shootSound);
+    public AudioData chargeSound;
     public VisualEffect muzzleFlash;
 }
 

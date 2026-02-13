@@ -1,24 +1,30 @@
+using AudioSystem;
 using UnityEngine;
 
 public class MusicManagerScript : MonoBehaviour
 {
     public bool autoPlay;
 
-    public AudioSource introSource;
-    public AudioSource loopSource;
+    public string introSource;
+    public string loopSource;
+    public string ambienceSource;
 
     void Start()
     {
         if (autoPlay)
-        StartCoroutine(PlayMusic());
+        {
+            PlayMusic();
+            PlayAmbience();
+        }
     }
 
-    public System.Collections.IEnumerator PlayMusic()
+    public void PlayMusic()
     {
-        introSource.Play();
-
-        yield return new WaitForSecondsRealtime(introSource.clip.length);
-
-        loopSource.Play();
+        StartCoroutine(AudioManager.Instance.PlayMusic(introSource, loopSource));
     }
+    public void PlayAmbience()
+    {
+        StartCoroutine(AudioManager.Instance.PlayMusic("",ambienceSource));
+    }
+
 }

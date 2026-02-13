@@ -1,3 +1,4 @@
+using AudioSystem;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -7,6 +8,7 @@ public class ExplosionHandler : MonoBehaviour
     public float radius;
     public float damage;
     public float duration = 0.5f;
+    public string audioFile = "Explosion";
 
     public void Start()
     {
@@ -18,6 +20,8 @@ public class ExplosionHandler : MonoBehaviour
         LayerMask ignoredTrigger = LayerMask.NameToLayer("Trigger");
 
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+
+        AudioManager.Instance.Play(audioFile, transform.position);
 
         foreach (var hit in hits)
         {
