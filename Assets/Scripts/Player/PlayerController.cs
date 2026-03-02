@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public interface IInteractable
 {
@@ -8,12 +9,18 @@ public interface IInteractable
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("MechStats and Components")]
+    public MechStatsSO mechStats;
+    public GameObject playerMech;
+    public FetchMechComponentsScript compFetch;
+    public Transform torsoTrackingSphere;
+
+    /*[Header("Movement Settings")]
     public float speed = 10f;
     public float runSpeed = 30f;
     public float acceleration = 10f;
     public float deceleration = 10f;
-    public float legRotationSpeed = 10f;
+    public float legRotationSpeed = 10f;*/
     private Vector3 currentVelocity;
 
     [Header("Ground Settings")]
@@ -22,15 +29,15 @@ public class PlayerController : MonoBehaviour
     public Transform groundRayOriginPoint;
 
     [Header("Body Parts")]
-    public Transform legs;
-    public Transform torso;
-    public Transform aimPivot;
+    //public Transform legs;
+    //public Transform torso;
+    //public Transform aimPivot;
 
     [Header("Weapons")]
-    public GameObject weaponR;
-    public GameObject weaponL;
-    public float wpnMaxRotation = 20f;
-    public float wpnRotationSpeed = 10f;
+    //public GameObject weaponR;
+    //public GameObject weaponL;
+    //public float wpnMaxRotation = 20f;
+    //public float wpnRotationSpeed = 10f;
     public bool armLock = false;
     public bool elevatedAim = false;
     private enum WeaponElevation
@@ -54,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private bool isAccelerated = false;
 
     private Rigidbody rigidBody;
-    [SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator;
     private Camera playerCamera;
 
     public IInteractable currentInteractable;
@@ -63,6 +70,32 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         playerCamera = Camera.main;
+
+        if (mechStats == null)
+        {
+            int selectedMech = SelectionManager.Instance.selectedMech;
+            mechStats = SelectionManager.Instance.mechSelections[selectedMech];
+        }
+        if (playerMech == null)
+        {
+            Instantiate(mechStats.model, this.transform);
+        }
+        if (compFetch == null)
+        {
+            compFetch = GetComponentInChildren<FetchMechComponentsScript>();
+        }
+        if (compFetch.multiAC != null)
+        {
+            WeightedTransformArray sources = compFetch.multiAC.data.sourceObjects;
+
+            sources.Add(new WeightedTransform(torsoTrackingSphere, 1f));
+
+            compFetch.multiAC.data.sourceObjects = sources;
+
+            compFetch.rig.Clear();
+            compFetch.rig.Build();
+        }
+
     }
 
     void Update()
@@ -70,7 +103,7 @@ public class PlayerController : MonoBehaviour
         if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
             currentInteractable.Activate();
 
-        if (animator.GetBool("IsStomping"))
+        if (compFetch.animator.GetBool("IsStomping"))
             return;
 
         if (Input.GetKeyUp(KeyCode.Mouse2))
@@ -87,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (animator.GetBool("IsStomping"))
+        if (compFetch.animator.GetBool("IsStomping"))
         {
             rigidBody.linearVelocity = Vector3.zero;
             return;
@@ -100,11 +133,11 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody.linearVelocity = Vector3.zero;
         currentVelocity = Vector3.zero;
-        animator.SetBool("IsStomping", true);
+        compFetch.animator.SetBool("IsStomping", true);
 
         yield return new WaitForSeconds(1f);
 
-        animator.SetBool("IsStomping", false);
+        compFetch.animator.SetBool("IsStomping", false);
     }
 
     private void HandleShooting()
@@ -167,7 +200,7 @@ public class PlayerController : MonoBehaviour
     private void HandleRun()
     {
         isRunning = Input.GetKey(KeyCode.LeftShift);
-        animator.SetBool("IsRunning", isRunning);
+        compFetch.animator.SetBool("IsRunning", isRunning);
     }
 
     public void Ability()
@@ -192,33 +225,33 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 targetDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-        float targetSpeed = isRunning ? runSpeed : speed;
+        float targetSpeed = isRunning ? mechStats.runningSpeed : mechStats.walkingSpeed;
 
         if (targetDirection.magnitude > 0.1f)
         {
             currentVelocity = Vector3.MoveTowards(
                 currentVelocity,
                 targetDirection * targetSpeed,
-                acceleration * Time.fixedDeltaTime
+                mechStats.acceleartion * Time.fixedDeltaTime
             );
-            animator.SetBool("IsWalking", true);
+            compFetch.animator.SetBool("IsWalking", true);
         }
         else
         {
             currentVelocity = Vector3.MoveTowards(
                 currentVelocity,
                 Vector3.zero,
-                deceleration * Time.fixedDeltaTime
+                mechStats.decelaration * Time.fixedDeltaTime
             );
-            animator.SetBool("IsWalking", false);
+            compFetch.animator.SetBool("IsWalking", false);
         }
 
         rigidBody.linearVelocity = new Vector3(currentVelocity.x, rigidBody.linearVelocity.y, currentVelocity.z);
 
         float currentSpeed = new Vector3(rigidBody.linearVelocity.x, 0, rigidBody.linearVelocity.z).magnitude;
-        animator.SetFloat("MoveSpeed", currentSpeed);
+        compFetch.animator.SetFloat("MoveSpeed", currentSpeed);
 
-        isAccelerated = currentSpeed > speed;
+        isAccelerated = currentSpeed > mechStats.walkingSpeed;
 
         HandleLegRotation(targetDirection);
         RotateTowardsMouse();
@@ -230,7 +263,7 @@ public class PlayerController : MonoBehaviour
         if (velocityDir.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(velocityDir, Vector3.up);
-            legs.rotation = Quaternion.Slerp(legs.rotation, targetRotation, legRotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, mechStats.legRotationSpeed * Time.deltaTime);
         }
     }
     private void RotateTowardsMouse()
@@ -246,7 +279,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case WeaponElevation.eyeLevel:
-                aimPlane = new Plane(Vector3.up, new Vector3(0, aimPivot.position.y, 0));
+                aimPlane = new Plane(Vector3.up, new Vector3(0, compFetch.aimPivot.transform.position.y, 0));
                 break;
 
             case WeaponElevation.elevatedLevel:
@@ -265,34 +298,34 @@ public class PlayerController : MonoBehaviour
             bool lockY = (weaponElevation == WeaponElevation.eyeLevel);
 
             Vector3 aimTarget = lockY
-                ? new Vector3(pointToLook.x, aimPivot.position.y, pointToLook.z)
+                ? new Vector3(pointToLook.x, compFetch.aimPivot.transform.position.y, pointToLook.z)
                 : pointToLook;
 
-            float maxAngle = wpnMaxRotation;
-            Vector3 forward = aimPivot.transform.forward;
+            float maxAngle = mechStats.weaponMaxRot;
+            Vector3 forward = compFetch.aimPivot.transform.forward;
 
             // Weapon 1
-            Vector3 aimDir1 = (aimTarget - weaponR.transform.position).normalized;
+            Vector3 aimDir1 = (aimTarget - compFetch.weaponR.transform.position).normalized;
             float angle1 = Vector3.Angle(forward, aimDir1);
             if (angle1 > maxAngle)
                 aimDir1 = Vector3.RotateTowards(forward, aimDir1, Mathf.Deg2Rad * maxAngle, 0f);
 
             // Weapon 2
-            Vector3 aimDir2 = (aimTarget - weaponL.transform.position).normalized;
+            Vector3 aimDir2 = (aimTarget - compFetch.weaponL.transform.position).normalized;
             float angle2 = Vector3.Angle(forward, aimDir2);
             if (angle2 > maxAngle)
                 aimDir2 = Vector3.RotateTowards(forward, aimDir2, Mathf.Deg2Rad * maxAngle, 0f);
 
-            weaponR.transform.rotation = Quaternion.Slerp(
-                weaponR.transform.rotation,
+            compFetch.weaponR.transform.rotation = Quaternion.Slerp(
+                compFetch.weaponR.transform.rotation,
                 Quaternion.LookRotation(aimDir1),
-                wpnRotationSpeed * Time.deltaTime
+                mechStats.weaponRotSpeed * Time.deltaTime
             );
 
-            weaponL.transform.rotation = Quaternion.Slerp(
-                weaponL.transform.rotation,
+            compFetch.weaponL.transform.rotation = Quaternion.Slerp(
+                compFetch.weaponL.transform.rotation,
                 Quaternion.LookRotation(aimDir2),
-                wpnRotationSpeed * Time.deltaTime
+                mechStats.weaponRotSpeed * Time.deltaTime
             );
         }
     }

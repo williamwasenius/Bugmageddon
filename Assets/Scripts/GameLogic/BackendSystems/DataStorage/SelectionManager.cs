@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class WeaponManager : MonoBehaviour
+public class SelectionManager : MonoBehaviour
 {
-    public static WeaponManager Instance { get; private set; }
+    public static SelectionManager Instance { get; private set; }
 
+    public MechStatsSO[] mechSelections;
     public GameObject[] weaponPrefabsRight;
     public GameObject[] weaponPrefabsLeft;
+    public int selectedMech;
     public int selectedWeapon1;       
     public int selectedWeapon2;       
 

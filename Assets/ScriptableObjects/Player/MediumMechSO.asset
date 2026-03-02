@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0e5e7ae10272c44b65f1016b92d5b1, type: 3}
+  m_Name: MediumMechSO
+  m_EditorClassIdentifier: Assembly-CSharp::MechStatsSO
+  maxHealth: 500
+  armor: 0
+  walkingSpeed: 15
+  runningSpeed: 30
+  acceleartion: 15
+  decelaration: 30
+  legRotationSpeed: 20
+  weaponMaxRot: 45
+  weaponRotSpeed: 10
+  model: {fileID: 3493639480678516113, guid: 3475b6d6a7249f7478656e77f4667a6e, type: 3}

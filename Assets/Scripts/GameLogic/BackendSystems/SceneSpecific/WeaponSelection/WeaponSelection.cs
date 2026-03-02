@@ -4,14 +4,18 @@ using UnityEngine.SceneManagement;
 public class WeaponSelection : MonoBehaviour
 {
     [System.Serializable]
-    public class WeaponSelectionComponents
+    public class SelectionComponents
     {
-        public GameObject weaponDisplay;
-        public GameObject weaponModel;
+        public GameObject informationDisplay;
+        public GameObject visualDisplay;
     }
 
-    public WeaponSelectionComponents[] weaponsR;
-    public WeaponSelectionComponents[] weaponsL;
+    public SelectionComponents[] mechChassis;
+
+    public int selectedMech = 0;
+
+    public SelectionComponents[] weaponsR;
+    public SelectionComponents[] weaponsL;
 
     public int selectedWPNR = 0;
     public int selectedWPNL = 0;
@@ -24,48 +28,59 @@ public class WeaponSelection : MonoBehaviour
         Activate(weaponsL, selectedWPNL);
     }
 
+    // ---------- MECH CHASSIS ---------- //
+
+    public void NextMech()
+    {
+        SwitchComponent(mechChassis, ref selectedMech, 1);
+    }
+    public void PreviousMech()
+    {
+        SwitchComponent(mechChassis, ref selectedMech, -1);
+    }
+
     // ---------- RIGHT WEAPON ---------- //
     public void NextWeapon()
     {
-        SwitchWeapon(weaponsR, ref selectedWPNR, 1);
+        SwitchComponent(weaponsR, ref selectedWPNR, 1);
     }
 
     public void PreviousWeapon()
     {
-        SwitchWeapon(weaponsR, ref selectedWPNR, -1);
+        SwitchComponent(weaponsR, ref selectedWPNR, -1);
     }
 
     // ---------- LEFT WEAPON ---------- //
     public void NextWeapon2()
     {
-        SwitchWeapon(weaponsL, ref selectedWPNL, 1);
+        SwitchComponent(weaponsL, ref selectedWPNL, 1);
     }
 
     public void PreviousWeapon2()
     {
-        SwitchWeapon(weaponsL, ref selectedWPNL, -1);
+        SwitchComponent(weaponsL, ref selectedWPNL, -1);
     }
 
     // ---------- WEAPON SELECTION FUNCTIONS ---------- //
-    void SwitchWeapon(WeaponSelectionComponents[] weapons, ref int index, int direction)
+    void SwitchComponent(SelectionComponents[] components, ref int index, int direction)
     {
-        DeActivate(weapons, index);
+        DeActivate(components, index);
 
-        index = (index + direction + weapons.Length) % weapons.Length;
+        index = (index + direction + components.Length) % components.Length;
 
-        Activate(weapons, index);
+        Activate(components, index);
     }
 
-    void Activate(WeaponSelectionComponents[] weapons, int index)
+    void Activate(SelectionComponents[] components, int index)
     {
-        weapons[index].weaponDisplay.SetActive(true);
-        weapons[index].weaponModel.SetActive(true);
+        components[index].informationDisplay.SetActive(true);
+        components[index].visualDisplay.SetActive(true);
     }
 
-    void DeActivate(WeaponSelectionComponents[] weapons, int index)
+    void DeActivate(SelectionComponents[] components, int index)
     {
-        weapons[index].weaponDisplay.SetActive(false);
-        weapons[index].weaponModel.SetActive(false);
+        components[index].informationDisplay.SetActive(false);
+        components[index].visualDisplay.SetActive(false);
     }
 
     // ---------- OTHER FUNCTIONS ---------- //
@@ -85,8 +100,10 @@ public class WeaponSelection : MonoBehaviour
 
     public void StartGame()
     {
-        WeaponManager.Instance.selectedWeapon1 = selectedWPNR;
-        WeaponManager.Instance.selectedWeapon2 = selectedWPNL;
+        SelectionManager.Instance.selectedMech = selectedMech;
+
+        SelectionManager.Instance.selectedWeapon1 = selectedWPNR;
+        SelectionManager.Instance.selectedWeapon2 = selectedWPNL;
 
         SceneManager.LoadScene(MissionTracker.Instance.GetNextMissionScene());
     }

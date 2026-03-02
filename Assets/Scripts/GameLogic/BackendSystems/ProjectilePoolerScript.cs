@@ -30,11 +30,11 @@ public class ProjectilePoolerScript : MonoBehaviour
 
     private void BuildPoolListFromWeapons()
     {
-        WeaponManager wm = WeaponManager.Instance;
-        if (wm == null) return;
+        SelectionManager sM = SelectionManager.Instance;
+        if (sM == null) return;
 
-        TryRegisterWeaponProjectile(wm.weaponPrefabsLeft[wm.selectedWeapon2]);
-        TryRegisterWeaponProjectile(wm.weaponPrefabsRight[wm.selectedWeapon1]);
+        TryRegisterWeaponProjectile(sM.weaponPrefabsLeft[sM.selectedWeapon2]);
+        TryRegisterWeaponProjectile(sM.weaponPrefabsRight[sM.selectedWeapon1]);
     }
 
     private void TryRegisterWeaponProjectile(GameObject weaponPrefab)
