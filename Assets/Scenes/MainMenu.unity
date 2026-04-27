@@ -15368,6 +15368,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4707205994820790771, guid: 19abd6fa1091f8642ad16ca07e48fed0, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c142e5a146b94f47a5b8da7e04f823a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16047,9 +16051,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3806baef25b48479ade4813e60541b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManagerScript
-  autoPlay: 1
+  autoPlayAmbient: 0
+  autoPlayMusic: 1
   introSource: 
   loopSource: MenuMusicLoop
+  ambienceSource: 
 --- !u!1001 &1818423307
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -116,9 +116,10 @@ public class BossStateMachine : MonoBehaviour
         {
             currentState.UpdateState();
             UpdatePhase(); 
-            AbilityCooldown();
         }
 
+
+        AbilityCooldown();
         velocity = navMeshAgent.velocity;
     }
 

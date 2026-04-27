@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour
     }
     private WeaponElevation weaponElevation;
 
-    private WeaponHandler weaponRHandler;
-    private WeaponHandler weaponLHandler;
+    public WeaponHandler weaponRHandler;
+    public WeaponHandler weaponLHandler;
 
     [Header("Ability")]
     public float abilityCooldown = 30f;
@@ -150,7 +150,9 @@ public class PlayerController : MonoBehaviour
             if (stats.chargedWeapon)
             {
                 if (Input.GetKey(KeyCode.Mouse1))
+                {
                     weaponRHandler.TryFire();
+                }
 
                 if (Input.GetKeyUp(KeyCode.Mouse1))
                 { 
@@ -328,17 +330,6 @@ public class PlayerController : MonoBehaviour
                 mechStats.weaponRotSpeed * Time.deltaTime
             );
         }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        currentInteractable = other.GetComponent<IInteractable>();
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<IInteractable>() == currentInteractable)
-            currentInteractable = null;
     }
     public void AssignWeapon(WeaponHandler newWeapon)
     {

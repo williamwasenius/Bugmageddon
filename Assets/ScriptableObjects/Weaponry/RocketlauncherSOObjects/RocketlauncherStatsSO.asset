@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponStatsSO
   fireRate: 1.5
   projectileStats: {fileID: 11400000, guid: df9218c90e54ac244bd1a9bc980d2d82, type: 2}
+  rotatingBarrel: 0
+  rotationSpeed: 0
   chargedWeapon: 0
   chargeTime: 1
-  shootSound: {fileID: 8300000, guid: d9ae1f43d255e854cb8efb036c7b7b39, type: 3}
+  shootSound: {fileID: 11400000, guid: dcf46c37ce3c9854883f8384dba78458, type: 2}
+  audioDataID: shootSound
   chargeSound: {fileID: 0}
   muzzleFlash: {fileID: 0}

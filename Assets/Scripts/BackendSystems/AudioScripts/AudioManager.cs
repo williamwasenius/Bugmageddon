@@ -64,6 +64,9 @@ namespace AudioSystem
             if (audioData.positionalSound)
             {
                 source.spatialBlend = 1f;
+                source.rolloffMode = audioData.rolloffMode;
+                source.minDistance = audioData.minDistance;
+                source.maxDistance = audioData.maxDistance;
             }
             else
             {
@@ -112,7 +115,6 @@ namespace AudioSystem
             {
                 AudioSource introAudio = Play(introData.id, Vector3.zero);
                 yield return new WaitForSecondsRealtime(introData.clip.length);
-                Destroy(introAudio.gameObject);
             }
 
             if (loopData != null)

@@ -117868,6 +117868,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: loopSource
+      value: Music01Loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: introSource
+      value: Music01Intro
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: autoPlayMusic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: ambienceSource
+      value: Ambient04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: autoPlayAmbient
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6563906837845264893, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -143222,6 +143242,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4707205994820790771, guid: 19abd6fa1091f8642ad16ca07e48fed0, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c142e5a146b94f47a5b8da7e04f823a, type: 2}
     - target: {fileID: 8018689280217007630, guid: 19abd6fa1091f8642ad16ca07e48fed0, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -148272,11 +148296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyIndicatorManager
   correctionAngle: 77.5
-  player: {fileID: 0}
+  player: {fileID: 1370310955}
   indicatorImagePivot: {fileID: 1982954667}
   targetObject: {fileID: 0}
   mainCamera: {fileID: 1157160464}
-  mission: {fileID: 0}
+  mission: {fileID: 1590530573}
 --- !u!1001 &1983259611
 PrefabInstance:
   m_ObjectHideFlags: 0

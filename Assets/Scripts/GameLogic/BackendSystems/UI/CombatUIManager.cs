@@ -7,6 +7,8 @@ public class CombatUIManager : MonoBehaviour
 
     public Image weaponRCooldownImage;
     public Image weaponLCooldownImage;
+    public Image weaponRHeatImage;
+    public Image weaponLHeatImage;
    // public Image DashCooldownImage;
 
     private WeaponHandler weaponRHandler;
@@ -38,11 +40,22 @@ public class CombatUIManager : MonoBehaviour
         if (weaponRHandler != null)
         {
             weaponRCooldownImage.fillAmount = weaponRHandler.GetCooldownProgress();
+
+            if (weaponRHandler.weaponStats.buildsHeat)
+            {
+                weaponRHeatImage.fillAmount = Mathf.Clamp01(weaponRHandler.currentHeat / weaponRHandler.weaponStats.maxHeat);
+            }
+
         }
 
         if (weaponLHandler != null)
         {
             weaponLCooldownImage.fillAmount = weaponLHandler.GetCooldownProgress();
+            
+            if (weaponLHandler.weaponStats.buildsHeat)
+            {
+                weaponLHeatImage.fillAmount = Mathf.Clamp01(weaponLHandler.currentHeat / weaponLHandler.weaponStats.maxHeat);
+            }
         }
 
         if (player != null)
@@ -52,7 +65,7 @@ public class CombatUIManager : MonoBehaviour
 
     }
 
-    private WeaponHandler FindWeaponHandler(GameObject weaponParent)
+    /*private WeaponHandler FindWeaponHandler(GameObject weaponParent)
     {
         if (weaponParent != null)
         {
@@ -60,17 +73,35 @@ public class CombatUIManager : MonoBehaviour
             return handler;
         }
         return null;
-    }
+    }*/
 
     private void AcquireWeapons()
     {
         if (weaponRHandler == null)
         {
-            weaponRHandler = FindWeaponHandler(weaponRParent);
+            weaponRHandler = player.weaponRHandler;
+
+            if (weaponRHandler.weaponStats.buildsHeat)
+            {
+                weaponRHeatImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                weaponRHeatImage.gameObject.SetActive(false);
+            }
         }
         if (weaponLHandler == null)
         {
-            weaponLHandler = FindWeaponHandler(weaponLParent);
+            weaponLHandler = player.weaponLHandler;
+
+            if (weaponLHandler.weaponStats.buildsHeat)
+            {
+                weaponLHeatImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                weaponLHeatImage.gameObject.SetActive(false);
+            }
         }
     }
 

@@ -22,3 +22,5 @@ MonoBehaviour:
   explosionDamage: 0
   projectilePrefab: {fileID: 5858682775981667188, guid: 6160891c05ccc58468328e1f6420e2f1, type: 3}
   explosionPrefab: {fileID: 0}
+  flightSound: {fileID: 0}
+  hitSound: {fileID: 11400000, guid: 5a87a3767015ea647a50cfb3af8f69aa, type: 2}

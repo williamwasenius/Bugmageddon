@@ -18,6 +18,13 @@ MonoBehaviour:
   rotationSpeed: 1500
   chargedWeapon: 0
   chargeTime: 1
+  buildsHeat: 0
+  heatPerShot: 1
+  maxHeat: 100
+  rampingFirerate: 1
+  rampSpeed: 20
+  startFireRate: 1
   shootSound: {fileID: 11400000, guid: a3eb4ef948db74643892c91742f441e4, type: 2}
+  audioDataID: shootSound
   chargeSound: {fileID: 0}
   muzzleFlash: {fileID: 0}

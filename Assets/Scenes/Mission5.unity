@@ -1322,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 6044254619207058156, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: 'audioClips.Array.data[0]'
       value: 
-      objectReference: {fileID: 8300000, guid: 4250a68d2c719f846b993f80e8312a9b, type: 3}
+      objectReference: {fileID: 11400000, guid: 1cd03ea4a7512fb4cbfe307b2578262e, type: 2}
     - target: {fileID: 6224669348495132182, guid: a1c64bcdd44f2124eb1e26e8f1109f65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -44.282288
@@ -21239,6 +21239,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5407819417256166137, guid: 04b268fe8370be548bc791be69943481, type: 3}
   m_PrefabInstance: {fileID: 437817424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &440580862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+  m_PrefabInstance: {fileID: 1595762032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3806baef25b48479ade4813e60541b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManagerScript
 --- !u!1001 &440625224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42120,7 +42131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &928105312
 Light:
   m_ObjectHideFlags: 0
@@ -71875,6 +71886,14 @@ PrefabInstance:
       propertyPath: autoPlay
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1053084298014328609, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: loopSource
+      value: msc_teffyd1-memory-leak_loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053084298014328609, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: introSource
+      value: msc_teffyd1-memory-leak_intro
+      objectReference: {fileID: 0}
     - target: {fileID: 1576233639047411717, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: Loop
       value: 1
@@ -71952,6 +71971,10 @@ PrefabInstance:
       propertyPath: destructibleRangeThreshold
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 4006648113542382434, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4160952331154375002, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: player
       value: 
@@ -72004,6 +72027,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5896778797342202033, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6025596179317044510, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -72015,6 +72042,22 @@ PrefabInstance:
     - target: {fileID: 6025596179317044510, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: loopSource
+      value: Music02Loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: introSource
+      value: Music02Intro
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: ambienceSource
+      value: Ambient05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062110431340808517, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: autoPlayAmbient
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6214918444778039587, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_Type
@@ -72034,6 +72077,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6214918444778039587, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6501073601789166954, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6563906837845264893, guid: 30ad03145b9be5048be382c05049a948, type: 3}
@@ -72164,7 +72211,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6476272876328199373, guid: 30ad03145b9be5048be382c05049a948, type: 3}
@@ -83440,7 +83489,7 @@ MonoBehaviour:
   textTwo: {fileID: 0}
   trigger: {fileID: 0}
   musicTrigger: 1
-  musicManager: {fileID: 1865173708}
+  musicManager: {fileID: 440580862}
 --- !u!1001 &1852980254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84273,17 +84322,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2181281245932567852, guid: d6a2e456ba73bca4690c7ea9748aae77, type: 3}
   m_PrefabInstance: {fileID: 1865022149}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1865173708 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1053084298014328609, guid: 30ad03145b9be5048be382c05049a948, type: 3}
-  m_PrefabInstance: {fileID: 1595762032}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3806baef25b48479ade4813e60541b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MusicManagerScript
 --- !u!1001 &1868372948
 PrefabInstance:
   m_ObjectHideFlags: 0

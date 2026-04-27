@@ -19,10 +19,21 @@ public class WeaponStatsSO : ScriptableObject
     public bool chargedWeapon = false;
     public float chargeTime = 1f;
 
+    [Header("Heat Buildup (optional)")]
+    public bool buildsHeat = false;
+    public float heatPerShot = 1f;
+    public float maxHeat = 10f;
+
+    [Header("Firerate Ramp (optional)")]
+    public bool rampingFirerate = false;
+    public float rampSpeed = 1f;
+    public float startFireRate = 1f;
+
     [Header("VFX & SFX")]
     public AudioData shootSound;
     public string audioDataID = nameof(shootSound);
     public AudioData chargeSound;
     public VisualEffect muzzleFlash;
+
 }
 

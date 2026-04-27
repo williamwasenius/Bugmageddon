@@ -11,6 +11,7 @@ public class WeaponHandler : MonoBehaviour
     private VisualEffect firePointVFX;
 
     private bool isFiring;
+    private bool isDisabled;
 
     private float cooldownTimer = 0f;
 
@@ -21,12 +22,19 @@ public class WeaponHandler : MonoBehaviour
     private bool isCharged = false;
     private AudioSource chargeAudioSource;
 
+    [Header("Weapon Heat Specific")]
+    public float currentHeat;
+
+    [Header("Weapon Ramp Specific")]
+    private float currentRoF;
+
     [Header("Shooter")]
+    public PlayerController player;
     public GameObject shooter;
 
     private void Awake()
     {
-        PlayerController player = GetComponentInParent<PlayerController>(); 
+        player = GetComponentInParent<PlayerController>(); 
         if (player != null) 
         {
             Debug.Log("player found");
@@ -38,6 +46,7 @@ public class WeaponHandler : MonoBehaviour
     {
         shooter = transform.root.gameObject; 
         firePointVFX = firePoint.GetComponent<VisualEffect>();
+        currentRoF = weaponStats.startFireRate;
     }
 
     private void Update()
@@ -51,19 +60,28 @@ public class WeaponHandler : MonoBehaviour
         {
             rotateWeapons();
         }
+
+        if (!isFiring)
+        {
+            DecreaseHeat();
+            currentRoF = weaponStats.startFireRate;
+        }
     }
 
     public void TryFire()
     {
-        if (weaponStats.chargedWeapon)
-        {
-            ChargeWeapon();
-            return;
-        }
+        if (!isDisabled)
+        {        
+            if (weaponStats.chargedWeapon)
+            {
+                ChargeWeapon();
+                return;
+            }
 
-        if (cooldownTimer <= 0)
-        {
-            Fire();
+            if (cooldownTimer <= 0)
+            {
+                Fire();
+            }
         }
     }
     public void StopFire()
@@ -157,13 +175,24 @@ public class WeaponHandler : MonoBehaviour
         projectileLogic.shooter = shooter;
 
         if (firePointVFX != null)
+        {
             firePointVFX.Play();
+        }
 
         if (weaponStats.shootSound != null)
+        {
             AudioManager.Instance.Play(weaponStats.shootSound.id, transform.position);
+        }
 
-        cooldownTimer = weaponStats.fireRate;
-
+        if (weaponStats.rampingFirerate)
+        {
+            RampUp();
+        }
+        if (weaponStats.buildsHeat)
+        {
+            IncreaseHeat();
+        }
+        cooldownTimer = weaponStats.rampingFirerate ? currentRoF : weaponStats.fireRate;
     }
 
     public float GetCooldownProgress()
@@ -178,5 +207,30 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    public void RampUp()
+    {
+        currentRoF = Mathf.Lerp(currentRoF, weaponStats.fireRate, weaponStats.rampSpeed * Time.deltaTime);
+    }
+
+    public void IncreaseHeat()
+    {
+        currentHeat += weaponStats.heatPerShot;
+        if (currentHeat >= weaponStats.maxHeat)
+        {
+            isDisabled = true;
+        }
+    }
+
+    public void DecreaseHeat()
+    {
+        if (currentHeat > 0)
+        {
+            currentHeat -= Time.deltaTime * 2;
+        }
+        if (currentHeat <= 0)
+        {
+            isDisabled = false;
+        }
+    }
 
 }

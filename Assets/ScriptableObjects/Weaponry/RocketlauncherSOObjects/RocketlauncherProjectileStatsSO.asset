@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
   speed: 100
   damage: 100
+  armorPierce: 0
   lifeTime: 5
   pierce: 0
   explosive: 1
@@ -21,3 +22,5 @@ MonoBehaviour:
   explosionDamage: 100
   projectilePrefab: {fileID: 6339254692014345315, guid: ddd40e7a2f0b4f3418f1f2782a1471e6, type: 3}
   explosionPrefab: {fileID: 4439557229569339894, guid: 42fabf2fed2f2d547b167ccf24b4b011, type: 3}
+  flightSound: {fileID: 11400000, guid: bd88feacf3a202840a06ed4a826d190f, type: 2}
+  hitSound: {fileID: 11400000, guid: 5a87a3767015ea647a50cfb3af8f69aa, type: 2}

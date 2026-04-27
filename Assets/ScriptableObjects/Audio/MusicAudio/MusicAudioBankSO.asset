@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479c22f85f44dd648b1b6c5766f58e90, type: 3}
   m_Name: MusicAudioBankSO
   m_EditorClassIdentifier: Assembly-CSharp::AudioBank
-  categoryName: WeaponAudioBank
+  categoryName: MusicAudioBank
   sounds:
   - {fileID: 11400000, guid: 9f068de6ddc9ab14aafc48221872e704, type: 2}
   - {fileID: 11400000, guid: 070a0fc5cd990754285ec967cb4bd45e, type: 2}

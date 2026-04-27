@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.AudioData
   id: RailcannonCharge
   dataType: 3
-  clip: {fileID: 8300000, guid: dfafb43509bdf704f89e33a103a7796d, type: 3}
+  clip: {fileID: 8300000, guid: 5c73d4a167c47d54f9cc0a5e9895ae96, type: 3}
   mixerGroup: {fileID: -60594750434616798, guid: 4030aefbdf54a9547bd29c188176e159, type: 2}
   volume: 1
   pitch: 1
+  playOnAwake: 1
   loop: 0
   positionalSound: 1

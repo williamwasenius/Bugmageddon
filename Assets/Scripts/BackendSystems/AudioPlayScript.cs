@@ -1,12 +1,15 @@
+using AudioSystem;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AudioPlayScript : MonoBehaviour
 {
-    public AudioClip[] audioClips;
+    public AudioData[] audioClips;
 
-    public void Play(int clipNumber)
+    public void Play(int index)
     {
-        AudioSource.PlayClipAtPoint(audioClips[clipNumber], Camera.main.transform.position);
+        if (index < 0 || index >= audioClips.Length || audioClips[index] == null)
+            return;
+
+        AudioManager.Instance.Play(audioClips[index].id, transform.position);
     }
 }

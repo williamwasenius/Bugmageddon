@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class MusicManagerScript : MonoBehaviour
 {
-    public bool autoPlay;
+    public bool autoPlayAmbient;
+    public bool autoPlayMusic;
 
     public string introSource;
     public string loopSource;
@@ -11,10 +12,13 @@ public class MusicManagerScript : MonoBehaviour
 
     void Start()
     {
-        if (autoPlay)
+        if (autoPlayAmbient)
+        {
+            PlayAmbience();
+        }
+        if (autoPlayMusic)
         {
             PlayMusic();
-            PlayAmbience();
         }
     }
 

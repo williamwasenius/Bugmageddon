@@ -18,5 +18,6 @@ MonoBehaviour:
   mixerGroup: {fileID: -60594750434616798, guid: 4030aefbdf54a9547bd29c188176e159, type: 2}
   volume: 1
   pitch: 1
+  playOnAwake: 1
   loop: 0
   positionalSound: 1

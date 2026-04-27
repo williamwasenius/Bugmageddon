@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Projectiles/Projectile")]
@@ -19,4 +20,8 @@ public class ProjectileStatsSO : ScriptableObject
     [Header("Prefab References")]
     public GameObject projectilePrefab;
     public GameObject explosionPrefab;
+
+    [Header("Projectile Audio")]
+    public AudioData flightSound;
+    public AudioData hitSound;
 }

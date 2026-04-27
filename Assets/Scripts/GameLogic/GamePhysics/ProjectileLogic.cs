@@ -1,5 +1,6 @@
-using UnityEngine;
+using AudioSystem;
 using System.Collections;
+using UnityEngine;
 
 public class ProjectileLogic : MonoBehaviour
 {
@@ -12,13 +13,18 @@ public class ProjectileLogic : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        if (projectileStats.flightSound != null)
+        { 
+            AudioManager.Instance.Play(projectileStats.flightSound.id, transform.position); 
+        }
+
         if (ProjectilePoolerScript.Instance != null)
         {
             StartCoroutine(DespawnAfterLifetime());
         }
         else
-        {
-            Destroy(gameObject, projectileStats.lifeTime);
+        { 
+            Destroy(gameObject, projectileStats.lifeTime); 
         }
     }
 
@@ -52,9 +58,9 @@ public class ProjectileLogic : MonoBehaviour
             {
                 EnemyStateMachine enemyStateMachine = hitObject.GetComponent<EnemyStateMachine>();
                 enemyStateMachine.OnHit(shooter);
-                if (audioPlayScript != null && shooter.CompareTag("Player"))
-                { 
-                    audioPlayScript.Play(0); 
+                if (projectileStats.hitSound != null && shooter.CompareTag("Player"))
+                {
+                    AudioManager.Instance.Play(projectileStats.hitSound.id, transform.position);
                 }
             }
 

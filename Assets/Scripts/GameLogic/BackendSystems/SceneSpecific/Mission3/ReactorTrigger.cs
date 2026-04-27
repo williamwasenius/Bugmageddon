@@ -26,15 +26,17 @@ public class ReactorTrigger : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             interractiblePrompt.SetActive(true);
-            other.GetComponent<PlayerController>().currentInteractable = this;
+            other.GetComponentInParent<PlayerController>().currentInteractable = this;
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             interractiblePrompt.SetActive(false);
-            other.GetComponent<PlayerController>().currentInteractable = null;
+            other.GetComponentInParent<PlayerController>().currentInteractable = null;
+        }
     }
 
 

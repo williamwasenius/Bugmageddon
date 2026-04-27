@@ -18,6 +18,7 @@ MonoBehaviour:
   rotationSpeed: 0
   chargedWeapon: 0
   chargeTime: 1
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 11400000, guid: 4ecee90a33cff96438ba6ab0ef616db3, type: 2}
+  audioDataID: shootSound
   chargeSound: {fileID: 0}
   muzzleFlash: {fileID: 0}

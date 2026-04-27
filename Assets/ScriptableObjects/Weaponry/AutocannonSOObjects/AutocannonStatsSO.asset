@@ -18,6 +18,12 @@ MonoBehaviour:
   rotationSpeed: 0
   chargedWeapon: 0
   chargeTime: 1
+  buildsHeat: 1
+  heatPerShot: 1
+  maxHeat: 10
+  rampingFirerate: 0
+  rampSpeed: 1
+  startFireRate: 1
   shootSound: {fileID: 11400000, guid: f26215d0a0b01824886118df5236ae2a, type: 2}
   audioDataID: shootSound
   chargeSound: {fileID: 0}

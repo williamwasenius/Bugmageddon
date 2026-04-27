@@ -29,6 +29,9 @@ namespace AudioSystem
         public bool playOnAwake = true;
         public bool loop = false;
         public bool positionalSound = false;
+        public float minDistance = 10f;
+        public float maxDistance = 100f;
+        public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
     }
 
 
