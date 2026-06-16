@@ -7,6 +7,7 @@ public class Mission1Script : MonoBehaviour
     public GameObject player;
     public int enemiesRemaining;
     public TextMeshProUGUI enemyCounter;
+    private EnemyEntitiesManagerScript entityManagerScript;
 
     public CanvasGroup winCanvas;
     public CanvasGroup failCanvas;
@@ -18,10 +19,10 @@ public class Mission1Script : MonoBehaviour
 
     private void Start()
     {
+        entityManagerScript = EnemyEntitiesManagerScript.Instance;
         UpdateEnemyCount();
         player = GameObject.FindWithTag("Player");
         MissionTracker.Instance.SetCurrentMission("Mission1");
-        enemiesRemaining += GameObject.FindGameObjectsWithTag("Spawner").Length;
     }
 
     private void Update()
@@ -45,7 +46,7 @@ public class Mission1Script : MonoBehaviour
 
     private void UpdateEnemyCount()
     {
-        enemiesRemaining = EnemyEntitiesManagerScript.Instance.enemiesInScene.Count;
+        enemiesRemaining = entityManagerScript.enemiesInScene.Count + entityManagerScript.spawnersInScene.Count;
     }
 
     private void Win()

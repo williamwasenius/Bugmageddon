@@ -12,6 +12,7 @@ public class EnemyEntitiesManagerScript : MonoBehaviour
 
     [Header("Runtime Entity Tracking")]
     public List<GameObject> enemiesInScene = new List<GameObject>();
+    public List<GameObject> spawnersInScene = new List<GameObject>();
     private List<GameObject> destructiblesInRange = new List<GameObject>();
     private Dictionary<GameObject, float> enemyInactiveTimers = new Dictionary<GameObject, float>();
 
@@ -36,7 +37,7 @@ public class EnemyEntitiesManagerScript : MonoBehaviour
         ManageVisibility(enemiesInScene, enemyRangeThreshold, "Enemy");
     }
 
-    // ---------------- PUBLIC REGISTRATION ---------------- //
+    // ---------------- ENEMY REGISTRATION ---------------- //
 
     public void RegisterEnemy(GameObject enemy)
     {
@@ -59,6 +60,24 @@ public class EnemyEntitiesManagerScript : MonoBehaviour
     public void UpdateEnemyList()
     {
         enemiesInScene.RemoveAll(enemy => enemy == null || !enemy.activeInHierarchy);
+    }
+
+    // ---------------- SPAWNER REGISTRATION ---------------- //
+    public void RegisterSpawner(GameObject spawner)
+    {
+        if (spawner != null && !spawnersInScene.Contains(spawner))
+            spawnersInScene.Add(spawner);
+    }
+
+    public void DeregisterSpawner(GameObject spawner)
+    {
+        if (spawner != null)
+            spawnersInScene.Remove(spawner);
+    }
+
+    public void UpdateSpawnerList()
+    {
+        spawnersInScene.RemoveAll(spawner => spawner == null || !spawner.activeInHierarchy);
     }
 
     // ---------------- ENTITY LOADING METHODS ---------------- //

@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
     {
         player = GameObject.FindGameObjectWithTag("Player");
         entityManagerScript = EnemyEntitiesManagerScript.Instance;
+        entityManagerScript.RegisterSpawner(gameObject);
         CurrentHealth = maxHealth;
 
     }
@@ -69,6 +70,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
         float normalizedHealth = Mathf.Clamp01(CurrentHealth / maxHealth);
         filler.fillAmount = normalizedHealth;
+
     }
 
     // Private Methods
@@ -91,7 +93,7 @@ public class EnemySpawner : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        entityManagerScript.DeregisterEnemy(gameObject);
+        entityManagerScript.DeregisterSpawner(gameObject);
         Destroy(gameObject);
     }
 
@@ -118,7 +120,11 @@ public class EnemySpawner : MonoBehaviour, IDamageable
         }
         else if (medium)
         {
-            if (enemyPrefab.name.Contains("Small"))
+            if (enemyPrefab.name.Contains("Charger"))
+            {
+                Spawn(enemyPrefab);
+            }
+            else
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -127,14 +133,14 @@ public class EnemySpawner : MonoBehaviour, IDamageable
                 }
                 yield break;
             }
-            else if (enemyPrefab.name.Contains("Medium"))
-            {
-                Spawn(enemyPrefab);
-            }
         }
         else if (large)
         {
-            if (enemyPrefab.name.Contains("Small"))
+            if (enemyPrefab.name.Contains("Charger"))
+            {
+                Spawn(enemyPrefab);
+            }
+            else
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -143,21 +149,8 @@ public class EnemySpawner : MonoBehaviour, IDamageable
                 }
                 yield break;
             }
-            else if (enemyPrefab.name.Contains("Medium"))
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    Spawn(enemyPrefab);
-                    yield return new WaitForSeconds(0.1f);
-                }
-                yield break;
-            }
-            else if (enemyPrefab.name.Contains("Large"))
-            {
-                Spawn(enemyPrefab);
-            }
         }
-
+            
         yield return null;
 
     }

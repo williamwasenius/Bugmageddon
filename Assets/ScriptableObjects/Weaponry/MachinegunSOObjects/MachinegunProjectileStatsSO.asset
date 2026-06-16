@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc63f4c8693e1c44abbfde9adaf56aa3, type: 3}
   m_Name: MachinegunProjectileStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
-  speed: 85
+  speed: 120
   damage: 15
   armorPierce: 0
   lifeTime: 5

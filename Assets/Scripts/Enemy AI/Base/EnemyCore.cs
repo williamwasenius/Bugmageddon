@@ -38,6 +38,8 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
         entityManagerScript = EnemyEntitiesManagerScript.Instance;
 
+        entityManagerScript.RegisterEnemy(gameObject);
+
         CurrentHealth = coreStats.maxHealth;
 
         if (meleeStats && !damageTrigger)
@@ -71,6 +73,7 @@ public class EnemyCore : MonoBehaviour, IDamageable
 
     public IEnumerator Die()
     {
+
         if (!hasExploded && bursterStats != null)
         {
             hasExploded = true;

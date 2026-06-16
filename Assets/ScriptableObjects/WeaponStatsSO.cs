@@ -5,6 +5,8 @@ using UnityEngine.VFX;
 [CreateAssetMenu(menuName = "Stats/Weapon Stats")]
 public class WeaponStatsSO : ScriptableObject
 {
+    public string weaponName = "Default";
+
     [Header("Firing")]
     public float fireRate = 0.2f;
 
@@ -23,6 +25,7 @@ public class WeaponStatsSO : ScriptableObject
     public bool buildsHeat = false;
     public float heatPerShot = 1f;
     public float maxHeat = 10f;
+    public float maxCooldownDuration = 5f;
 
     [Header("Firerate Ramp (optional)")]
     public bool rampingFirerate = false;

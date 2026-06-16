@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MechStatsSO
   maxHealth: 1000
   armor: 0
-  walkingSpeed: 10
-  runningSpeed: 20
-  acceleartion: 10
+  walkingSpeed: 7.5
+  runningSpeed: 15
+  acceleartion: 7.5
   decelaration: 20
-  legRotationSpeed: 20
-  weaponMaxRot: 0
-  weaponRotSpeed: 0
-  model: {fileID: 919132149155446097, guid: 60893983be32e0a42b9da8c138940fad, type: 3}
+  legRotationSpeed: 15
+  weaponMaxRot: 45
+  weaponRotSpeed: 10
+  model: {fileID: 8242142118246348123, guid: f01f4f212c469b6468d65f9e533dd6d1, type: 3}

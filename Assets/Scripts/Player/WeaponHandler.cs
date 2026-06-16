@@ -4,6 +4,10 @@ using UnityEngine.VFX;
 
 public class WeaponHandler : MonoBehaviour
 {
+    [Header("Weapon Variants")]
+    public WeaponStatsSO[] weaponVariants;
+    public bool altWeapon = false;
+
     [Header("Weapon Information")]
     public WeaponStatsSO weaponStats;
     public Transform firePoint;
@@ -44,6 +48,11 @@ public class WeaponHandler : MonoBehaviour
 
     private void Start()
     {
+        if (altWeapon && weaponVariants.Length > 1 && weaponVariants != null)
+            weaponStats = weaponVariants[1];
+        else
+            weaponStats = weaponVariants[0];
+
         shooter = transform.root.gameObject; 
         firePointVFX = firePoint.GetComponent<VisualEffect>();
         currentRoF = weaponStats.startFireRate;
@@ -51,20 +60,25 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
+
+     if (isFiring && weaponStats.rotatingBarrel)
+        {
+            rotateWeapons();
+        }
+
+    }
+
+    private void FixedUpdate()
+    {
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
         }
 
-        if (isFiring && weaponStats.rotatingBarrel)
-        {
-            rotateWeapons();
-        }
-
         if (!isFiring)
         {
             DecreaseHeat();
-            currentRoF = weaponStats.startFireRate;
+            currentRoF = Mathf.MoveTowards(currentRoF, weaponStats.startFireRate, weaponStats.rampSpeed * Time.deltaTime);
         }
     }
 
@@ -184,6 +198,8 @@ public class WeaponHandler : MonoBehaviour
             AudioManager.Instance.Play(weaponStats.shootSound.id, transform.position);
         }
 
+        cooldownTimer = weaponStats.rampingFirerate ? currentRoF : weaponStats.fireRate;
+
         if (weaponStats.rampingFirerate)
         {
             RampUp();
@@ -192,7 +208,7 @@ public class WeaponHandler : MonoBehaviour
         {
             IncreaseHeat();
         }
-        cooldownTimer = weaponStats.rampingFirerate ? currentRoF : weaponStats.fireRate;
+        
     }
 
     public float GetCooldownProgress()
@@ -209,7 +225,7 @@ public class WeaponHandler : MonoBehaviour
 
     public void RampUp()
     {
-        currentRoF = Mathf.Lerp(currentRoF, weaponStats.fireRate, weaponStats.rampSpeed * Time.deltaTime);
+        currentRoF = Mathf.MoveTowards(currentRoF, weaponStats.fireRate, weaponStats.rampSpeed * Time.deltaTime);
     }
 
     public void IncreaseHeat()
@@ -223,12 +239,15 @@ public class WeaponHandler : MonoBehaviour
 
     public void DecreaseHeat()
     {
+        float coolRate = weaponStats.maxHeat / weaponStats.maxCooldownDuration;
+
         if (currentHeat > 0)
         {
-            currentHeat -= Time.deltaTime * 2;
+            currentHeat -= coolRate * Time.deltaTime;
         }
         if (currentHeat <= 0)
         {
+            currentHeat = 0;
             isDisabled = false;
         }
     }

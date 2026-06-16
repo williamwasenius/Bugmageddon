@@ -16,41 +16,12 @@ public class SettingsScript : MonoBehaviour
     public Slider vFXSlider;
     void Start()
     {
-        fullScreenToggle.isOn = Screen.fullScreen;
-
-        if(QualitySettings.vSyncCount == 0 )
-        {
-            vSyncToggle.isOn = false;
-        }
-        else
-        {
-            vSyncToggle.isOn = true;
-        }
-
-        bool foundResolution = false;
-        for( int i = 0; i < resolutions.Count; i++ )
-        {
-            if (Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical)
-            {
-                foundResolution = true;
-                selectedResolution = i;
-
-                UpdateResolutionText();
-            }
-        }
-
-        if( !foundResolution )
-        {
-            ResolutionType newResolution = new ResolutionType();
-            newResolution.horizontal = Screen.width;
-            newResolution.vertical = Screen.height;
-
-            resolutions.Add( newResolution );
-            selectedResolution = resolutions.Count - 1;
-            UpdateResolutionText();
-        }
-
+        fullScreenToggle.isOn = SaveManager.Instance.fullScreen;
+        vSyncToggle.isOn = SaveManager.Instance.vSync;
+        selectedResolution = SaveManager.Instance.resolutionIndex;
+        UpdateResolutionText();
         SetAudioLevel();
+        ApplySavedGraphics();
     }
 
     void Update()
@@ -84,24 +55,37 @@ public class SettingsScript : MonoBehaviour
     }
     public void ApplyGraphicsButton()
     {
-        //Screen.fullScreen = fullScreenToggle.isOn;
+        SaveManager.Instance.fullScreen = fullScreenToggle.isOn;
+        SaveManager.Instance.vSync = vSyncToggle.isOn;
+        SaveManager.Instance.resolutionIndex = selectedResolution;
 
         if (vSyncToggle.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
+            {
+                QualitySettings.vSyncCount = 1;
+            }
+        else
+            {
+                QualitySettings.vSyncCount = 0;
+            }
 
-        }else
-        {
-            QualitySettings.vSyncCount = 0;
-        }
+        FullScreenMode mode = fullScreenToggle.isOn ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
 
-        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullScreenToggle.isOn);
+        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, mode);
+
+        SaveManager.Instance.SavePlayerData();
     }
     public void SetAudioLevel()
     {
         audioSlider.value = SaveManager.Instance.volumeSliderAmount;
         musicSlider.value = SaveManager.Instance.musicSliderAmount;
         vFXSlider.value = SaveManager.Instance.vFXSliderAmount;
+
+    }
+    private void ApplySavedGraphics()
+    {
+        QualitySettings.vSyncCount = SaveManager.Instance.vSync ? 1 : 0;
+        FullScreenMode mode = SaveManager.Instance.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        Screen.SetResolution(resolutions[SaveManager.Instance.resolutionIndex].horizontal, resolutions[SaveManager.Instance.resolutionIndex].vertical, mode);
     }
 }
 

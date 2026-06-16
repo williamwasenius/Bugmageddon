@@ -19632,7 +19632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823412497009284435, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Confirm
+      value: ApplyGraphicsButton
       objectReference: {fileID: 0}
     - target: {fileID: 6823412497009284435, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -19644,7 +19644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823412497009284435, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: OptionsScript, Assembly-CSharp
+      value: SettingsScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6823412497009284435, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -19791,13 +19791,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
 --- !u!114 &4609141417656568818 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7643755556655105589, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5810934605993029927, guid: 7161861b8aeb4444e9eeea175b804ca4, type: 3}
   m_PrefabInstance: {fileID: 4609141417656568817}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279270194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b49196d32a2f8504c90ffcc1d0efd2a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a7bbe34b7e2f6d4ab59a8370c3a7b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4609141417656568819 stripped

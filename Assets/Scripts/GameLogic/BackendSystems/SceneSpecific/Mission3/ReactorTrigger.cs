@@ -5,6 +5,7 @@ public class ReactorTrigger : MonoBehaviour, IInteractable
     public Mission3Script mission;
     public GameObject interractiblePrompt;
     public Collider trigger;
+    public GameObject indicatorCircle;
     public int generatorIndex;
 
     void Start()
@@ -18,6 +19,7 @@ public class ReactorTrigger : MonoBehaviour, IInteractable
         interractiblePrompt.SetActive(false);
         mission.StartGeneratorDefense(generatorIndex);
         trigger.enabled = false;
+        indicatorCircle.SetActive(false);
 
     }
 

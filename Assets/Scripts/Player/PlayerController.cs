@@ -75,6 +75,11 @@ public class PlayerController : MonoBehaviour
         {
             int selectedMech = SelectionManager.Instance.selectedMech;
             mechStats = SelectionManager.Instance.mechSelections[selectedMech];
+            if (mechStats != null)
+            {
+                DestructibleScript destructible = GetComponent<DestructibleScript>();
+                destructible.SetStats(mechStats.maxHealth, mechStats.armor, false, false);
+            }
         }
         if (playerMech == null)
         {

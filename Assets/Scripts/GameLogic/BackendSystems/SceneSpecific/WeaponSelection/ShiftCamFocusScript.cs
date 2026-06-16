@@ -9,21 +9,37 @@ public class ShiftCamFocusScript : MonoBehaviour
     {
         public Transform waypoint;
         public Transform lookTarget;
+        public GameObject blockingObject;
     }
 
     public CinemachineCamera cmCamera;
     public CameraPreset[] presets;
+    public int currentCamera = 0;
 
     public void Start()
     {
-        moveCamera(0);
+        moveCamera(currentCamera);
     }
 
     public void moveCamera(int indexNum)
     {
-        CameraPreset preset = presets[indexNum];
+        CameraPreset preset = presets[currentCamera];
+
+        if (preset.blockingObject != null)
+        {
+            preset.blockingObject.SetActive(true);
+        }
+
+        currentCamera = indexNum;
+        preset = presets[indexNum];
+
         cmCamera.Follow = preset.waypoint;
         cmCamera.LookAt = preset.lookTarget;
+
+        if (preset.blockingObject != null)
+        {
+            preset.blockingObject.SetActive(false);
+        }
     }
 
 }

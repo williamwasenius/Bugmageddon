@@ -7,9 +7,11 @@ public class SelectionManager : MonoBehaviour
     public MechStatsSO[] mechSelections;
     public GameObject[] weaponPrefabsRight;
     public GameObject[] weaponPrefabsLeft;
-    public int selectedMech;
-    public int selectedWeapon1;       
-    public int selectedWeapon2;       
+    public int selectedMech = 0;
+    public int selectedWeaponR = 0;       
+    public int selectedWeaponL = 0;
+    public bool altWeaponR = false;
+    public bool altWeaponL = false;
 
     private void Awake()
     {

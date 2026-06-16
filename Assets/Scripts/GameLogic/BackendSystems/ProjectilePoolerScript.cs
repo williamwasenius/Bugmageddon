@@ -33,8 +33,8 @@ public class ProjectilePoolerScript : MonoBehaviour
         SelectionManager sM = SelectionManager.Instance;
         if (sM == null) return;
 
-        TryRegisterWeaponProjectile(sM.weaponPrefabsLeft[sM.selectedWeapon2]);
-        TryRegisterWeaponProjectile(sM.weaponPrefabsRight[sM.selectedWeapon1]);
+        TryRegisterWeaponProjectile(sM.weaponPrefabsRight[sM.selectedWeaponR]);
+        TryRegisterWeaponProjectile(sM.weaponPrefabsLeft[sM.selectedWeaponL]);
     }
 
     private void TryRegisterWeaponProjectile(GameObject weaponPrefab)

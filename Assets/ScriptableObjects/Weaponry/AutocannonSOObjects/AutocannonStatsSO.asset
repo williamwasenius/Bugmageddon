@@ -21,6 +21,7 @@ MonoBehaviour:
   buildsHeat: 1
   heatPerShot: 1
   maxHeat: 10
+  maxCooldownDuration: 3
   rampingFirerate: 0
   rampSpeed: 1
   startFireRate: 1

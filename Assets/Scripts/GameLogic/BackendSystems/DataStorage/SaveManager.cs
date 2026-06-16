@@ -29,6 +29,11 @@ public class SaveManager : MonoBehaviour
     public float musicSliderAmount;
     public float vFXSliderAmount;
 
+    // Video Settings
+    public int resolutionIndex;
+    public bool fullScreen;
+    public bool vSync;
+
 
     private void Awake()
     {
@@ -39,6 +44,7 @@ public class SaveManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+
     }
     private void OnApplicationQuit()
     {
@@ -63,12 +69,17 @@ public class SaveManager : MonoBehaviour
         data.weapon1 = weapon1;
         data.weapon2 = weapon2;
         data.weapon3 = weapon3;
-        data.weapon3 = weapon4;
+        data.weapon4 = weapon4;
 
         // Audio 
         data.volumeSliderAmount = volumeSliderAmount;
         data.musicSliderAmount = musicSliderAmount;
         data.vFXSliderAmount = vFXSliderAmount;
+
+        // Video
+        data.resolutionIndex = resolutionIndex;
+        data.fullScreen = fullScreen;
+        data.vSync = vSync;
 
         string jason = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/playerInfo.json", jason);
@@ -99,6 +110,11 @@ public class SaveManager : MonoBehaviour
             volumeSliderAmount = data.volumeSliderAmount;
             musicSliderAmount= data.musicSliderAmount;
             vFXSliderAmount = data.vFXSliderAmount;
+
+            //Video
+            resolutionIndex = data.resolutionIndex;
+            fullScreen = data.fullScreen;
+            vSync = data.vSync;
         }
         else
         {
@@ -109,7 +125,7 @@ public class SaveManager : MonoBehaviour
 
     public void DefaultPlayerData()
     {
-        //missions
+        // Missions
         tutorialMission = false;
         mission1 = false;
         mission2 = false;
@@ -118,11 +134,21 @@ public class SaveManager : MonoBehaviour
         mission5 = false;
         currentMission = 0;
 
-        //weapons
+        // Weapons
         weapon1 = true;
         weapon2 = false;
         weapon3 = false;
         weapon4 = false;
+
+        // Audio
+        volumeSliderAmount = 1;
+        musicSliderAmount = 1;
+        vFXSliderAmount = 1;
+
+        // Video
+        resolutionIndex = 0;
+        fullScreen = true;
+        vSync = false;
     }
     public void DefaultGameData()
     {
@@ -152,6 +178,11 @@ class PlayerData
     public float volumeSliderAmount;
     public float musicSliderAmount;
     public float vFXSliderAmount;
+
+    // video settings
+    public int resolutionIndex;
+    public bool fullScreen;
+    public bool vSync;
 }
 
 //if we have different saves.

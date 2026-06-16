@@ -8,19 +8,19 @@ public class LoadWeapon : MonoBehaviour
 
     void Start()
     {
-    int selectedWeapon1 = SelectionManager.Instance.selectedWeapon1;
-    int selectedWeapon2 = SelectionManager.Instance.selectedWeapon2;
+    int selectedWeapon1 = SelectionManager.Instance.selectedWeaponR;
+    int selectedWeapon2 = SelectionManager.Instance.selectedWeaponL;
 
     if (selectedWeapon1 < 0 || selectedWeapon1 >= SelectionManager.Instance.weaponPrefabsRight.Length)
         {
             selectedWeapon1 = 0;
-            SelectionManager.Instance.selectedWeapon1 = 0;
+            SelectionManager.Instance.selectedWeaponR = 0;
         }
 
     if (selectedWeapon2 < 0 || selectedWeapon2 >= SelectionManager.Instance.weaponPrefabsLeft.Length)
         {
             selectedWeapon2 = 0;
-            SelectionManager.Instance.selectedWeapon2 = 0;
+            SelectionManager.Instance.selectedWeaponL = 0;
         }
 
     GameObject prefab1 = SelectionManager.Instance.weaponPrefabsRight[selectedWeapon1];
@@ -31,9 +31,17 @@ public class LoadWeapon : MonoBehaviour
 
     clone1.transform.localPosition = Vector3.zero;
     clone1.transform.localRotation = Quaternion.identity;
+    if (SelectionManager.Instance.altWeaponR)
+        {
+            clone1.GetComponent<WeaponHandler>().altWeapon = true;
+        }
 
     clone2.transform.localPosition = Vector3.zero;
     clone2.transform.localRotation = Quaternion.identity;
+    if (SelectionManager.Instance.altWeaponL)
+        {
+            clone2.GetComponent<WeaponHandler>().altWeapon = true;
+        }
     }
 
 }

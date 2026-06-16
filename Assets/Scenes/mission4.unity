@@ -101156,6 +101156,22 @@ PrefabInstance:
       propertyPath: hpContainer
       value: 
       objectReference: {fileID: 120589314}
+    - target: {fileID: 2050925971133085357, guid: 6a3ad06ac4c823a4083c166012108889, type: 3}
+      propertyPath: healthBars.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050925971133085357, guid: 6a3ad06ac4c823a4083c166012108889, type: 3}
+      propertyPath: hpContainers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050925971133085357, guid: 6a3ad06ac4c823a4083c166012108889, type: 3}
+      propertyPath: 'healthBars.Array.data[0]'
+      value: 
+      objectReference: {fileID: 120589313}
+    - target: {fileID: 2050925971133085357, guid: 6a3ad06ac4c823a4083c166012108889, type: 3}
+      propertyPath: 'hpContainers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 120589314}
     - target: {fileID: 3493639480678516113, guid: 6a3ad06ac4c823a4083c166012108889, type: 3}
       propertyPath: m_Name
       value: PlayerContainer

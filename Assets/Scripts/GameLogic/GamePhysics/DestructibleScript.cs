@@ -6,8 +6,8 @@ public class DestructibleScript : MonoBehaviour, IDamageable
     // Public Variables
     public float CurrentHealth { get; set; }
 
-    public GameObject hpContainer;
-    public Image healthBar;
+    public GameObject[] hpContainers;
+    public Image[] healthBars;
     public AudioPlayScript audioPlayScript;
     public float Armor => armor;
     public float MaxHealth => maxHealth;
@@ -33,7 +33,7 @@ public class DestructibleScript : MonoBehaviour, IDamageable
             transform.rotation = Quaternion.Euler(0, randomRotation, 0);
         }
 
-        if (healthBar != null)
+        if (healthBars != null)
         {
             CurrentHealth = maxHealth;
         }
@@ -42,10 +42,13 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (healthBar != null)
+        if (healthBars != null)
         {
             float normalizedHealth = Mathf.Clamp01(CurrentHealth / maxHealth);
-            healthBar.fillAmount = normalizedHealth;
+            foreach (Image healthBar in healthBars)
+            {
+                healthBar.fillAmount = normalizedHealth;
+            }
         }
     }
 
@@ -72,14 +75,26 @@ public class DestructibleScript : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        if (hpContainer != null)
+        if (hpContainers != null)
         {
-            hpContainer.SetActive(false);
+            foreach (GameObject hpContainer in hpContainers)
+            {
+                hpContainer.SetActive(false);
+            }
         }
         if (dustVFX != null)
         {
             GameObject dust = Instantiate(dustVFX, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
+    }
+
+    public void SetStats(float Health, float Armor, bool isNaturalObject, bool isDestructible)
+    {
+        maxHealth = Health;
+        CurrentHealth = maxHealth;
+        armor = Armor;
+        NaturalObject = isNaturalObject;
+        fragile = isDestructible;
     }
 }
