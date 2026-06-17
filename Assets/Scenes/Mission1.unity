@@ -47787,9 +47787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Eliminate all bugs and nests
-
-'
+  m_text: Eliminate all Bugs and Nests
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
   m_sharedMaterial: {fileID: 2118036077212545858, guid: a42a157b2e6473f4697c7fd42d38f9b4, type: 2}
@@ -53683,6 +53681,14 @@ PrefabInstance:
     - target: {fileID: 3290473601086545415, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604634499258332226, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_text
+      value: 'Lets see if you''ve got what it takes!
+
+
+        Eliminate every bug
+        and burrow inside the base!'
       objectReference: {fileID: 0}
     - target: {fileID: 4160952331154375002, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: player

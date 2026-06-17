@@ -15,12 +15,6 @@ public class PlayerController : MonoBehaviour
     public FetchMechComponentsScript compFetch;
     public Transform torsoTrackingSphere;
 
-    /*[Header("Movement Settings")]
-    public float speed = 10f;
-    public float runSpeed = 30f;
-    public float acceleration = 10f;
-    public float deceleration = 10f;
-    public float legRotationSpeed = 10f;*/
     private Vector3 currentVelocity;
 
     [Header("Ground Settings")]
@@ -28,16 +22,7 @@ public class PlayerController : MonoBehaviour
     public float groundRayDistance = 3f;
     public Transform groundRayOriginPoint;
 
-    [Header("Body Parts")]
-    //public Transform legs;
-    //public Transform torso;
-    //public Transform aimPivot;
-
     [Header("Weapons")]
-    //public GameObject weaponR;
-    //public GameObject weaponL;
-    //public float wpnMaxRotation = 20f;
-    //public float wpnRotationSpeed = 10f;
     public bool armLock = false;
     public bool elevatedAim = false;
     private enum WeaponElevation
@@ -61,7 +46,6 @@ public class PlayerController : MonoBehaviour
     private bool isAccelerated = false;
 
     private Rigidbody rigidBody;
-    //[SerializeField] private Animator animator;
     private Camera playerCamera;
 
     public IInteractable currentInteractable;
@@ -210,7 +194,7 @@ public class PlayerController : MonoBehaviour
         compFetch.animator.SetBool("IsRunning", isRunning);
     }
 
-    public void Ability()
+    /*public void Ability()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && Time.time >= abilityCooldownCounter && !abilityActive)
         {
@@ -224,7 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(abilityDuration);
         abilityActive = false;
-    }
+    }*/
 
     private void HandleMovement()
     {

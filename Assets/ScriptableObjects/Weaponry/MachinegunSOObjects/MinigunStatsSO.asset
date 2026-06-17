@@ -24,7 +24,7 @@ MonoBehaviour:
   maxHeat: 300
   maxCooldownDuration: 10
   rampingFirerate: 1
-  rampSpeed: 5
+  rampSpeed: 0.2
   startFireRate: 0.5
   shootSound: {fileID: 11400000, guid: a3eb4ef948db74643892c91742f441e4, type: 2}
   audioDataID: shootSound

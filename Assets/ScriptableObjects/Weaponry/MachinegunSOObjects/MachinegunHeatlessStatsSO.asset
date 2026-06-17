@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fe4ba60a5e3d8c4c96e24604317aec9, type: 3}
-  m_Name: MachinegunStatsSO
+  m_Name: MachinegunHeatlessStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::WeaponStatsSO
-  weaponName: Machine Gun
+  weaponName: Heatless Machinegun
   fireRate: 0.1
   projectileStats: {fileID: 11400000, guid: e9a1c759ed9342b449e0b9f4923485d2, type: 2}
   rotatingBarrel: 1
   rotationSpeed: 1500
   chargedWeapon: 0
   chargeTime: 1
-  buildsHeat: 1
+  buildsHeat: 0
   heatPerShot: 1
   maxHeat: 50
-  maxCooldownDuration: 1
+  maxCooldownDuration: 2.5
   rampingFirerate: 0
   rampSpeed: 5
   startFireRate: 2

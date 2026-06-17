@@ -9,13 +9,14 @@ public class ProjectileLogic : MonoBehaviour
     public ProjectileStatsSO projectileStats;
     private Rigidbody rb;
 
-    private void Start()
+    private void OnEnable()
     {
-        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
 
         if (projectileStats.flightSound != null)
-        { 
-            AudioManager.Instance.Play(projectileStats.flightSound.id, transform.position); 
+        {
+            AudioManager.Instance.Play(projectileStats.flightSound.id, transform.position);
         }
 
         if (ProjectilePoolerScript.Instance != null)
@@ -23,9 +24,14 @@ public class ProjectileLogic : MonoBehaviour
             StartCoroutine(DespawnAfterLifetime());
         }
         else
-        { 
-            Destroy(gameObject, projectileStats.lifeTime); 
+        {
+            Destroy(gameObject, projectileStats.lifeTime);
         }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines(); 
     }
 
     private void FixedUpdate()
@@ -45,6 +51,8 @@ public class ProjectileLogic : MonoBehaviour
 
     private void HandleHit(GameObject hitObject)
     {
+        if (shooter == null) return;
+
         if (shooter.CompareTag(hitObject.tag) || (shooter.CompareTag("Ally") && hitObject.CompareTag("Player")))
         {
             RemoveProjectile();

@@ -130,8 +130,7 @@ public class InGameMenu : MonoBehaviour
 
     public void Options()
     {
-        options.SetActive(true);
-        menu.SetActive(false);
+        options.SetActive(!options.activeInHierarchy);
     }
 
     public void Exit()

@@ -24698,12 +24698,6 @@ Transform:
   - {fileID: 1061291347}
   - {fileID: 616625126}
   - {fileID: 651899935}
-  - {fileID: 467893030}
-  - {fileID: 2029495993}
-  - {fileID: 760449384}
-  - {fileID: 297198199}
-  - {fileID: 526353677}
-  - {fileID: 388516649}
   m_Father: {fileID: 544669285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &166272627
@@ -45186,11 +45180,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretB1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039012262970393084, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: MaxDistance
@@ -45322,15 +45324,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -99.9895
+      value: 415
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -481.71716
+      value: 372
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -45488,6 +45490,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45496,11 +45502,6 @@ PrefabInstance:
 --- !u!1 &297198193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 297198192}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &297198199 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 297198192}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &297277039
@@ -59303,15 +59304,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 572283579932432459, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e92ca442f4ebe0e4486455afcc36d49b, type: 2}
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretA1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3512967135468733548, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -59451,15 +59460,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: cfdba84b1298927488a261e8506f5932, type: 2}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -323.93927
+      value: 191.05023
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -359.8384
+      value: 493.87875
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59617,6 +59626,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59625,11 +59638,6 @@ PrefabInstance:
 --- !u!1 &388516643 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 388516642}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &388516649 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 388516642}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &388572083
@@ -72291,11 +72299,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretC2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039012262970393084, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: MaxDistance
@@ -72427,15 +72443,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 150.83899
+      value: 665.8285
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -359.13138
+      value: 494.5858
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -72593,6 +72609,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -72601,11 +72621,6 @@ PrefabInstance:
 --- !u!1 &467893024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 467893023}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &467893030 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 467893023}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &468226194
@@ -83228,11 +83243,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretA2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039012262970393084, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: MaxDistance
@@ -83364,15 +83387,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -303.11084
+      value: 211.87866
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -379.2527
+      value: 474.46448
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -83530,6 +83553,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83538,11 +83565,6 @@ PrefabInstance:
 --- !u!1 &526353671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 526353670}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &526353677 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 526353670}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &526373273
@@ -119801,11 +119823,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretB2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039012262970393084, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: MaxDistance
@@ -119937,15 +119967,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.9895
+      value: 443
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -480.71716
+      value: 373
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -120103,6 +120133,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -120111,11 +120145,6 @@ PrefabInstance:
 --- !u!1 &760449378 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 760449377}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &760449384 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 760449377}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &760901116
@@ -311720,11 +311749,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 165947947}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839163318588231418, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_Name
       value: TurretC1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039012262970393084, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: MaxDistance
@@ -311856,15 +311893,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130.83893
+      value: 645.8284
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 671.13745
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -379.13135
+      value: 474.58582
       objectReference: {fileID: 0}
     - target: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
       propertyPath: m_LocalRotation.w
@@ -312022,6 +312059,10 @@ PrefabInstance:
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].outWeight
       value: 0.46512285
       objectReference: {fileID: 0}
+    - target: {fileID: 8823727875035867157, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -312030,11 +312071,6 @@ PrefabInstance:
 --- !u!1 &2029495987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3286874501324065739, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
-  m_PrefabInstance: {fileID: 2029495986}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2029495993 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7285367178832866898, guid: f5ce0f4bd9af1c74781ac2499185ab89, type: 3}
   m_PrefabInstance: {fileID: 2029495986}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2030121658
@@ -328900,6 +328936,12 @@ SceneRoots:
   m_Roots:
   - {fileID: 929359602}
   - {fileID: 356314626}
+  - {fileID: 467893023}
+  - {fileID: 2029495986}
+  - {fileID: 760449377}
+  - {fileID: 297198192}
+  - {fileID: 526353670}
+  - {fileID: 388516642}
   - {fileID: 544669285}
   - {fileID: 308192818}
   - {fileID: 967326674}

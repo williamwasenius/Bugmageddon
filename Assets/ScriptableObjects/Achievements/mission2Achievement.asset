@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: mission2Achievement
   m_EditorClassIdentifier: Assembly-CSharp::AchievementSO
   id: mission2Achievement
-  title: mission 2 name
+  title: Highway to Hell
   description: Complete the second mission of Bugmageddon
-  iconLocked: {fileID: 21300000, guid: 998ecf6cd40f70e47ac314408bd5805a, type: 3}
-  iconUnlocked: {fileID: 21300000, guid: b8d9eb65424b7b244800081fd1364e26, type: 3}
+  iconLocked: {fileID: 21300000, guid: 3b8b14107a3e22041a0eac54fd3557f9, type: 3}
+  iconUnlocked: {fileID: 21300000, guid: cb3c85523a7e2ca44ba9f0474e2f706f, type: 3}
   unlocked: 0

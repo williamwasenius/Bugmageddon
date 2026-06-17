@@ -53,6 +53,14 @@ public class PlaytestingCanvas : MonoBehaviour
             {
                 testingPanel.SetActive(!testingPanel.activeSelf);
             }
+
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                if (Time.timeScale != 0)
+                    Time.timeScale = 0;
+                else
+                    Time.timeScale = 1f;
+            }
         }
     }
 

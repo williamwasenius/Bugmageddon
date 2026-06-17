@@ -51832,6 +51832,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3604634499258332226, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_text
+      value: 'You need to quickly get to the nearby city of New Helsinki!
+
+
+        The
+        tunnel at the end of the highway will lead directly into the city. '
+      objectReference: {fileID: 0}
     - target: {fileID: 4160952331154375002, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: player
       value: 

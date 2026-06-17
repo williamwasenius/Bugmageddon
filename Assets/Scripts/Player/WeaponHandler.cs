@@ -49,9 +49,17 @@ public class WeaponHandler : MonoBehaviour
     private void Start()
     {
         if (altWeapon && weaponVariants.Length > 1 && weaponVariants != null)
-            weaponStats = weaponVariants[1];
+            {
+                weaponStats = weaponVariants[1];
+            }
+        else if (weaponVariants.Length == 1)
+            { 
+            weaponStats = weaponVariants[0]; 
+        }
         else
-            weaponStats = weaponVariants[0];
+        {
+
+        }
 
         shooter = transform.root.gameObject; 
         firePointVFX = firePoint.GetComponent<VisualEffect>();
@@ -79,6 +87,13 @@ public class WeaponHandler : MonoBehaviour
         {
             DecreaseHeat();
             currentRoF = Mathf.MoveTowards(currentRoF, weaponStats.startFireRate, weaponStats.rampSpeed * Time.deltaTime);
+        }
+        else 
+        {
+            if (weaponStats.rampingFirerate)
+            {
+                RampUp();
+            }
         }
     }
 
@@ -185,8 +200,8 @@ public class WeaponHandler : MonoBehaviour
         }
 
         ProjectileLogic projectileLogic = projectile.GetComponent<ProjectileLogic>();
-        projectileLogic.projectileStats = projectileStats;
         projectileLogic.shooter = shooter;
+        projectileLogic.projectileStats = projectileStats;
 
         if (firePointVFX != null)
         {
@@ -200,10 +215,6 @@ public class WeaponHandler : MonoBehaviour
 
         cooldownTimer = weaponStats.rampingFirerate ? currentRoF : weaponStats.fireRate;
 
-        if (weaponStats.rampingFirerate)
-        {
-            RampUp();
-        }
         if (weaponStats.buildsHeat)
         {
             IncreaseHeat();
