@@ -688,8 +688,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7fb6a8f2039a3d0438ece67bb4322e5e, type: 2}
     - target: {fileID: 8761260502699297857, guid: 23843725a382c8746848dad42342dcc0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761260502699297857, guid: 23843725a382c8746848dad42342dcc0, type: 3}
       propertyPath: testingBuild
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8903351258463244785, guid: 23843725a382c8746848dad42342dcc0, type: 3}
       propertyPath: m_Name

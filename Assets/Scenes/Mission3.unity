@@ -10160,7 +10160,7 @@ MonoBehaviour:
   - {fileID: 347140974}
   - {fileID: 110524992}
   audioPlayScript: {fileID: 0}
-  maxHealth: 1000
+  maxHealth: 500
   armor: 0
   dustVFX: {fileID: 7196435243983682290, guid: 051d32e8db8576a46b76e9dfd5b88862, type: 3}
   NaturalObject: 0
@@ -116707,7 +116707,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 5, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738885271
 MonoBehaviour:
@@ -132605,7 +132605,7 @@ MonoBehaviour:
   - {fileID: 2994590547126553864}
   - {fileID: 1746752839}
   audioPlayScript: {fileID: 0}
-  maxHealth: 1000
+  maxHealth: 500
   armor: 0
   dustVFX: {fileID: 7196435243983682290, guid: 051d32e8db8576a46b76e9dfd5b88862, type: 3}
   NaturalObject: 0
@@ -152973,7 +152973,7 @@ GameObject:
   - component: {fileID: 967326676}
   - component: {fileID: 967326678}
   m_Layer: 0
-  m_Name: Reactor
+  m_Name: Main Reactor
   m_TagString: Objective
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153073,7 +153073,7 @@ MonoBehaviour:
   - {fileID: 359624782}
   - {fileID: 1669740619}
   audioPlayScript: {fileID: 0}
-  maxHealth: 5000
+  maxHealth: 1000
   armor: 0
   dustVFX: {fileID: 4439557229569339894, guid: 42fabf2fed2f2d547b167ccf24b4b011, type: 3}
   NaturalObject: 0
@@ -238872,6 +238872,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8704259013870672433, guid: 30ad03145b9be5048be382c05049a948, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704259013870672433, guid: 30ad03145b9be5048be382c05049a948, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
@@ -282865,7 +282869,7 @@ MonoBehaviour:
   - {fileID: 1684938769}
   - {fileID: 707598698}
   audioPlayScript: {fileID: 0}
-  maxHealth: 1000
+  maxHealth: 500
   armor: 0
   dustVFX: {fileID: 7196435243983682290, guid: 051d32e8db8576a46b76e9dfd5b88862, type: 3}
   NaturalObject: 0

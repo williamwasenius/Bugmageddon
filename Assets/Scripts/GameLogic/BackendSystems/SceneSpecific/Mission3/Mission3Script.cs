@@ -32,6 +32,7 @@ public class Mission3Script : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI objectiveText;
     public GameObject finalWaveUI;
+    private string defaultText = "Activate and Defend the Reactors!";
 
     [Header("Settings")]
     public float defendDuration = 60f;
@@ -62,7 +63,7 @@ public class Mission3Script : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         MissionTracker.Instance.SetCurrentMission("Mission3");
-        objectiveText.text = "Activate and Defend the Generators!";
+        objectiveText.text = defaultText;
         foreach (var gen in generators)
         {
             if (gen.reactor == null) continue;
@@ -152,8 +153,8 @@ public class Mission3Script : MonoBehaviour
         currentTimer = (currentState == MissionState.FinalDefense) ? finalDefenseDuration : defendDuration;
 
         objectiveText.text = currentState == MissionState.FinalDefense
-            ? "Defend the central reactor..."
-            : $"Defend reactor {currentGeneratorIndex + 1}...";
+            ? "Defend the Central Reactor..."
+            : $"Defend Reactor {currentGeneratorIndex + 1}...";
     }
 
     // ---------------------- DEFENSE RESULT ----------------------
@@ -181,6 +182,8 @@ public class Mission3Script : MonoBehaviour
         waveManager.EndWave(index + 1);
 
         currentState = MissionState.Idle;
+
+        objectiveText.text = defaultText;
         currentReactor = finalGenerator.reactor;
     }
 

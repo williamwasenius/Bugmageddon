@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GausscannonProjectileStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileStatsSO
   speed: 200
-  damage: 500
+  damage: 250
   armorPierce: 0
   lifeTime: 5
   pierce: 1
